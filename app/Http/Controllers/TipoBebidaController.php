@@ -15,11 +15,9 @@ class TipoBebidaController extends Controller
     public function index()
     {
         //
-       // $tipo_bebidas = TipoBebida::get();
-       // return $tipo_bebidas;
-        //los redireccionamientos seran despues;
-        //return view('tipobebida.index')
-        return "hola";
+        $tipo_bebidas = TipoBebida::get();
+        return response()->json($tipo_bebidas);
+
     }
 
     /**
@@ -43,10 +41,19 @@ class TipoBebidaController extends Controller
     public function store(Request $request)
     {
         //
-      //  $tipoBebida = new TipoBebida;
-       // $tipoBebida->nombre = $request->Input('nombre');
-       // return response()->json($tipoBebida);
-       return "post";
+        try{
+            $tipoBebida = new TipoBebida;
+            $tipoBebida->nombre = $request->Input('nombre');
+            //return response()->json($tipoBebida);
+           //return $request;
+            $tipoBebida->save();
+            return response()->json($tipoBebida, 200)->header('Content-Type', 'application/json'); 
+            //response   
+        }
+        catch(\Exception $e ){
+            return $e->getMessage();
+        }
+       
     }
 
     /**
@@ -58,6 +65,14 @@ class TipoBebidaController extends Controller
     public function show(TipoBebida $tipoBebida)
     {
         //
+        $tipo = TipoBebida::find($tipoBebida);
+        if ($tipo){
+            return $tipo;
+        }
+        else{
+            return [];
+        }
+      
     }
 
     /**
@@ -69,6 +84,13 @@ class TipoBebidaController extends Controller
     public function edit(TipoBebida $tipoBebida)
     {
         //
+        $tipo = TipoBebida::find($tipoBebida);
+        if ($tipo){
+            return $tipo;
+        }
+        else{
+            return [];
+        }
     }
 
     /**
@@ -81,7 +103,23 @@ class TipoBebidaController extends Controller
     public function update(Request $request, TipoBebida $tipoBebida)
     {
         //
-    }
+        try{
+            $tipo = TipoBebida::findorFail($tipoBebida->TipoBebidaId);
+            $tipo->nombre = $request->Input('nombre');
+            $query = $tipo->save();
+            if ($query == 1)
+                //indica que se actualizo de manera correcta
+                return response()->json($query, 200);
+            else {
+                //si la respuesta es false, entonces significa que salio un error
+                return response()->json($query);
+            }
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+       
+        //return $query;
+    } 
 
     /**
      * Remove the specified resource from storage.
@@ -92,5 +130,15 @@ class TipoBebidaController extends Controller
     public function destroy(TipoBebida $tipoBebida)
     {
         //
+        try{
+            $tipo =  TipoBebida::find($tipoBebida->TipoBebidaId);
+            //return $tipo;
+            $query = $tipo->delete();   
+            return response()->json($query); 
+        }
+        catch(\Exception $e){
+            return $e->getMessage();
+        }
+
     }
 }

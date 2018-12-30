@@ -15,7 +15,7 @@ class CreateTipoBebidasTable extends Migration
     {
         Schema::create('tipo_bebidas', function (Blueprint $table) {
             $table->increments('TipoBebidaId');
-            $table->string('nombre',100);
+            $table->string('nombre',100)->unique();
 
             $table->timestamps();
         });
