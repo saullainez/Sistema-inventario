@@ -20,3 +20,5 @@ Route::resource('tipo-bebida', 'TipoBebidaController');
 Route::get('/identificacion', function(){
     return csrf_token();
 });
+
+Route::resource('producto', 'ProductoController');

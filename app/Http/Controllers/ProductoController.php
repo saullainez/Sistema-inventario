@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -15,6 +16,17 @@ class ProductoController extends Controller
     public function index()
     {
         //
+        try{
+            $productos = DB::table('productos as p')
+            ->select('p.ProductoId', 'p.ProductoNombre','p.ProductoDescripcion','p.TipoBebidaId','tb.nombre as TipoBebida')
+            ->join('tipo_bebidas as tb','p.TipoBebidaId','=','tb.TipoBebidaId')->get();
+            //dd($productos);
+            return response()->json($productos, 200);
+        }
+        catch(\Exception $e){
+            return $e->getMessage();
+        }
+       
     }
 
     /**
@@ -36,6 +48,18 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        try{
+            $producto = new Producto;
+            $producto->ProductoNombre = $request->Input('ProductoNombre');
+            $producto->ProductoDescripcion = $request->Input('ProductoDescripcion');
+            $producto->TipoBebidaId = $request->Input('TipoBebidaId');
+            //return response()->json($request, 200);
+            $producto->save();
+         //   return response()->json($producto, 200);
+        }catch(\Exception $e){
+            return $e.getMessage();
+        }
+
     }
 
     /**
@@ -47,6 +71,7 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         //
+        return $producto;
     }
 
     /**
@@ -58,6 +83,7 @@ class ProductoController extends Controller
     public function edit(Producto $producto)
     {
         //
+        return $producto;
     }
 
     /**
@@ -70,6 +96,18 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         //
+        try{
+            $pro = Producto::find($producto->ProductoId);
+            $pro->ProductoNombre = $request->Input('ProductoNombre');
+            $pro->ProductoDescripcion = $request->Input('ProdcutoDescripcion');
+            $pro->TipoBebidaId = $request->Input('TipoBebidaId');
+            $query = $pro->save();
+            return response()->json($pro, 200);
+        }
+        catch(\Exception $e){
+            return $e->getMesage();
+        }
+
     }
 
     /**
@@ -81,5 +119,15 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         //
+        try{
+            $pro = Producto::find($producto->ProductoId);
+            $query = $pro->delete();
+            return response()->json($query, 200);
+        }
+        catch(\Exception $e){
+            return $e->getMessage();
+        }
+       
+
     }
 }

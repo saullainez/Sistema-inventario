@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTipoBebidasTable extends Migration
+class CreateActivosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateTipoBebidasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_bebidas', function (Blueprint $table) {
-            $table->increments('TipoBebidaId');
-            $table->string('nombre',100);
-
+        Schema::create('activos', function (Blueprint $table) {
+            $table->increments('ActivoId');
+            $table->string('ActivoNombre',100);
+            $table->string('ActivoDescripcion',250);
+            $table->enum('TipoActivo',['Consumible','Equipo']);
             $table->timestamps();
         });
+
     }
 
     /**
@@ -28,6 +30,6 @@ class CreateTipoBebidasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_bebidas');
+        Schema::dropIfExists('activos');
     }
 }

@@ -65,7 +65,7 @@ class TipoBebidaController extends Controller
     public function show(TipoBebida $tipoBebida)
     {
         //
-        $tipo = TipoBebida::find($tipoBebida);
+        $tipo = TipoBebida::find($tipoBebida->TipoBebidaId);
         if ($tipo){
             return $tipo;
         }
@@ -84,7 +84,7 @@ class TipoBebidaController extends Controller
     public function edit(TipoBebida $tipoBebida)
     {
         //
-        $tipo = TipoBebida::find($tipoBebida);
+        $tipo = TipoBebida::find($tipoBebida->TipoBebidaId);
         if ($tipo){
             return $tipo;
         }

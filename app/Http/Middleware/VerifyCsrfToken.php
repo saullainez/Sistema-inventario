@@ -21,6 +21,8 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         'tipo-bebida',
-        'tipo-bebida/*'
+        'tipo-bebida/*',
+        'producto',
+        'producto/*'
     ];
 }
