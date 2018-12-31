@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $table = ['productos'];
+    protected $table = 'productos';
     protected $primaryKey = 'ProductoId';
-    protected $fillable = ['ProductoNombre', 'ProductoDescripcion',
-        'TipoBebidaId'];
+    protected $fillable = ['ProductoNombre', 'ProductoDescripcion','TipoBebidaId'];
     protected $guarded = [];
 
+    
     public function tipoBebida(){
         return $this->belongsTo('App\TipoBebida','bebida_producto_fk','TipoBebidaId');
     }
@@ -19,4 +19,5 @@ class Producto extends Model
     public function presentacion(){
         //return $this->hasMany('App\Presentacion','producto_presentacion_fk','ProductoId');
     }
+    
 }

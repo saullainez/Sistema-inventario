@@ -15,9 +15,15 @@ class TipoBebidaController extends Controller
     public function index()
     {
         //
-        $tipo_bebidas = TipoBebida::get();
-        return response()->json($tipo_bebidas);
-
+        try{
+            $tipo_bebidas = TipoBebida::get();
+            return response()->json($tipo_bebidas,200)->header('Content-Type','application/json');    
+        }
+        catch(\Exception $e){
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
+        }
+     
     }
 
     /**
@@ -51,7 +57,8 @@ class TipoBebidaController extends Controller
             //response   
         }
         catch(\Exception $e ){
-            return $e->getMessage();
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
         }
        
     }
@@ -107,15 +114,12 @@ class TipoBebidaController extends Controller
             $tipo = TipoBebida::findorFail($tipoBebida->TipoBebidaId);
             $tipo->nombre = $request->Input('nombre');
             $query = $tipo->save();
-            if ($query == 1)
-                //indica que se actualizo de manera correcta
-                return response()->json($query, 200);
-            else {
-                //si la respuesta es false, entonces significa que salio un error
-                return response()->json($query);
-            }
+            $res = ['actualizo' => $query];
+            return response()->json($res, 200)->header('Content-Type','application/json');
+            
         }catch(\Exception $e){
-            return $e->getMessage();
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
         }
        
         //return $query;
@@ -133,11 +137,13 @@ class TipoBebidaController extends Controller
         try{
             $tipo =  TipoBebida::find($tipoBebida->TipoBebidaId);
             //return $tipo;
-            $query = $tipo->delete();   
-            return response()->json($query); 
+            $query = $tipo->delete(); 
+            $res = ['elimino' => $query];  
+            return response()->json($res,200)->header('Content-Type','application/json'); 
         }
         catch(\Exception $e){
-            return $e->getMessage();
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
         }
 
     }

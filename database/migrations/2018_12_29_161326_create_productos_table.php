@@ -16,7 +16,7 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->increments('ProductoId');
             $table->string('ProductoNombre',100);
-            $table->string('ProductoDescripcion',100);
+            $table->string('ProductoDescripcion');
             $table->integer('TipoBebidaId')->unsigned();
             $table->timestamps();
 

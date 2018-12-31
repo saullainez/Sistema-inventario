@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/registro', function(){
+    return view('formulario');
+});
 Route::resource('tipo-bebida', 'TipoBebidaController');
 
 Route::get('/identificacion', function(){

@@ -15,6 +15,16 @@ class ActivoController extends Controller
     public function index()
     {
         //
+        try{
+            $activos = Activo::get();
+            return response()->json($activos, 200)->header('Content-Type','application\json');
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error);
+        }
+       
+
     }
 
     /**
@@ -36,6 +46,18 @@ class ActivoController extends Controller
     public function store(Request $request)
     {
         //
+        try{
+            $activo = new Activo;
+            $activo->ActivoNombre = $request->Input('ActivoNombre');
+            $activo->ActivoDescripcion = $request->Input('ActivoDescripcion');
+            $activo->TipoActivo = $request->Input('TipoActivo');
+            $activo->save();
+            return response()->json($activo, 200)->header('Content-Type','application/json');
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error);
+        }
     }
 
     /**
@@ -47,6 +69,7 @@ class ActivoController extends Controller
     public function show(Activo $activo)
     {
         //
+        return response()->json($activo, 200)->header('Content-Type','application/json');
     }
 
     /**
@@ -58,6 +81,7 @@ class ActivoController extends Controller
     public function edit(Activo $activo)
     {
         //
+        return response()->json($activo, 200)->header('Content-Type','application/json');
     }
 
     /**
@@ -70,6 +94,20 @@ class ActivoController extends Controller
     public function update(Request $request, Activo $activo)
     {
         //
+        try{
+            $act = Activo::find($activo->ActivoId);
+            $act->ActivoNombre = $request->ActivoNombre;  
+            $act->ActivoDescripcion = $request->activoDescripcion;
+            $act->TipoActivo = $request->TipoActivo;
+            $query = $act->save();
+            $res = ['actualizo' => $query];
+            return response()->json($res, 200)->header('Content-Type','application/json');
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error);
+        }
+       
     }
 
     /**
@@ -81,5 +119,13 @@ class ActivoController extends Controller
     public function destroy(Activo $activo)
     {
         //
+        try{
+            $query = $activo->delete();
+            $res = ['elimino' => $query];
+            return response()->json($res, 200)->header('Content-Type','application/json');
+        }catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error);
+        }
     }
 }

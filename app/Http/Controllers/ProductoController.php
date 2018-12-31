@@ -17,14 +17,19 @@ class ProductoController extends Controller
     {
         //
         try{
+          
+            
             $productos = DB::table('productos as p')
             ->select('p.ProductoId', 'p.ProductoNombre','p.ProductoDescripcion','p.TipoBebidaId','tb.nombre as TipoBebida')
             ->join('tipo_bebidas as tb','p.TipoBebidaId','=','tb.TipoBebidaId')->get();
             //dd($productos);
+           
+            
             return response()->json($productos, 200);
         }
         catch(\Exception $e){
-            return $e->getMessage();
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
         }
        
     }
@@ -48,17 +53,22 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+      
         try{
             $producto = new Producto;
             $producto->ProductoNombre = $request->Input('ProductoNombre');
             $producto->ProductoDescripcion = $request->Input('ProductoDescripcion');
             $producto->TipoBebidaId = $request->Input('TipoBebidaId');
-            //return response()->json($request, 200);
+          //  return response()->json($producto, 200);
             $producto->save();
-         //   return response()->json($producto, 200);
+            
+          
+            return response()->json($producto, 200);
         }catch(\Exception $e){
-            return $e.getMessage();
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
         }
+        
 
     }
 
@@ -105,7 +115,8 @@ class ProductoController extends Controller
             return response()->json($pro, 200);
         }
         catch(\Exception $e){
-            return $e->getMesage();
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
         }
 
     }
@@ -125,7 +136,8 @@ class ProductoController extends Controller
             return response()->json($query, 200);
         }
         catch(\Exception $e){
-            return $e->getMessage();
+            $error = ['error' => $e->getMessage()];
+            return response()->json($error);
         }
        
 
