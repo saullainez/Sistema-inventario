@@ -18,8 +18,8 @@ class CreateInventariosTable extends Migration
             $table->integer('Cantidad');
 
             $table->timestamps();
-
-            $table->foreign('PresentacionId')->references('PresentacionId')->on('Presentacion')->onDelete('cascade');
+            
+            $table->foreign('PresentacionId')->references('PresentacionId')->on('presentaciones')->onDelete('cascade');
         });
     }
 

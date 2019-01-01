@@ -18,7 +18,7 @@ class CreateInventarioActivosTable extends Migration
             $table->integer('Cantidad');
             $table->timestamps();
 
-            $table->foreign('ActivoId')->references('ActivoId')->on('Activo')->onDelete('cascade');
+            $table->foreign('ActivoId')->references('ActivoId')->on('activos')->onDelete('cascade');
         });
     }
 

@@ -14,7 +14,7 @@ class CreatePresentacionsTable extends Migration
     public function up()
     {
         Schema::create('presentaciones', function (Blueprint $table) {
-            $table->integer('PresentacionId')->primary()->unique();
+            $table->integer('PresentacionId')->primary()->unsigned()->unique();
             $table->integer('ActivoId')->unsigned();
             $table->integer('ProductoId')->unsigned();
 
