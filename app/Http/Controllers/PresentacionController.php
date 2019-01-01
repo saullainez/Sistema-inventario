@@ -20,7 +20,7 @@ class PresentacionController extends Controller
         try{
             $presentaciones = DB::table('presentaciones as p')
             ->select('p.PresentacionId','p.ProductoId','b.ProductoNombre as producto','p.ActivoId','a.ActivoNombre as envase')
-            ->join('productos as b','.ProductoId','=','b.ProductoId')
+            ->join('productos as b','p.ProductoId','=','b.ProductoId')
             ->join('activos as a','p.ActivoId','=','a.ActivoId')->get();
 
             return response()->json($presentaciones, 200)->header('Content-Type','application/json');
@@ -53,9 +53,9 @@ class PresentacionController extends Controller
             $presentacion = new Presentacion;
             $presentacion->ProductoId = $request->ProductoId;
             $presentacion->ActivoId = $request->ActivoId;
-            $id = (int)((string)$request->ProductoId + (string)$request->ActivoId);
+            $id = "{$request->ProductoId}{$request->ActivoId}";
             $presentacion->PresentacionId = $id;
-            //$presentacion->save();
+            $presentacion->save();
             return response()->json($presentacion, 200)->header('Content-Type','application/json');
 
         }
@@ -77,7 +77,7 @@ class PresentacionController extends Controller
         try{
             $present = DB::table('presentaciones as p')
             ->select('p.PresentacionId','p.ProductoId','b.ProductoNombre as producto','p.ActivoId','a.ActivoNombre as envase')
-            ->join('productos as b','.ProductoId','=','b.ProductoId')
+            ->join('productos as b','p.ProductoId','=','b.ProductoId')
             ->join('activos as a','p.ActivoId','=','a.ActivoId')
             ->whereraw('p.PresentacionId = ?',[$presentacion->PresentacionId])->get();
         return $present;
@@ -100,7 +100,7 @@ class PresentacionController extends Controller
         try{
             $present = DB::table('presentaciones as p')
             ->select('p.PresentacionId','p.ProductoId','b.ProductoNombre as producto','p.ActivoId','a.ActivoNombre as envase')
-            ->join('productos as b','.ProductoId','=','b.ProductoId')
+            ->join('productos as b','p.ProductoId','=','b.ProductoId')
             ->join('activos as a','p.ActivoId','=','a.ActivoId')
             ->whereraw('p.PresentacionId = ?',[$presentacion->PresentacionId])->get();
         return $present;
@@ -125,9 +125,9 @@ class PresentacionController extends Controller
         try{
             $presentacion->ActivoId = $request->ActivoId;
             $presentacion->ProductoId = $request->ProductoId;
-            $id = (int)((string)$request->ProductoId + (string)$request->ActivoId);
+            $id = "{$request->ProductoId}{$request->ActivoId}";
             $presentacion->PresentacionId = $id;
-            //$query = $presentacion->save();
+            $query = $presentacion->save();
             $res = ['actualizo' => $query];
             return response()->json($res, 200)->header('Content-Type','application/json');
         }

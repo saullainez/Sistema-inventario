@@ -19,4 +19,8 @@ class presentacion extends Model
     public function activos(){
         $this->belongsTo('App\Activo','envase_presentacion_fk','ActivoId');
     }
+
+    public function inventarios(){
+        $this->hasMany('App\Inventario','presentacion_inv_fk','PresentacionId');
+    }
 }

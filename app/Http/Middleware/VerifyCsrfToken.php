@@ -23,6 +23,8 @@ class VerifyCsrfToken extends Middleware
         'tipo-bebida',
         'tipo-bebida/*',
         'producto',
-        'producto/*'
+        'producto/*',
+        'presentacion',
+        'presentacion/*'
     ];
 }

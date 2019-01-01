@@ -24,4 +24,5 @@ Route::get('/identificacion', function(){
     return csrf_token();
 });
 
+Route::resource('presentacion', 'PresentacionController');
 Route::resource('producto', 'ProductoController');
