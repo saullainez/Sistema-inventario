@@ -30,7 +30,7 @@ Route::resource('inventario', 'InventarioController');
 Route::resource('inventario-activo', 'InventarioActivoController');
 
 Route::get('/proveedor','EmpresaController@proveedores');
-Route::get('clientes','EmpresaController@clientes');
+Route::get('/clientes','EmpresaController@clientes');
 Route::get('/entradas','MovimientoConceptoController@entradas');
 Route::get('/salidas','MovimientoConceptoController@salidas');
 
