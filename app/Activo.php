@@ -19,4 +19,8 @@ class Activo extends Model
     public function inventario(){
         return $this->hasMany('App\Inventario','activo_inv_fk','ActivoId');
     }
+
+    public function movimientos(){
+        return $this->hasMany('App\MovimientoActivo','activo_mov_fk','ActivoId');
+    }
 }

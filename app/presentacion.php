@@ -23,4 +23,8 @@ class presentacion extends Model
     public function inventarios(){
         $this->hasMany('App\Inventario','presentacion_inv_fk','PresentacionId');
     }
+
+    public function movimientos(){
+        return $this->hasMany('app\MovimientoProducto','presentacion_mov_fk','PresentacionId');
+    }
 }

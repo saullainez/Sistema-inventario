@@ -26,3 +26,9 @@ Route::get('/identificacion', function(){
 
 Route::resource('presentacion', 'PresentacionController');
 Route::resource('producto', 'ProductoController');
+Route::resource('empresa', 'EmpresaController');
+Route::get('/proveedor','EmpresaController@proveedores');
+Route::get('clientes','EmpresaController@clientes');
+Route::resource('movimientos', 'MovimientoConceptoController');
+Route::get('/entradas','MovimientoConceptoController@entradas');
+Route::get('/salidas','MovimientoConceptoController@salidas');
