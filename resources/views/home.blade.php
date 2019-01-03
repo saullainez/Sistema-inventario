@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    ¡Inicio de sesión correcto!
+                    ¡Inicio de sesión exitoso!
                 </div>
             </div>
         </div>
