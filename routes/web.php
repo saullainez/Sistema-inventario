@@ -37,3 +37,11 @@ Route::get('/salidas','MovimientoConceptoController@salidas');
 Route::get('/identificacion', function(){
     return csrf_token();
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

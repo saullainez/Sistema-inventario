@@ -1,0 +1,14 @@
+.contenedor-formulario-registro{
+    background-color: rgba(0, 0, 0, 0.62);
+    color: #ffffff;
+    width: 497px;
+    border-radius: 8px;
+    padding: 1rem 4rem 1rem 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
+}
+.invalid-feedback {
+    font-size: 94% 1important!important;
+    color: #fb6472 ;
+}
