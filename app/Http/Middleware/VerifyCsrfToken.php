@@ -25,6 +25,21 @@ class VerifyCsrfToken extends Middleware
         'producto',
         'producto/*',
         'presentacion',
-        'presentacion/*'
+        'presentacion/*',
+        'inventario',
+        'inventario/*',
+        'inventario-activo',
+        'inventario-activo/*',
+        'empresa',
+        'empresa/*',
+        'conceptos',
+        'conceptos/*',
+        'movimiento-producto',
+        'movimiento-producto/*',
+        'movimiento-activo',
+        'movimiento-activo/*',
+        'activo',
+        'activo/*'
+
     ];
 }
