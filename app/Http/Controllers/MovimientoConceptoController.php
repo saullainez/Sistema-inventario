@@ -97,9 +97,9 @@ class MovimientoConceptoController extends Controller
         
         try
         {
-            $movimiento->Nombre = $request->Input('Nombre');
-            $movimiento->TipoMovimiento = $request->Input('TipoMovimiento');
-            $query = $movimiento->save();
+            $movimientoConcepto->Nombre = $request->Input('Nombre');
+            $movimientoConcepto->TipoMovimiento = $request->Input('TipoMovimiento');
+            $query = $movimientoConcepto->save();
             $res = ['actualizo'=>$query];
             return response()->json($res, 200)->header('Content-Type','application/json');
         }
@@ -120,7 +120,7 @@ class MovimientoConceptoController extends Controller
         //
         try
         {
-            $query = $movimiento->delete();
+            $query = $movimientoConcepto->delete();
             $res = ['elimino'=>$query];
             return response()->json($res, 200)->header('Content-Type','application/json');
         }

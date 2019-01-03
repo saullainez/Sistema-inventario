@@ -116,7 +116,7 @@ class EmpresaController extends Controller
 
             $query = $empresa->save();
             $res = ['actualizo'=>$query];
-            return response()->json($query, 200)->header('Content-Type','application/json');
+            return response()->json($res, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];

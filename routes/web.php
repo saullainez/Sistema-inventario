@@ -22,7 +22,7 @@ Route::resource('tipo-bebida', 'TipoBebidaController');
 Route::resource('presentacion', 'PresentacionController');
 Route::resource('producto', 'ProductoController');
 Route::resource('empresa', 'EmpresaController');
-Route::resource('conceptos', 'MovimientoConceptoController');
+Route::resource('movimiento-concepto', 'MovimientoConceptoController');
 Route::resource('movimiento-producto', 'MovimientoProductoController');
 Route::resource('movimiento-activo', 'MovimientoActivoController');
 Route::resource('activo', 'ActivoController');
