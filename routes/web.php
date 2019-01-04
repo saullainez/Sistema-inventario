@@ -28,6 +28,7 @@ Route::resource('movimiento-activo', 'MovimientoActivoController');
 Route::resource('activo', 'ActivoController');
 Route::resource('inventario', 'InventarioController');
 Route::resource('inventario-activo', 'InventarioActivoController');
+Route::resource('usuarios', 'UserController');
 
 Route::get('/proveedor','EmpresaController@proveedores');
 Route::get('/clientes','EmpresaController@clientes');
