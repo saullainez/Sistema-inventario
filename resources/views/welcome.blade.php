@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Sistema de inventario</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -132,7 +132,7 @@
                 @else
                     <div class="contenedor-formulario-registro">
                         <h1>Bienvenido</h1>
-                        <a style="color:white; font-size: 1.4rem;" href="{{ url('/home') }}">Dashboard</a>
+                        <a style="color:white; font-size: 1.4rem;" href="{{ url('/home') }}">Ir al Dashboard</a>
                     </div>
                 @endguest
 
