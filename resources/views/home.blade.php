@@ -1,6 +1,20 @@
-@extends('layouts.app')
-
+@extends('layouts.layout')
 @section('content')
+<div class="card mb-4 wow fadeIn">
+    <div class="card-body d-sm-flex justify-content-between">
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <a href="/">Inicio</a>
+            <span>/</span>
+            <span>Dashboard</span>
+        </h4>
+    </div>
+</div>
+<div class="row wow fadeIn">
+    
+</div>
+@endsection
+
+<!--@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -20,4 +34,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection-->
