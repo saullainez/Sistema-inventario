@@ -51,8 +51,10 @@ class ActivoController extends Controller
             $activo->ActivoNombre = $request->Input('ActivoNombre');
             $activo->ActivoDescripcion = $request->Input('ActivoDescripcion');
             $activo->TipoActivo = $request->Input('TipoActivo');
-            $activo->save();
-            return response()->json($activo, 200)->header('Content-Type','application/json');
+            //$activo->save();
+
+            $res = Activo::crearActivo($activo);
+            return response()->json($res, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error' => $e->getMessage()];

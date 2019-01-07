@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class presentacion extends Model
 {
@@ -26,5 +27,15 @@ class presentacion extends Model
 
     public function movimientos(){
         return $this->hasMany('app\MovimientoProducto','presentacion_mov_fk','PresentacionId');
+    }
+
+    public static function crearPresentacion($presentacion){
+        $pres = DB::select('call crear_presentacion(?,?,?)', 
+        [
+            $presentacion->PresentacionId,
+            $presentacion->ActivoId,
+            $presentacion->ProductoId
+        ]);
+        return $pres;
     }
 }

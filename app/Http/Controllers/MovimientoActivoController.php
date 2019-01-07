@@ -17,15 +17,18 @@ class MovimientoActivoController extends Controller
     {
         //
         try{
-            $inventario = DB::get('inventario_activos as ia')
-            ->select('ia.ActivoId','a.ActivoNombre','ia.Descripcion','ia.Fecha',
-            'ia.Cantidad','ia.Monto','ia.ProveedorId','e.EmpresaNombre',
-            'ia.MovimientoConceptiId','mc.Nombre','ia.TipoMovimiento')
-            ->join('activos as a','ia.ActivoId','=','a.ActivoId')
-            ->join('empresas as e','ia.ProveedorId','=','e.EmpresaId')
-            ->join('movimiento_conceptos as mc','ia.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+           // $movimientoActivo = MovimientoActivo::get();
+            
+            $movimientoActivo = DB::table('movimiento_activos as ma')
+            ->select('ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+            'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
+            'ma.MovimientoConceptoId','mc.Nombre')
+            ->join('activos as a','ma.ActivoId','=','a.ActivoId')
+            ->join('empresas as e','ma.ProveedorId','=','e.EmpresaId')
+            ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
             ->get();
-            return response()->json($inventario, 200)->header('Content-Type','application/json');
+            
+            return response()->json($movimientoActivo, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -53,17 +56,24 @@ class MovimientoActivoController extends Controller
     {
         //
         try{
-            $inventario = new InventarioActivo;
-            $inventario->ActivoId = $request->ActivoId;
-            $inventario->Descripcion = $request->Descripcion;
-            $inventario->Fecha = $request->Fecha;
-            $inventario->Cantidad = $request->Cantidad;
-            $inventario->Monto = $request->Monto;
-            $inventario->ProveedorId = $request->ProveedorId;
-            $inventario->MovimientoConceptoId = $request->MovimientoConceptoId;
-            $inventario->TipoMovimiento = $request->TipoMovimiento;
-            $inventario->save();
-            return response()->json($inventario, 200)->header('Content-Type','application/json');
+        
+            $movimientoActivo = new movimientoActivo;
+            
+            $movimientoActivo->ActivoId = $request->ActivoId;
+            $movimientoActivo->Descripcion = $request->Descripcion;
+            $movimientoActivo->Fecha = $request->Fecha;
+            $movimientoActivo->Cantidad = $request->Cantidad;
+            $movimientoActivo->Monto = $request->Monto;
+            $movimientoActivo->ProveedorId = $request->ProveedorId;
+            $movimientoActivo->MovimientoConceptoId = $request->MovimientoConceptoId;
+           // $movimientoActivo->crearMovimiento($movimientoActivo);
+            $res = MovimientoActivo::crearMovimiento($movimientoActivo);
+           /*
+            $movimientoActivo->save();
+            */
+            //dd($res);
+            //return $res;
+            return response()->json($res, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -82,16 +92,16 @@ class MovimientoActivoController extends Controller
     {
         //
         try{
-            $inventario = DB::get('inventario_activos as ia')
-            ->select('ia.MovimientoActivoId','ia.ActivoId','a.ActivoNombre','ia.Descripcion','ia.Fecha',
-            'ia.Cantidad','ia.Monto','ia.ProveedorId','e.EmpresaNombre',
-            'ia.MovimientoConceptiId','mc.Nombre','ia.TipoMovimiento')
-            ->join('activos as a','ia.ActivoId','=','a.ActivoId')
-            ->join('empresas as e','ia.ProveedorId','=','e.EmpresaId')
-            ->join('movimiento_conceptos as mc','ia.MovimientoConceptoId','=','mc.MovimientoConceptoId')
-            ->whereraw('ia.MovimientoActivoId = ?',[$movimientoActivo->MovimientoActivoId])
+            $movimientoActivo = DB::table('movimiento_activos as ma')
+            ->select('ma.MovimientoActivoId','ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+            'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
+            'ma.MovimientoConceptoId','mc.Nombre')
+            ->join('activos as a','ma.ActivoId','=','a.ActivoId')
+            ->join('empresas as e','ma.ProveedorId','=','e.EmpresaId')
+            ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->whereraw('ma.MovimientoActivoId = ?',[$movimientoActivo->MovimientoActivoId])
             ->get();
-            return response()->json($inventario, 200)->header('Content-Type','application/json');
+            return response()->json($movimientoActivo, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -109,16 +119,16 @@ class MovimientoActivoController extends Controller
     {
         //
         try{
-            $inventario = DB::get('inventario_activos as ia')
-            ->select('ia.MovimientoActivoId','ia.ActivoId','a.ActivoNombre','ia.Descripcion','ia.Fecha',
-            'ia.Cantidad','ia.Monto','ia.ProveedorId','e.EmpresaNombre',
-            'ia.MovimientoConceptiId','mc.Nombre','ia.TipoMovimiento')
-            ->join('activos as a','ia.ActivoId','=','a.ActivoId')
-            ->join('empresas as e','ia.ProveedorId','=','e.EmpresaId')
-            ->join('movimiento_conceptos as mc','ia.MovimientoConceptoId','=','mc.MovimientoConceptoId')
-            ->whereraw('ia.MovimientoActivoId = ?',[$movimientoActivo->MovimientoActivoId])
+            $movimientoActivo = DB::table('movimiento_activos as ma')
+            ->select('ma.MovimientoActivoId','ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+            'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
+            'ma.MovimientoConceptoId','mc.Nombre')
+            ->join('activos as a','ma.ActivoId','=','a.ActivoId')
+            ->join('empresas as e','ma.ProveedorId','=','e.EmpresaId')
+            ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->whereraw('ma.MovimientoActivoId = ?',[$movimientoActivo->MovimientoActivoId])
             ->get();
-            return response()->json($inventario, 200)->header('Content-Type','application/json');
+            return response()->json($movimientoActivo, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -137,7 +147,8 @@ class MovimientoActivoController extends Controller
     {
         //
         try{
-         
+           // return "hola";
+
             $movimientoActivo->ActivoId = $request->ActivoId;
             $movimientoActivo->Descripcion = $request->Descripcion;
             $movimientoActivo->Fecha = $request->Fecha;
@@ -145,9 +156,11 @@ class MovimientoActivoController extends Controller
             $movimientoActivo->Monto = $request->Monto;
             $movimientoActivo->ProveedorId = $request->ProveedorId;
             $movimientoActivo->MovimientoConceptoId = $request->MovimientoConceptoId;
-            $movimientoActivo->TipoMovimiento = $request->TipoMovimiento;
-            $query = $movimientoActivo->save();
-            $req = ['actualizo'=>$query];
+    
+            //$query = $movimientoActivo->save();
+            //$req = ['actualizo'=>$query];
+            //return $movimientoActivo;
+            $req = MovimientoActivo::actualizarMovimiento($movimientoActivo);
             return response()->json($req, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
@@ -168,8 +181,9 @@ class MovimientoActivoController extends Controller
         //
         try{
          
-            $query = $movimientoActivo->delete();
-            $req = ['elimino'=>$query];
+            //$query = $movimientoActivo->delete();
+            //$req = ['elimino'=>$query];
+            $req = MovimientoActivo::eliminarMovimiento($movimientoActivo);
             return response()->json($req, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){

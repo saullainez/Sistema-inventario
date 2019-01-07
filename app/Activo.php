@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Activo extends Model
 {
@@ -22,5 +23,15 @@ class Activo extends Model
 
     public function movimientos(){
         return $this->hasMany('App\MovimientoActivo','activo_mov_fk','ActivoId');
+    }
+
+    public static function crearActivo($activo){
+        $act = DB::select('call crear_activo(?,?,?)',
+        [
+            $activo->ActivoNombre,
+            $activo->ActivoDescripcion,
+            $activo->TipoActivo
+        ]);
+        return $act;
     }
 }

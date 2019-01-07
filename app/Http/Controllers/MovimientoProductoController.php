@@ -66,8 +66,9 @@ class MovimientoProductoController extends Controller
             $movimiento->ClienteId = $request->ClienteId;
             $movimiento->MovimientoConceptoId = $request->MovimientoConceptoId;
             $movimiento->Monto = $request->Monto;
-            $movimiento->save();
-            return response()->json($movimiento, 200)->header('Content-Type','application/json');
+            //$movimiento->save();
+            $req = MovimientoProducto::crearMovimiento($movimiento);
+            return response()->json($req, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -155,8 +156,9 @@ class MovimientoProductoController extends Controller
             $movimientoProducto->ClienteId = $request->ClienteId;
             $movimientoProducto->MovimientoConceptoId = $request->MovimientoConceptoId;
             $movimientoProducto->Monto = $request->Monto;
-            $query = $movimientoProducto->save();
-            $req = ['actualizo'=>$query];
+           // $query = $movimientoProducto->save();
+           // $req = ['actualizo'=>$query];
+           $req = MovimientoProdcuto::actualizarMovimiento($MovimientoProducto);
             return response()->json($req, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
@@ -177,8 +179,9 @@ class MovimientoProductoController extends Controller
         //
         try{
           
-            $query = $movimientoProducto->delete();
-            $req = ['elimino'=>$query];
+            //$query = $movimientoProducto->delete();
+           // $req = ['elimino'=>$query];
+           $req = MovimientoProducto::eliminarMovimiento($movimientoProducto);
             return response()->json($req, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){

@@ -55,8 +55,9 @@ class PresentacionController extends Controller
             $presentacion->ActivoId = $request->ActivoId;
             $id = "{$request->ProductoId}{$request->ActivoId}";
             $presentacion->PresentacionId = $id;
-            $presentacion->save();
-            return response()->json($presentacion, 200)->header('Content-Type','application/json');
+            //$presentacion->save();
+            $res = Presentacion::crearPresentacion($presentacion);
+            return response()->json($res, 200)->header('Content-Type','application/json');
 
         }
         catch(\Exception $e){

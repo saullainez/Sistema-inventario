@@ -22,7 +22,6 @@ class CreateMovimientoActivosTable extends Migration
             $table->double('Monto');
             $table->integer('ProveedorId')->unsigned()->nullable();
             $table->integer('MovimientoConceptoId')->unsigned();
-            $table->enum('TipoMovimiento',['Entrada','Salida']);
             $table->timestamps();
 
             $table->foreign('ActivoId')->references('ActivoId')->on('activos')->onDelete('cascade');
