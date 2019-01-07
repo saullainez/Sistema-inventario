@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -21,7 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view ('usuarios.index');
+        $users = User::paginate();
+        return view ('usuarios.index', compact('users'));
     }
 
     /**

@@ -23,7 +23,7 @@
             <div class="container-fluid">
 
                 <!-- Marca -->
-                <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+                <a class="navbar-brand waves-effect" href="/home">
                     <strong class="blue-text">Sistema de inventario</strong>
                 </a>
 
@@ -112,12 +112,12 @@
             </a>
 
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item active waves-effect">
+                <a id = "home" href="/home" class="list-group-item waves-effect">
                     <i class="fa fa-pie-chart mr-3"></i>Dashboard
                 </a>
                 @role('admin')
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-user mr-3"></i>Profile</a>
+                    <a id = "usuarios" href="/usuarios" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fa fa-user mr-3"></i>Usuarios</a>
                     <a href="#" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-table mr-3"></i>Tables</a>
                     <a href="#" class="list-group-item list-group-item-action waves-effect">
@@ -152,6 +152,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/activar.js"></script>
     <!-- Initializations -->
     <script type="text/javascript">
         // Animations initialization
