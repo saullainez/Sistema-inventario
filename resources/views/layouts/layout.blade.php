@@ -152,12 +152,13 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script type="text/javascript" src="js/activar.js"></script>
+    <!--<script type="text/javascript" src="js/activar.js"></script>-->
     <!-- Initializations -->
     <script type="text/javascript">
         // Animations initialization
         new WOW().init();
     </script>
+    @yield('scripts')
 
 </body>
 

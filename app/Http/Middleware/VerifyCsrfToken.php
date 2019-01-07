@@ -39,7 +39,7 @@ class VerifyCsrfToken extends Middleware
         'movimiento-activo',
         'movimiento-activo/*',
         'activo',
-        'activo/*'
+        'activo/*',
 
     ];
 }

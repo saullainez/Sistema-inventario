@@ -12,6 +12,12 @@
     </div>
 </div>
 <div class="row wow fadeIn">
+    <div id="alert" style="display:none;" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong id="mensaje"></strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
@@ -20,7 +26,8 @@
                 </div> 
                 @can('usuarios.create')
                     <div class="col-3">
-                        <a href="#!" class="btn btn-primary">Nuevo usuario</a>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarUsuarioModal">Nuevo usuario</button>
+                        <!--<a href="#!" class="btn btn-primary">Nuevo usuario</a>-->
                     </div>
                 @endcan
             </div>
@@ -31,6 +38,19 @@
             <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
             <a href="#!" class="btn btn-primary">Go somewhere</a>-->
             <table class="table table-stripped table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 3rem;">ID</th>
+                        <th style="width: 14rem;">Nombre</th>
+                        <th style="width: 27rem;">Correo electrónico</th>
+                        <th colspan="2">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaUsuarios">
+                    
+                </tbody>
+            </table>
+            <!--<table class="table table-stripped table-hover">
                 <thead>
                     <tr>
                         <th style="width: 3rem;">ID</th>
@@ -59,8 +79,13 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $users->render() }}-->
         </div>
     </div>
 </div>
+@include('usuarios.modales.crear')
+@endsection
+@section('scripts')
+<script type="text/javascript" src="js/usuarios.js"></script>
 @endsection
 

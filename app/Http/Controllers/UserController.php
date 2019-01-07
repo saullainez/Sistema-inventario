@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 
@@ -25,6 +26,13 @@ class UserController extends Controller
     {
         $users = User::paginate();
         return view ('usuarios.index', compact('users'));
+
+    }
+
+    public function obtenerUsuarios()
+    {
+        $usuarios = User::get();
+        return response()->json($usuarios, 200);
     }
 
     /**
@@ -45,7 +53,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+            ]);
+            return response()->json([
+                "mensaje" => "Usuario creado correctamente"
+            ]);
+        }
+        
     }
 
     /**
