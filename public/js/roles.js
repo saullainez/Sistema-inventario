@@ -5,7 +5,11 @@ function modalEditarRol(id, nombre, slug, desc, especial){
     $("#nuevoEspecial").val(especial);
     $("#actualizarRol").attr('onClick', `actualizarRol(${id})`);
     $("#editarRolModal").modal();
-}
+};
+function modalEliminarRol(id){
+    $("#borrarRol").attr('onClick', `eliminarRol(${id})`);
+    $("#eliminarRolModal").modal();
+};
 function cargarRoles(){
     $.ajax({
         url: `/obtenerroles`,
@@ -80,6 +84,28 @@ function actualizarRol(id) {
             cargarRoles();
         },
         error: function (error) {
+            console.error(error);
+        }
+    });
+};
+
+function eliminarRol(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/eliminarrol`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarRoles();
+        },
+        error: function(error){
             console.error(error);
         }
     });

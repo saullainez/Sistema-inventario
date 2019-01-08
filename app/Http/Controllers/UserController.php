@@ -15,7 +15,7 @@ class UserController extends Controller
         $this->middleware('permission:usuarios.index')->only(['index', 'obtenerUsuarios']);
         $this->middleware('permission:usuarios.create')->only(['create', 'store']);
         $this->middleware('permission:usuarios.edit')->only(['edit', 'update', 'actualizarUsuario']);
-        $this->middleware('permission:usuarios.destroy')->only('destroy');
+        $this->middleware('permission:usuarios.destroy')->only(['destroy', 'eliminarUsuario']);
     }
     /**
      * Display a listing of the resource.
@@ -127,7 +127,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    /*public function destroy($id)
     {
         if($request->ajax()){
             $usuario = User::find($request->id);
@@ -136,7 +136,7 @@ class UserController extends Controller
                 "mensaje" => "Usuario eliminado correctamente"
             ]);
         };
-    }
+    }*/
 
     public function eliminarUsuario(Request $request)
     {

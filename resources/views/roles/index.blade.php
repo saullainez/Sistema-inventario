@@ -54,7 +54,7 @@
 </div>
 @include('roles.modales.crear')
 @include('roles.modales.editar')
-<!--@include('usuarios.modales.eliminar')-->
+@include('roles.modales.eliminar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/roles.js"></script>

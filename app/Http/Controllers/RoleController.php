@@ -121,4 +121,15 @@ class RoleController extends Controller
     {
         //
     }
+
+    public function eliminarRol(Request $request)
+    {
+        if($request->ajax()){
+            $rol = Role::find($request->id);
+            $rol->delete();
+            return response()->json([
+                "mensaje" => "Rol eliminado correctamente"
+            ]);
+        };
+    }
 }

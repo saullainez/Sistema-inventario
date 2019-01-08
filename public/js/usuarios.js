@@ -4,7 +4,7 @@ function modalEditarUsuario(id, nombre, correo){
     $("#actualizarUsuario").attr('onClick', `actualizarUsuario(${id})`);
     $("#editarUsuarioModal").modal();
 };
-function modalEliminarProyecto(id){
+function modalEliminarUsuario(id){
     $("#borrarUsuario").attr('onClick', `eliminarUsuario(${id})`);
     $("#eliminarUsuarioModal").modal();
 };
@@ -22,7 +22,7 @@ function cargarUsuarios(){
                     <td>${res[i].name}</td>
                     <td>${res[i].email}</td>
                     <td><a onclick="modalEditarUsuario(${res[i].id}, '${res[i].name}', '${res[i].email}');" class="btn btn-sm btn-default">Editar</a></td>
-                    <td><a onclick="modalEliminarProyecto(${res[i].id});" class="btn btn-sm btn-danger">Eliminar</a></td>
+                    <td><a onclick="modalEliminarUsuario(${res[i].id});" class="btn btn-sm btn-danger">Eliminar</a></td>
                 </tr>`);
             }
         },
