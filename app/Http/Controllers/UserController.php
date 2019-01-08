@@ -62,7 +62,7 @@ class UserController extends Controller
             return response()->json([
                 "mensaje" => "Usuario creado correctamente"
             ]);
-        }
+        };
         
     }
 
@@ -95,9 +95,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    /*public function update(Request $request)
     {
-        //
+        if($request->ajax()){
+            $usuario = User::find($request->id);
+            $usuario->name = $request['name'];
+            $usuario->email = $request['email'];
+            $usuario->save();
+            return response()->json([
+                "mensaje" => "Usuario actualizado correctamente"
+            ]);
+        };
+    }*/
+
+    public function editarUsuario(Request $request)
+    {
+        if($request->ajax()){
+            $usuario = User::find($request->id);
+            $usuario->name = $request['name'];
+            $usuario->email = $request['email'];
+            $usuario->save();
+            return response()->json([
+                "mensaje" => "Usuario actualizado correctamente"
+            ]);
+        };
     }
 
     /**
@@ -108,6 +129,23 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if($request->ajax()){
+            $usuario = User::find($request->id);
+            $usuario->delete();
+            return response()->json([
+                "mensaje" => "Usuario eliminado correctamente"
+            ]);
+        };
+    }
+
+    public function eliminarUsuario(Request $request)
+    {
+        if($request->ajax()){
+            $usuario = User::find($request->id);
+            $usuario->delete();
+            return response()->json([
+                "mensaje" => "Usuario eliminado correctamente"
+            ]);
+        };
     }
 }

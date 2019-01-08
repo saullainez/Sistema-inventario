@@ -1,8 +1,12 @@
 function modalEditarUsuario(id, nombre, correo){
-    alert("Editar" + id + nombre + correo);
+    $("#nombreNuevo").val(nombre);
+    $("#emailNuevo").val(correo);
+    $("#actualizarUsuario").attr('onClick', `actualizarUsuario(${id})`);
+    $("#editarUsuarioModal").modal();
 };
 function modalEliminarProyecto(id){
-    alert("Eliminar" + id);
+    $("#borrarUsuario").attr('onClick', `eliminarUsuario(${id})`);
+    $("#eliminarUsuarioModal").modal();
 };
 function cargarUsuarios(){
     $.ajax({
@@ -50,7 +54,53 @@ function crearUsuario() {
             console.error(error);
         }
     });
-}
+};
+
+function actualizarUsuario(id){
+    var tokenEditar = $("#tokenEditar").val();
+    var data = {
+        id: id,
+        name: $("#nombreNuevo").val(),
+        email: $("#emailNuevo").val()
+    };
+    $.ajax({
+        url: `/editarusuario`,
+        headers: {'X-CSRF-TOKEN': tokenEditar},
+        method: "PUT",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarUsuarios();
+        },
+        error: function(error){
+            console.error(error);
+        }
+    });
+};
+
+function eliminarUsuario(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/eliminarusuario`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarUsuarios();
+        },
+        error: function(error){
+            console.error(error);
+        }
+    });
+};
 
 $(document).ready(function () {
     $("#usuarios").addClass("active");

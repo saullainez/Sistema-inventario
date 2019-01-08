@@ -84,6 +84,8 @@
     </div>
 </div>
 @include('usuarios.modales.crear')
+@include('usuarios.modales.editar')
+@include('usuarios.modales.eliminar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/usuarios.js"></script>

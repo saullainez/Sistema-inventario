@@ -36,6 +36,8 @@ Route::get('/entradas','MovimientoConceptoController@entradas');
 Route::get('/salidas','MovimientoConceptoController@salidas');
 
 Route::get('/obtenerusuarios', 'UserController@obtenerUsuarios');
+Route::put('/editarusuario', 'UserController@editarUsuario');
+Route::delete('/eliminarusuario', 'UserController@eliminarUsuario');
 
 Route::get('/identificacion', function(){
     return csrf_token();
