@@ -49,7 +49,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            Role::create([
+                'name' => $request['name'],
+                'slug' => $request['slug'],
+                'description' => $request['description'],
+                'special' => $request['special']
+            ]);
+            return response()->json([
+                "mensaje" => "Rol creado correctamente"
+            ]);
+        };
     }
 
     /**
