@@ -29,6 +29,7 @@ Route::resource('activo', 'ActivoController');
 Route::resource('inventario', 'InventarioController');
 Route::resource('inventario-activo', 'InventarioActivoController');
 Route::resource('usuarios', 'UserController');
+Route::resource('roles', 'RoleController');
 
 Route::get('/proveedor','EmpresaController@proveedores');
 Route::get('/clientes','EmpresaController@clientes');
@@ -38,6 +39,8 @@ Route::get('/salidas','MovimientoConceptoController@salidas');
 Route::get('/obtenerusuarios', 'UserController@obtenerUsuarios');
 Route::put('/editarusuario', 'UserController@editarUsuario');
 Route::delete('/eliminarusuario', 'UserController@eliminarUsuario');
+
+Route::get('/obtenerroles', 'RoleController@obtenerRoles');
 
 Route::get('/identificacion', function(){
     return csrf_token();

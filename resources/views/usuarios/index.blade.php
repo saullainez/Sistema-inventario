@@ -27,7 +27,6 @@
                 @can('usuarios.create')
                     <div class="col-3">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarUsuarioModal">Nuevo usuario</button>
-                        <!--<a href="#!" class="btn btn-primary">Nuevo usuario</a>-->
                     </div>
                 @endcan
             </div>
@@ -35,8 +34,6 @@
 
         <div class="card-body">
             <h5 class="card-title">Listado de usuarios</h5>
-            <!--<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#!" class="btn btn-primary">Go somewhere</a>-->
             <table class="table table-stripped table-hover">
                 <thead>
                     <tr>

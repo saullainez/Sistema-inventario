@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:roles.index')->only(['index', 'obtenerRoles']);
+        $this->middleware('permission:roles.create')->only(['create', 'store']);
+        $this->middleware('permission:roles.edit')->only(['edit', 'update']);
+        $this->middleware('permission:roles.destroy')->only('destroy');
+    } 
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,13 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return view ('roles.index');
+    }
+
+    public function obtenerRoles()
+    {
+        $roles = Role::get();
+        return response()->json($roles, 200);
     }
 
     /**
