@@ -37,10 +37,11 @@ Route::get('/entradas','MovimientoConceptoController@entradas');
 Route::get('/salidas','MovimientoConceptoController@salidas');
 
 Route::get('/obtenerusuarios', 'UserController@obtenerUsuarios');
-Route::put('/editarusuario', 'UserController@editarUsuario');
+Route::put('/actualizarusuario', 'UserController@actualizarUsuario');
 Route::delete('/eliminarusuario', 'UserController@eliminarUsuario');
 
 Route::get('/obtenerroles', 'RoleController@obtenerRoles');
+Route::put('/actualizarrol', 'RoleController@actualizarRol');
 
 Route::get('/identificacion', function(){
     return csrf_token();

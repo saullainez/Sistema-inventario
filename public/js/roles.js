@@ -1,3 +1,11 @@
+function modalEditarRol(id, nombre, slug, desc, especial){
+    $("#nuevoNombre").val(nombre);
+    $("#nuevoSlug").val(slug);
+    $("#nuevaDescripcion").val(desc);
+    $("#nuevoEspecial").val(especial);
+    $("#actualizarRol").attr('onClick', `actualizarRol(${id})`);
+    $("#editarRolModal").modal();
+}
 function cargarRoles(){
     $.ajax({
         url: `/obtenerroles`,
@@ -36,6 +44,33 @@ function crearRol() {
         url: `/roles`,
         headers: {'X-CSRF-TOKEN': tokenAgregar},
         method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarRoles();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+
+function actualizarRol(id) {
+    var tokenEditar = $("#tokenEditar").val();
+    var data = {
+        id: id,
+        name: $("#nuevoNombre").val(),
+        slug: $("#nuevoSlug").val(),
+        description: $("#nuevaDescripcion").val(),
+        special: $("#nuevoEspecial").val()
+    };
+    $.ajax({
+        url: `/actualizarrol`,
+        headers: {'X-CSRF-TOKEN': tokenEditar},
+        method: "PUT",
         data: data,
         dataType: "json",
         success: function (res) {

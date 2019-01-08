@@ -64,7 +64,7 @@ function actualizarUsuario(id){
         email: $("#emailNuevo").val()
     };
     $.ajax({
-        url: `/editarusuario`,
+        url: `/actualizarusuario`,
         headers: {'X-CSRF-TOKEN': tokenEditar},
         method: "PUT",
         data: data,

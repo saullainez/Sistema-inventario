@@ -12,7 +12,7 @@ class RoleController extends Controller
         $this->middleware('auth');
         $this->middleware('permission:roles.index')->only(['index', 'obtenerRoles']);
         $this->middleware('permission:roles.create')->only(['create', 'store']);
-        $this->middleware('permission:roles.edit')->only(['edit', 'update']);
+        $this->middleware('permission:roles.edit')->only(['edit', 'update', 'actualizarRol']);
         $this->middleware('permission:roles.destroy')->only('destroy');
     } 
     /**
@@ -94,6 +94,21 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function actualizarRol(Request $request)
+    {
+        if($request->ajax()){
+            $rol = Role::find($request->id);
+            $rol->name = $request['name'];
+            $rol->slug = $request['slug'];
+            $rol->description = $request['description'];
+            $rol->special = $request['special'];
+            $rol->save();
+            return response()->json([
+                "mensaje" => "Rol actualizado correctamente"
+            ]);
+        };
     }
 
     /**
