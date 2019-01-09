@@ -1,3 +1,10 @@
+function modalEditarPermiso(id, nombre, slug, desc){
+    $("#nuevoNombre").val(nombre);
+    $("#nuevoSlug").val(slug);
+    $("#nuevaDescripcion").val(desc);
+    $("#actualizarPermiso").attr('onClick', `actualizarPermiso(${id})`);
+    $("#editarPermisoModal").modal();
+};
 function cargarPermisos(){
     $.ajax({
         url: `/obtenerpermisos`,
@@ -34,6 +41,32 @@ function crearPermiso() {
         url: `/permisos`,
         headers: {'X-CSRF-TOKEN': tokenAgregar},
         method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarPermisos();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+
+function actualizarPermiso(id) {
+    var tokenEditar = $("#tokenEditar").val();
+    var data = {
+        id: id,
+        name: $("#nuevoNombre").val(),
+        slug: $("#nuevoSlug").val(),
+        description: $("#nuevaDescripcion").val()
+    };
+    $.ajax({
+        url: `/actualizarpermiso`,
+        headers: {'X-CSRF-TOKEN': tokenEditar},
+        method: "PUT",
         data: data,
         dataType: "json",
         success: function (res) {

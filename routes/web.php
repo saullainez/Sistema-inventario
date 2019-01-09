@@ -46,6 +46,7 @@ Route::put('/actualizarrol', 'RoleController@actualizarRol');
 Route::delete('/eliminarrol', 'RoleController@eliminarRol');
 
 Route::get('/obtenerpermisos', 'PermisosController@obtenerPermisos');
+Route::put('/actualizarpermiso', 'PermisosController@actualizarPermiso');
 
 Route::get('/identificacion', function(){
     return csrf_token();

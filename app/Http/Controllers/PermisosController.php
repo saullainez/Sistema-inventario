@@ -90,9 +90,23 @@ class PermisosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    /*public function update(Request $request, $id)
     {
         //
+    }*/
+
+    public function actualizarPermiso(Request $request)
+    {
+        if($request->ajax()){
+            $permiso = Permission::find($request->id);
+            $permiso->name = $request['name'];
+            $permiso->slug = $request['slug'];
+            $permiso->description = $request['description'];
+            $permiso->save();
+            return response()->json([
+                "mensaje" => "Permiso actualizado correctamente"
+            ]);
+        };
     }
 
     /**
