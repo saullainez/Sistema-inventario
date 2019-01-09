@@ -5,6 +5,10 @@ function modalEditarPermiso(id, nombre, slug, desc){
     $("#actualizarPermiso").attr('onClick', `actualizarPermiso(${id})`);
     $("#editarPermisoModal").modal();
 };
+function modalEliminarPermiso(id){
+    $("#borrarPermiso").attr('onClick', `eliminarPermiso(${id})`);
+    $("#eliminarPermisoModal").modal();
+};
 function cargarPermisos(){
     $.ajax({
         url: `/obtenerpermisos`,
@@ -76,6 +80,28 @@ function actualizarPermiso(id) {
             cargarPermisos();
         },
         error: function (error) {
+            console.error(error);
+        }
+    });
+};
+
+function eliminarPermiso(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/eliminarpermiso`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarPermisos();
+        },
+        error: function(error){
             console.error(error);
         }
     });

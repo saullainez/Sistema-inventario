@@ -53,7 +53,7 @@
 </div>
 @include('permisos.modales.crear')
 @include('permisos.modales.editar')
-<!--@include('roles.modales.eliminar')-->
+@include('permisos.modales.eliminar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/permisos.js"></script>
