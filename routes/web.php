@@ -40,6 +40,8 @@ Route::get('/salidas','MovimientoConceptoController@salidas');
 Route::get('/obtenerusuarios', 'UserController@obtenerUsuarios');
 Route::put('/actualizarusuario', 'UserController@actualizarUsuario');
 Route::delete('/eliminarusuario', 'UserController@eliminarUsuario');
+Route::post('/agregarrolusuario', 'UserController@agregarRolUsuario');
+Route::get('/obtenerrolesusuario', 'UserController@verRolUsuario');
 
 Route::get('/obtenerroles', 'RoleController@obtenerRoles');
 Route::put('/actualizarrol', 'RoleController@actualizarRol');

@@ -40,7 +40,7 @@
                         <th style="width: 3rem;">ID</th>
                         <th style="width: 14rem;">Nombre</th>
                         <th style="width: 27rem;">Correo electrónico</th>
-                        <th colspan="2">&nbsp;</th>
+                        <th colspan="4">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody id="tablaUsuarios">
@@ -83,6 +83,8 @@
 @include('usuarios.modales.crear')
 @include('usuarios.modales.editar')
 @include('usuarios.modales.eliminar')
+@include('usuarios.modales.agregarrol')
+@include('usuarios.modales.verroles')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/usuarios.js"></script>

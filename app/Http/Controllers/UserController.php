@@ -148,4 +148,23 @@ class UserController extends Controller
             ]);
         };
     }
+
+    public function agregarRolUsuario(Request $request)
+    {
+        if($request->ajax()){
+            $usuario = User::find($request->id);
+            $usuario->roles()->sync($request->roles);
+            return response()->json([
+                "mensaje" => "Rol asignado correctamente"
+            ]);
+        };
+    }
+    public function verRolUsuario(Request $request)
+    {
+        if($request->ajax()){
+            $usuario = User::find($request->id);
+            $roles = $usuario->getroles();
+            return response()->json($roles, 200);
+        };
+    }
 }
