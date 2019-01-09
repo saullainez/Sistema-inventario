@@ -51,10 +51,10 @@
         </div>
     </div>
 </div>
-<!--@include('roles.modales.crear')
-@include('roles.modales.editar')
-@include('roles.modales.eliminar')
-@endsection-->
+@include('permisos.modales.crear')
+<!--@include('roles.modales.editar')
+@include('roles.modales.eliminar')-->
+@endsection
 @section('scripts')
 <script type="text/javascript" src="js/permisos.js"></script>
 @endsection

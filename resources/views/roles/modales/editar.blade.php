@@ -24,7 +24,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="nuevaDescripcion" required>Descripcion</label>
-                            <input type="text" class="form-control" id="nuevaDescripcion">
+                            <textarea class="form-control" id="nuevaDescripcion"></textarea>
                         </div>
                         <div class="mb-3">
                             <h6>Permiso especial</h6>

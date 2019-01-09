@@ -13,7 +13,7 @@ class RoleController extends Controller
         $this->middleware('permission:roles.index')->only(['index', 'obtenerRoles']);
         $this->middleware('permission:roles.create')->only(['create', 'store']);
         $this->middleware('permission:roles.edit')->only(['edit', 'update', 'actualizarRol']);
-        $this->middleware('permission:roles.destroy')->only('destroy');
+        $this->middleware('permission:roles.destroy')->only(['destroy', 'eliminarRol']);
     } 
     /**
      * Display a listing of the resource.

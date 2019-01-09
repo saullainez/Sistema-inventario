@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PermisosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:permisos.index')->only(['index', 'obtenerPermisos']);
+        $this->middleware('permission:permisos.create')->only(['create', 'store']);
+        $this->middleware('permission:permisos.edit')->only(['edit', 'update', 'actualizarPermiso']);
+        $this->middleware('permission:permisos.destroy')->only(['destroy', 'eliminarPermiso']);
+    } 
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +49,16 @@ class PermisosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            Permission::create([
+                'name' => $request['name'],
+                'slug' => $request['slug'],
+                'description' => $request['description'],
+            ]);
+            return response()->json([
+                "mensaje" => "Permiso creado correctamente"
+            ]);
+        };
     }
 
     /**

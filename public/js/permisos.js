@@ -23,6 +23,31 @@ function cargarPermisos(){
     });
 };
 
+function crearPermiso() {
+    var tokenAgregar = $("#tokenAgregar").val();
+    var data = {
+        name: $("#nombre").val(),
+        slug: $("#slug").val(),
+        description: $("#descripcion").val()
+    };
+    $.ajax({
+        url: `/permisos`,
+        headers: {'X-CSRF-TOKEN': tokenAgregar},
+        method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarPermisos();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+
 $(document).ready(function () {
     $("#permisos").addClass("active");
     cargarPermisos();
