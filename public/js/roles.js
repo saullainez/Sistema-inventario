@@ -34,7 +34,7 @@ function cargarRoles(){
             console.error(error);
         }
     });
-}
+};
 
 function crearRol() {
     var tokenAgregar = $("#tokenAgregar").val();

@@ -120,8 +120,8 @@
                         <i class="fa fa-user mr-3"></i>Usuarios</a>
                     <a id = "roles" href="/roles" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-user-shield mr-3"></i>Roles</a>
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-map mr-3"></i>Maps</a>
+                    <a id = "permisos" href="/permisos" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-lock-open mr-3"></i>Permisos</a>
                     <a href="#" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-money mr-3"></i>Orders</a>
                 @else
