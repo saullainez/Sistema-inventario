@@ -84,6 +84,12 @@
                                     <i class="fas fa-wine-glass mr-3"></i>Tipo de bebida</a>
                             @endcan
                         </li>
+                        <li>
+                            @can('activo.index')
+                                <a id = "activoMenu" href="/activo" class="nav-link">
+                                    <i class="far fa-check-circle mr-3"></i>Activos</a>
+                            @endcan
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -154,8 +160,10 @@
                     <a id = "tb" href="/tipo-bebida" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-wine-glass mr-3"></i>Tipo de bebida</a>
                 @endcan
-                    <a href="tb" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-money mr-3"></i>Orders</a>
+                @can('activo.index')
+                    <a id = "activo" href="/activo" class="list-group-item list-group-item-action waves-effect">
+                        <i class="far fa-check-circle mr-3"></i>Activos</a>
+                @endcan
 
             </div>
 

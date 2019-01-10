@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ActivoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:activo.index')->only(['index', 'obtenerActivo']);
+        $this->middleware('permission:activo.create')->only(['create', 'store']);
+        $this->middleware('permission:activo.edit')->only(['edit', 'update', 'actualizarActivo']);
+        $this->middleware('permission:activo.destroy')->only(['destroy', 'eliminarActivo']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,14 +25,19 @@ class ActivoController extends Controller
         //
         try{
             $activos = Activo::get();
-            return response()->json($activos, 200)->header('Content-Type','application\json');
+            return view ('activos.index', compact('activos'));
+            //return response()->json($activos, 200)->header('Content-Type','application\json');
         }
         catch(\Exception $e){
             $error = ['error' => $e->getMessage()];
             return response()->json($error);
         }
-       
+    }
 
+    public function obtenerActivos()
+    {
+        $activos = Activo::get();
+        return response()->json($activos, 200);
     }
 
     /**
