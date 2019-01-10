@@ -165,4 +165,16 @@ class TipoBebidaController extends Controller
         }
 
     }
+
+    public function actualizarTipoBebida(Request $request)
+    {
+        if($request->ajax()){
+            $tipo_bebida = TipoBebida::find($request->id);
+            $tipo_bebida->nombre = $request['nombre'];
+            $tipo_bebida->save();
+            return response()->json([
+                "mensaje" => "Tipo de bebida actualizada correctamente"
+            ]);
+        };
+    }
 }
