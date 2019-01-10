@@ -21,6 +21,28 @@ function cargarTipoBebida(){
         }
     });
 };
+function crearTipoBebida() {
+    var tokenAgregar = $("#tokenAgregar").val();
+    var data = {
+        nombre: $("#nombre").val()
+    };
+    $.ajax({
+        url: `/tipo-bebida`,
+        headers: {'X-CSRF-TOKEN': tokenAgregar},
+        method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarTipoBebida();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
 $(document).ready(function () {
     $("#tb").addClass("active");
     $("#tbMenu").addClass("active");

@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class TipoBebidaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:tipo-bebida.index')->only(['index', 'obtenerTipoBebida']);
+        $this->middleware('permission:tipo-bebida.create')->only(['create', 'store']);
+        $this->middleware('permission:tipo-bebida.edit')->only(['edit', 'update', 'actualizarTipoBebida']);
+        $this->middleware('permission:tipo-bebida.destroy')->only(['destroy', 'eliminarTipoBebida']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,8 +68,11 @@ class TipoBebidaController extends Controller
             //return response()->json($tipoBebida);
            //return $request;
             $tipoBebida->save();
-            return response()->json($tipoBebida, 200)->header('Content-Type', 'application/json'); 
-            //response   
+            //return response()->json($tipoBebida, 200)->header('Content-Type', 'application/json'); 
+            //response  
+            return response()->json([
+                "mensaje" => "Tipo de bebida creada correctamente"
+            ]); 
         }
         catch(\Exception $e ){
             $error = ['error'=>$e->getMessage()];
