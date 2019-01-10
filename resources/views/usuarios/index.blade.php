@@ -21,11 +21,11 @@
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
-                <div class="col-9">
+                <div class="col-7 col-sm-8 col-md-9">
                     <h5 style="position: relative; top: 1rem;">Administrar Usuarios</h5>
                 </div> 
                 @can('usuarios.create')
-                    <div class="col-3">
+                    <div class="col-5 col-sm-4 col-md-3">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarUsuarioModal">Nuevo usuario</button>
                     </div>
                 @endcan

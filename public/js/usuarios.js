@@ -59,6 +59,7 @@ function cargarUsuarios(){
                     <td><a onclick="modalEliminarUsuario(${res[i].id});" class="btn btn-sm btn-danger">Eliminar</a></td>
                 </tr>`);
             }
+            
         },
         error: function (error) {
             console.error(error);
@@ -90,7 +91,7 @@ function cargarRolesDeUsuario(id){
         id: id
     };
     $.ajax({
-        url: `/obtenerrolesusuario`,
+        url: `/obtenerrolsusuario`,
         method: "GET",
         data: data,
         dataType: "json",
@@ -101,7 +102,6 @@ function cargarRolesDeUsuario(id){
                     <h4>${res[i]}</h4>`);
             };
             $("#verRolUsuarioModal").modal();
-            //console.log(res[0]);
         },
         error: function (error) {
             console.error(error);

@@ -115,19 +115,21 @@
                 <a id = "home" href="/home" class="list-group-item list-group-item-action waves-effect">
                     <i class="fas fa-chart-pie mr-3"></i>Dashboard
                 </a>
-                @role('admin')
+                @can('usuarios.index')
                     <a id = "usuarios" href="/usuarios" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-user mr-3"></i>Usuarios</a>
+                @endcan
+                @can('roles.index')
                     <a id = "roles" href="/roles" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-user-shield mr-3"></i>Roles</a>
+                @endcan
+                @can('permisos.index')
                     <a id = "permisos" href="/permisos" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-lock-open mr-3"></i>Permisos</a>
+                @endcan
                     <a href="#" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-money mr-3"></i>Orders</a>
-                @else
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fa fa-user mr-3"></i>No es admin</a>
-                @endrole
+
             </div>
 
         </div>

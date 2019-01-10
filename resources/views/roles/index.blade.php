@@ -42,11 +42,11 @@
                         <th style="width: 17rem;">Slug</th>
                         <th style="width: 29rem;">Descripción</th>
                         <th style="width: 22rem;">Especial</th>
-                        <th colspan="2">&nbsp;</th>
+                        <th colspan="4">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody id="tablaRoles">
-                    
+
                 </tbody>
             </table>
         </div>
@@ -55,6 +55,8 @@
 @include('roles.modales.crear')
 @include('roles.modales.editar')
 @include('roles.modales.eliminar')
+@include('roles.modales.agregarpermiso')
+@include('roles.modales.verpermisos')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/roles.js"></script>

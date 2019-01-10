@@ -132,4 +132,24 @@ class RoleController extends Controller
             ]);
         };
     }
+
+    public function agregarPermisoRol(Request $request)
+    {
+        if($request->ajax()){
+            $rol = Role::find($request->id);
+            $rol->permissions()->sync($request->permissions);
+            return response()->json([
+                "mensaje" => "Permiso asignado correctamente"
+            ]);
+        };
+    }
+
+    public function verPermisoRol(Request $request)
+    {
+        if($request->ajax()){
+            $rol = Role::find($request->id);
+            $permisos = $rol->getpermissions();
+            return response()->json($permisos, 200);
+        };
+    }
 }
