@@ -1,4 +1,4 @@
-function cargarActivo(){
+function cargarActivos(){
     $.ajax({
         url: `/obteneractivos`,
         method: "GET",
@@ -23,8 +23,32 @@ function cargarActivo(){
         }
     });
 };
+function crearActivo() {
+    var tokenAgregar = $("#tokenAgregar").val();
+    var data = {
+        ActivoNombre: $("#nombre").val(),
+        ActivoDescripcion: $("#descripcion").val(),
+        TipoActivo: $("#tipo").val()
+    };
+    $.ajax({
+        url: `/activo`,
+        headers: {'X-CSRF-TOKEN': tokenAgregar},
+        method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarActivos();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
 $(document).ready(function () {
     $("#activo").addClass("active");
     $("#activoMenu").addClass("active");
-    cargarActivo();
+    cargarActivos();
 });
