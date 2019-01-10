@@ -7,7 +7,7 @@
             <span>/</span>
             <a href="/home">Dashboard</a>
             <span>/</span>
-            <span>Roles</span>
+            <span>Tipo de bebida</span>
         </h4>
     </div>
 </div>
@@ -21,46 +21,38 @@
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
-                <div class="col-7 col-sm-8 col-md-9">
-                    <h5 style="position: relative; top: 1rem;">Administrar Roles</h5>
+                <div class="col-6 col-sm-7 col-md-8">
+                    <h5 style="position: relative; top: 1rem;">Administrar Tipos de bebida</h5>
                 </div> 
                 @can('roles.create')
-                    <div class="col-5 col-sm-4 col-md-3">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarRolModal">Nuevo rol</button>
+                    <div class="col-6 col-sm-5 col-md-4">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarTipoBebidaModal">Agregar tipo de bebida</button>
                     </div>
                 @endcan
             </div>
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de roles</h5>
+            <h5 class="card-title">Listado de tipos de bebidas</h5>
             <div class="table-responsive">
                 <table class="table table-stripped table-hover">
                     <thead>
                         <tr>
-                            <th style="width: 3rem;">ID</th>
-                            <th style="width: 17rem;">Nombre</th>
-                            <th style="width: 17rem;">Slug</th>
-                            <th style="width: 29rem;">Descripción</th>
-                            <th style="width: 22rem;">Especial</th>
-                            <th colspan="4">&nbsp;</th>
+                            <th style="width: 6rem;">ID</th>
+                            <th style="width: 35rem;">Nombre</th>
+                            <th colspan="2">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaRoles">
-
+                    <tbody id="tablaTipoBebida">
+                        
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-@include('roles.modales.crear')
-@include('roles.modales.editar')
-@include('roles.modales.eliminar')
-@include('roles.modales.agregarpermiso')
-@include('roles.modales.verpermisos')
+@include('tipo_bebida.modales.crear')
 @endsection
 @section('scripts')
-<script type="text/javascript" src="js/roles.js"></script>
+<script type="text/javascript" src="js/tipo_bebida.js"></script>
 @endsection
-

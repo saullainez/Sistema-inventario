@@ -17,13 +17,20 @@ class TipoBebidaController extends Controller
         //
         try{
             $tipo_bebidas = TipoBebida::get();
-            return response()->json($tipo_bebidas,200)->header('Content-Type','application/json');    
+            return view ('tipo_bebida.index', compact('tipo_bebidas'));
+            //return response()->json($tipo_bebidas,200)->header('Content-Type','application/json');    
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
      
+    }
+
+    public function obtenerTipoBebida()
+    {
+        $tipobebidas = TipoBebida::get();
+        return response()->json($tipobebidas, 200);
     }
 
     /**

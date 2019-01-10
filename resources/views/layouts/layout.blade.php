@@ -78,6 +78,12 @@
                                     <i class="fas fa-lock-open mr-3"></i>Permisos</a>
                             @endcan
                         </li>
+                        <li>
+                            @can('tipo-bebida.index')
+                                <a id = "tbMenu" href="/tipo-bebida" class="nav-link">
+                                    <i class="fas fa-wine-glass mr-3"></i>Tipo de bebida</a>
+                            @endcan
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -144,7 +150,11 @@
                     <a id = "permisos" href="/permisos" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-lock-open mr-3"></i>Permisos</a>
                 @endcan
-                    <a href="#" class="list-group-item list-group-item-action waves-effect">
+                @can('tipo-bebida.index')
+                    <a id = "tb" href="/tipo-bebida" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-wine-glass mr-3"></i>Tipo de bebida</a>
+                @endcan
+                    <a href="tb" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-money mr-3"></i>Orders</a>
 
             </div>
