@@ -177,4 +177,14 @@ class TipoBebidaController extends Controller
             ]);
         };
     }
+    public function eliminarTipoBebida(Request $request)
+    {
+        if($request->ajax()){
+            $tipo_bebida = TipoBebida::find($request->id);
+            $tipo_bebida->delete();
+            return response()->json([
+                "mensaje" => "Tipo de bebida eliminada correctamente"
+            ]);
+        };
+    }
 }

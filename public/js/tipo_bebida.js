@@ -4,6 +4,10 @@ function modalEditarTipoBebida(id, nombre){
     $("#editarTipoBebidaModal").modal();
     
 };
+function modalEliminarTipoBebida(id){
+    $("#borrarTipoBebida").attr('onClick', `eliminarTipoBebida(${id})`);
+    $("#eliminarTipoBebidaModal").modal();
+};
 function cargarTipoBebida(){
     $.ajax({
         url: `/obtenertipobebida`,
@@ -59,6 +63,27 @@ function actualizarTipoBebida(id){
         url: `/actualizartipobebida`,
         headers: {'X-CSRF-TOKEN': tokenEditar},
         method: "PUT",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarTipoBebida();
+        },
+        error: function(error){
+            console.error(error);
+        }
+    });
+};
+function eliminarTipoBebida(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/eliminartipobebida`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
         data: data,
         dataType: "json",
         success: function(res){

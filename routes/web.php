@@ -55,6 +55,7 @@ Route::delete('/eliminarpermiso', 'PermisosController@eliminarPermiso');
 
 Route::get('/obtenertipobebida', 'TipoBebidaController@obtenerTipoBebida');
 Route::put('/actualizartipobebida', 'TipoBebidaController@actualizarTipoBebida');
+Route::delete('/eliminartipobebida', 'TipoBebidaController@eliminarTipoBebida');
 
 Route::get('/identificacion', function(){
     return csrf_token();

@@ -53,6 +53,7 @@
 </div>
 @include('tipo_bebida.modales.crear')
 @include('tipo_bebida.modales.editar')
+@include('tipo_bebida.modales.eliminar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/tipo_bebida.js"></script>
