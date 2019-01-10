@@ -191,6 +191,7 @@ function eliminarRol(id){
 
 $(document).ready(function () {
     $("#roles").addClass("active");
+    $("#rolesMenu").addClass("active");
     cargarRoles();
     cargarPermisos();
 })

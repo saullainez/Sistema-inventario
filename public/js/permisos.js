@@ -109,5 +109,6 @@ function eliminarPermiso(id){
 
 $(document).ready(function () {
     $("#permisos").addClass("active");
+    $("#permisosMenu").addClass("active");
     cargarPermisos();
 });

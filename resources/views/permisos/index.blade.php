@@ -21,11 +21,11 @@
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
-                <div class="col-9">
+                <div class="col-7 col-sm-8 col-md-9">
                     <h5 style="position: relative; top: 1rem;">Administrar Permisos</h5>
                 </div> 
                 @can('roles.create')
-                    <div class="col-3">
+                    <div class="col-5 col-sm-4 col-md-3">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarPermisoModal">Nuevo permiso</button>
                     </div>
                 @endcan
@@ -34,20 +34,22 @@
 
         <div class="card-body">
             <h5 class="card-title">Listado de permisos</h5>
-            <table class="table table-stripped table-hover">
-                <thead>
-                    <tr>
-                        <th style="width: 3rem;">ID</th>
-                        <th style="width: 17rem;">Nombre</th>
-                        <th style="width: 17rem;">Slug</th>
-                        <th style="width: 29rem;">Descripción</th>
-                        <th colspan="2">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaPermisos">
-                    
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-stripped table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 3rem;">ID</th>
+                            <th style="width: 17rem;">Nombre</th>
+                            <th style="width: 17rem;">Slug</th>
+                            <th style="width: 29rem;">Descripción</th>
+                            <th colspan="2">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPermisos">
+                        
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

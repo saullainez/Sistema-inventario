@@ -60,11 +60,28 @@
 
                     <!-- Right -->
                     <ul class="navbar-nav ml-auto">
+                        <li>
+                            @can('usuarios.index')
+                                <a id = "usuariosMenu" href="/usuarios" class="nav-link">
+                                    <i class="fa fa-user mr-3"></i>Usuarios</a>
+                            @endcan
+                        </li>
+                        <li>
+                            @can('roles.index')
+                                <a id = "rolesMenu" href="/roles" class="nav-link">
+                                    <i class="fa fa-user-shield mr-3"></i>Roles</a>
+                            @endcan
+                        </li>
+                        <li>
+                            @can('permisos.index')
+                                <a id = "permisosMenu" href="/permisos" class="nav-link">
+                                    <i class="fas fa-lock-open mr-3"></i>Permisos</a>
+                            @endcan
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

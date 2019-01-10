@@ -181,6 +181,7 @@ function eliminarUsuario(id){
 
 $(document).ready(function () {
     $("#usuarios").addClass("active");
+    $("#usuariosMenu").addClass("active");
     cargarUsuarios();
     cargarRoles()
 })
