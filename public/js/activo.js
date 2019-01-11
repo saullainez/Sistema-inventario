@@ -6,6 +6,10 @@ function modalEditarActivo(id, ActivoNombre, ActivoDescripcion, TipoActivo){
     $("#editarActivoModal").modal();
     
 };
+function modalEliminarActivo(id){
+    $("#borrarActivo").attr('onClick', `eliminarActivo(${id})`);
+    $("#eliminarActivoModal").modal();
+};
 function cargarActivos(){
     $.ajax({
         url: `/obteneractivos`,
@@ -76,6 +80,27 @@ function actualizarActivo(id) {
             cargarActivos();
         },
         error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function eliminarActivo(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/eliminaractivo`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarActivos();
+        },
+        error: function(error){
             console.error(error);
         }
     });
