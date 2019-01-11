@@ -160,6 +160,16 @@ class EmpresaController extends Controller
         };
 
     }
+    public function eliminarEmpresa(Request $request)
+    {
+        if($request->ajax()){
+            $empresa = Empresa::find($request->EmpresaId);
+            $empresa->delete();
+            return response()->json([
+                "mensaje" => "Empresa eliminada correctamente"
+            ]);
+        };
+    }
 
     /**
      * Remove the specified resource from storage.

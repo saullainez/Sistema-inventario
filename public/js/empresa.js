@@ -19,6 +19,10 @@ function modalEditarEmpresa(EmpresaId, EmpresaNombre, EmpresaDireccion, EmpresaT
     $("#editarEmpresaModal").modal();
     
 };
+function modalEliminarEmpresa(id){
+    $("#borrarEmpresa").attr('onClick', `eliminarEmpresa(${id})`);
+    $("#eliminarEmpresaModal").modal();
+};
 function cargarEmpresas(){
     $.ajax({
         url: `/obtenerempresas`,
@@ -105,6 +109,27 @@ function actualizarEmpresa(id) {
             cargarEmpresas();
         },
         error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function eliminarEmpresa(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        EmpresaId: id
+    };
+    $.ajax({
+        url: `/eliminarempresa`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarEmpresas();
+        },
+        error: function(error){
             console.error(error);
         }
     });
