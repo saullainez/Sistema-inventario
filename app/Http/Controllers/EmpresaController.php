@@ -75,7 +75,8 @@ class EmpresaController extends Controller
             $empresa->tipo = $request->Input('Tipo');
 
             $empresa->save();
-            return response()->json($empresa, 200)->header('Content-Type','application/json');
+
+            return response()->json([$empresa, "mensaje" => "Empresa creada correctamente"], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];

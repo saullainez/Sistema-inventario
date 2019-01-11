@@ -19,12 +19,12 @@
                             <input type="text" class="form-control" id="contacto">
                         </div>
                         <div class="mb-3">
-                            <label for="telefono" required>Telefono</label>
-                            <input type="text" class="form-control" id="telefono">
+                            <label for="Contactotelefono" required>Teléfono</label>
+                            <input type="text" class="form-control" id="Contactotelefono">
                         </div>
                         <div class="mb-3">
-                            <label for="correo" required>Correo</label>
-                            <input type="text" class="form-control" id="correo">
+                            <label for="Contactocorreo" required>Correo</label>
+                            <input type="text" class="form-control" id="Contactocorreo">
                         </div>
                     </form>
                 </div>
