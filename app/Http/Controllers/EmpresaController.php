@@ -140,6 +140,27 @@ class EmpresaController extends Controller
         }
     }
 
+    public function actualizarEmpresa(Request $request)
+    {
+        if($request->ajax()){
+            $empresa = Empresa::find($request->EmpresaId);
+            $empresa->EmpresaNombre = $request->Input('EmpresaNombre');
+            $empresa->EmpresaDireccion = $request->Input('EmpresaDireccion');
+            $empresa->EmpresaTelefono = $request->Input('EmpresaTelefono');
+            $empresa->EmpresaCorreo = $request->Input('EmpresaCorreo');
+            $empresa->Contacto = $request->Input('Contacto');
+            $empresa->ContactoTelefono = $request->Input('ContactoTelefono');
+            $empresa->ContactoCorreo = $request->Input('ContactoCorreo');
+            $empresa->FechaPago = $request->Input('FechaPago');
+            $empresa->Tipo = $request->Input('Tipo');
+            $empresa->save();
+            return response()->json([
+                "mensaje" => "Empresa actualizada correctamente"
+            ]);
+        };
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *

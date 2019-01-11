@@ -16,21 +16,18 @@
                         <input type="hidden" name="_tokenContacto" value="{{ csrf_token() }}" id="tokenContacto">
                         <div class="mb-3">
                             <label for="contacto" required>Contacto</label>
-                            <input type="text" class="form-control" id="contacto">
+                            <input type="text" class="form-control" id="contacto" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="Contactotelefono" required>Teléfono</label>
-                            <input type="text" class="form-control" id="Contactotelefono">
+                            <input type="text" class="form-control" id="Contactotelefono" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="Contactocorreo" required>Correo</label>
-                            <input type="text" class="form-control" id="Contactocorreo">
+                            <input type="text" class="form-control" id="Contactocorreo" disabled>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" id="editarContacto">Editar</button>
             </div>
         </div>
     </div>

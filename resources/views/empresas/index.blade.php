@@ -71,6 +71,7 @@
 </div>
 @include('empresas.modales.crear')
 @include('empresas.modales.contacto')
+@include('empresas.modales.editar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/empresa.js"></script>
