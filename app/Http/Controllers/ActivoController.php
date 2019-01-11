@@ -159,4 +159,14 @@ class ActivoController extends Controller
             ]);
         };
     }
+    public function eliminarActivo(Request $request)
+    {
+        if($request->ajax()){
+            $activo = Activo::find($request->id);
+            $activo->delete();
+            return response()->json([
+                "mensaje" => "Activo eliminado correctamente"
+            ]);
+        };
+    }
 }
