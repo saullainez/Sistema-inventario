@@ -1,3 +1,11 @@
+function modalEditarActivo(id, ActivoNombre, ActivoDescripcion, TipoActivo){
+    $("#nombreNuevo").val(ActivoNombre);
+    $("#descripcionNueva").val(ActivoDescripcion);
+    $("#nuevo").val(TipoActivo);
+    $("#actualizarActivo").attr('onClick', `actualizarActivo(${id})`);
+    $("#editarActivoModal").modal();
+    
+};
 function cargarActivos(){
     $.ajax({
         url: `/obteneractivos`,
@@ -34,6 +42,31 @@ function crearActivo() {
         url: `/activo`,
         headers: {'X-CSRF-TOKEN': tokenAgregar},
         method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarActivos();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function actualizarActivo(id) {
+    var tokenEditar = $("#tokenEditar").val();
+    var data = {
+        ActivoId: id,
+        ActivoNombre: $("#nombreNuevo").val(),
+        ActivoDescripcion: $("#descripcionNueva").val(),
+        TipoActivo: $("#nuevo").val()
+    };
+    $.ajax({
+        url: `/actualizaractivo`,
+        headers: {'X-CSRF-TOKEN': tokenEditar},
+        method: "PUT",
         data: data,
         dataType: "json",
         success: function (res) {

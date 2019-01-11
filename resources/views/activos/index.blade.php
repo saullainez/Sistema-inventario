@@ -54,6 +54,7 @@
     </div>
 </div>
 @include('activos.modales.crear')
+@include('activos.modales.editar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/activo.js"></script>

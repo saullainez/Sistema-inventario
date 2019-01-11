@@ -65,12 +65,12 @@ class ActivoController extends Controller
             $activo->ActivoDescripcion = $request->Input('ActivoDescripcion');
             $activo->TipoActivo = $request->Input('TipoActivo');
             $activo->save();
-
-            /*res = Activo::crearActivo($activo);
-            return response()->json($res, 200)->header('Content-Type','application/json');*/
             return response()->json([
                 "mensaje" => "Activo creado correctamente"
-            ]); 
+            ]);
+
+            /*$res = Activo::crearActivo($activo);
+            return response()->json($res, 200)->header('Content-Type','application/json');*/
         }
         catch(\Exception $e){
             $error = ['error' => $e->getMessage()];
@@ -145,5 +145,18 @@ class ActivoController extends Controller
             $error = ['error' => $e->getMessage()];
             return response()->json($error);
         }
+    }
+    public function actualizarActivo(Request $request)
+    {
+        if($request->ajax()){
+            $activo = Activo::find($request->ActivoId);
+            $activo->ActivoNombre = $request['ActivoNombre'];
+            $activo->ActivoDescripcion = $request['ActivoDescripcion'];
+            $activo->TipoActivo = $request['TipoActivo'];
+            $activo->save();
+            return response()->json([
+                "mensaje" => "Activo actualizado correctamente"
+            ]);
+        };
     }
 }

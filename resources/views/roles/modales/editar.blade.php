@@ -4,7 +4,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <p class="heading lead">Editar rol</p>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" class="white-text">&times;</span>
                 </button>
