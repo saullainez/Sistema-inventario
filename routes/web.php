@@ -61,6 +61,10 @@ Route::get('/obteneractivos', 'ActivoController@obtenerActivos');
 Route::put('/actualizaractivo', 'ActivoController@actualizarActivo');
 Route::delete('/eliminaractivo', 'ActivoController@eliminarActivo');
 
+Route::get('/obtenerempresas', 'EmpresaController@obtenerEmpresas');
+Route::put('/actualizarempresa', 'EmpresaController@actualizarEmpresa');
+Route::delete('/eliminarempresa', 'EmpresaController@eliminarEmpresa');
+
 Route::get('/identificacion', function(){
     return csrf_token();
 });

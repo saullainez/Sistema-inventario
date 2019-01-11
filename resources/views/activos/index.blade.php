@@ -33,7 +33,7 @@
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado activos</h5>
+            <h5 class="card-title">Listado de activos</h5>
             <div class="table-responsive">
                 <table class="table table-stripped table-hover">
                     <thead>

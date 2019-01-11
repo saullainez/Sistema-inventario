@@ -90,6 +90,12 @@
                                     <i class="far fa-check-circle mr-3"></i>Activos</a>
                             @endcan
                         </li>
+                        <li>
+                            @can('empresa.index')
+                                <a id = "empresaMenu" href="/empresa" class="nav-link">
+                                    <i class="far fa-building mr-3"></i>Empresas</a>
+                            @endcan
+                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -134,7 +140,7 @@
         <!-- Navbar -->
 
         <!-- Sidebar -->
-        <div class="sidebar-fixed position-fixed">
+        <div class="sidebar-fixed position-fixed" style="width: 240px !important;">
 
             <a class="logo-wrapper waves-effect">
                 <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
@@ -163,6 +169,10 @@
                 @can('activo.index')
                     <a id = "activo" href="/activo" class="list-group-item list-group-item-action waves-effect">
                         <i class="far fa-check-circle mr-3"></i>Activos</a>
+                @endcan
+                @can('empresa.index')
+                    <a id = "empresa" href="/empresa" class="list-group-item list-group-item-action waves-effect">
+                        <i class="far fa-building mr-3"></i>Empresas</a>
                 @endcan
 
             </div>

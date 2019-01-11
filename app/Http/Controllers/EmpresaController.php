@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class EmpresaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:empresa.index')->only(['index', 'obtenerEmpresa']);
+        $this->middleware('permission:empresa.create')->only(['create', 'store']);
+        $this->middleware('permission:empresa.edit')->only(['edit', 'update', 'actualizarEmpresa']);
+        $this->middleware('permission:empresa.destroy')->only(['destroy', 'eliminarEmpresa']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,13 +26,20 @@ class EmpresaController extends Controller
         //
         try{
             $empresas = Empresa::get();
-            return response()->json($empresas, 200)->header('Content-Type','application/json');
+            return view ('empresas.index', compact('empresas'));
+            //return response()->json($empresas, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
 
+    }
+
+    public function obtenerEmpresas()
+    {
+        $empresas = Empresa::get();
+        return response()->json($empresas, 200);
     }
 
     /**
