@@ -185,4 +185,14 @@ class PresentacionController extends Controller
             ]);
         };
     }
+    public function eliminarPresentacion(Request $request)
+    {
+        if($request->ajax()){
+            $presentacion = Presentacion::find($request->id);
+            $presentacion->delete();
+            return response()->json([
+                "mensaje" => "Presentacion eliminada correctamente"
+            ]);
+        };
+    }
 }

@@ -5,6 +5,10 @@ function modalEditarPresentacion(PresentacionId, producto, envase){
     $("#actualizarPresentacionModal").modal();
     
 };
+function modalEliminarPresentacion(id){
+    $("#borrarPresentacion").attr('onClick', `eliminarPresentacion(${id})`);
+    $("#eliminarPresentacionModal").modal();
+};
 function cargarPresentaciones(){
     $.ajax({
         url: `/obtenerpresentaciones`,
@@ -114,6 +118,27 @@ function actualizarPresentacion(id) {
             cargarPresentaciones();
         },
         error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function eliminarPresentacion(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/eliminarpresentacion`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarPresentaciones();
+        },
+        error: function(error){
             console.error(error);
         }
     });

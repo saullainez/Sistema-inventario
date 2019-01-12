@@ -54,6 +54,7 @@
 </div>
 @include('presentaciones.modales.crear')
 @include('presentaciones.modales.editar')
+@include('presentaciones.modales.eliminar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/presentacion.js"></script>
