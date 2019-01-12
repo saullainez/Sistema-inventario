@@ -71,6 +71,28 @@ Route::delete('/eliminarproducto', 'ProductoController@eliminarProducto');
 
 Route::get('/obtenerpresentaciones', 'PresentacionController@obtenerPresentaciones');
 
+
+
+Route::get('/obtenerinventarios','InventarioController@obtenerInventario');
+Route::put('/actualizarinventario','InventarioController@actualizarInventario');
+Route::delete('/eliminarinventario','InventarioController@eliminarInventario');
+
+Route::get('/obtenerinventarioactivos','InventarioActivoController@obtenerInventarioActivo');
+Route::put('/actualizarinventarioactivo','InventarioActivoController@actualizarInventarioActivo');
+Route::delete('/eliminarinventarioactivo','InventarioActivoController@eliminarInventarioActivo');
+
+Route::get('/obtenermovimientoconceptos','MovimientoConceptoController@obtenerMovimientoConcepto');
+Route::put('/actualizarmovimientocontepto','MovimientoConceptoController@actualizarMovimientoConcepto');
+Route::delete('/eliminarmovimientoconcepto','MovimientoConceptoController@eliminarMovimientoConcepto');
+
+Route::get('/obtenermovimientoactivos','MovimientoActivoController@obtenerMovimientoActivo');
+Route::put('/actualizarmovimientoactivo','MovimientoActivoController@actualizarMovimientoActivo');
+Route::delete('/eliminarmovimientoactivo','MovimientoActivoController@eliminarMovimientoActivo');
+
+Route::get('/obtenermovimientoproductos','MovimientoProductoController@obtenerMovimientoProducto');
+Route::put('/actualizarmovimientoproducto','MovimientoProductoController@actualizarMovimientoProducto');
+Route::delete('/eliminarmovimientoproducto','MovimientoProductoController@eliminarMovimientoProducto');
+
 Route::get('/identificacion', function(){
     return csrf_token();
 });
