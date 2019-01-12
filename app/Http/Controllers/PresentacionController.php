@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\presentacion;
+use App\inventario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -70,7 +71,7 @@ class PresentacionController extends Controller
             $presentacion->PresentacionId = $id;
             //$presentacion->save();
             $res = Presentacion::crearPresentacion($presentacion);
-            return response()->json($res, 200)->header('Content-Type','application/json');
+            return response()->json([$res, "mensaje"=>"Presentación creada correctamente"], 200)->header('Content-Type','application/json');
 
         }
         catch(\Exception $e){
@@ -169,5 +170,29 @@ class PresentacionController extends Controller
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
+    }
+    public function actualizarPresentacion(Request $request)
+    {
+        if($request->ajax()){
+            $presentacion = Presentacion::find($request->pId);
+            $presentacion->ActivoId = $request->ActivoId;
+            $presentacion->ProductoId = $request->ProductoId;
+            $id = "{$request->ProductoId}{$request->ActivoId}";
+            $presentacion->PresentacionId = $id;
+            $presentacion->save();
+            return response()->json([
+                "mensaje" => "Presentacion actualizada correctamente"
+            ]);
+        };
+    }
+    public function eliminarPresentacion(Request $request)
+    {
+        if($request->ajax()){
+            $presentacion = Presentacion::find($request->id);
+            $presentacion->delete();
+            return response()->json([
+                "mensaje" => "Presentacion eliminada correctamente"
+            ]);
+        };
     }
 }

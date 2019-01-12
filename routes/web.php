@@ -70,6 +70,8 @@ Route::put('/actualizarproducto', 'ProductoController@actualizarProducto');
 Route::delete('/eliminarproducto', 'ProductoController@eliminarProducto');
 
 Route::get('/obtenerpresentaciones', 'PresentacionController@obtenerPresentaciones');
+Route::put('/actualizarpresentacion', 'PresentacionController@actualizarPresentacion');
+Route::delete('/eliminarpresentacion', 'PresentacionController@eliminarPresentacion');
 
 
 

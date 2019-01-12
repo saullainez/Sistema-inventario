@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <div class="text-center">
-                    <i class="fa fa-plus-circle fa-4x mb-3 animated rotateIn"></i>
+                <i class="fa fa-edit fa-4x mb-3 animated rotateIn"></i>
                     <form>
                         <input type="hidden" name="_tokenEditar" value="{{ csrf_token() }}" id="tokenEditar">
                         <div class="mb-3">
