@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
     <div class="modal-content text-center">
       <div class="modal-header d-flex justify-content-center">
-        <p class="heading">¿Seguro(a) que desea borrar este tipo de bebida?</p>
+        <p class="heading">Al borrar este tipo de bebida, también se eliminarán todos los productos asociados a esta, ¿seguro(a) que desea borrar?</p>
       </div>
       <div class="modal-body">
         <i class="fa fa-times fa-4x animated rotateIn"></i>
