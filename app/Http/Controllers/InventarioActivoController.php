@@ -30,7 +30,7 @@ class InventarioActivoController extends Controller
             $inventario = DB::table('inventario_activos as i')
             ->select('i.ActivoId','a.ActivoNombre','i.Cantidad')
             ->join('activos as a','i.ActivoId','=','a.ActivoId')->get();
-            return view('',compact('inventario'));
+            return view('inventarioActivo.index',compact('inventario'));
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
