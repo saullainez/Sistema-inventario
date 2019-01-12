@@ -14,6 +14,15 @@ class MovimientoProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('permission:movimiento-producto.index')->only(['index','obtenerMovimientoProducto']);
+        $this->middleware('permission:movimiento-producto.create')->only(['create','store']);
+        $this->middleware('permission:movimiento-producto.edit')->only(['edit','update','actualizarMovimientoProducto']);
+        $this->middleware('permission:movimiento-producto.destroy')->only(['destroy','eliminarMovimientoProducto']);
+     }
+
     public function index()
     {
         //
@@ -28,6 +37,31 @@ class MovimientoProductoController extends Controller
             ->join('empresas as e','mp.ClienteId','=','e.EmpresaId')
             ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
             ->get();
+
+            return view('movimientoProducto.index',compact('movimientos'));
+
+           // return response()->json($movimientos, 200)->header('Content-Type','application/json');
+        }
+        catch(\Exception $e){
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
+        }
+    }
+
+    public function obtenerMovimientoProducto(){
+        try{
+            $movimientos = DB::table('movimiento_productos as mp')
+            ->select('mp.MovimientoProductoId','mp.PresentacionId',
+            'p.PresentacionNombre','mp.Descripcion','mp.Fecha',
+            'mp.AnioCosecha','mp.Cantidad','mp.ClienteId','e.EmpresaNombre',
+            'mp.MovimientoConceptoId','mc.Nombre as MovimientoConceptoNombre',
+            'mp.Monto')
+            ->join('presentaciones as p','mp.PresentacionId','=','p.PresentacionId')
+            ->join('empresas as e','mp.ClienteId','=','e.EmpresaId')
+            ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->get();
+            
+            //return view('movimientoProducto.index',compact('movimientos'));
 
             return response()->json($movimientos, 200)->header('Content-Type','application/json');
         }
@@ -168,6 +202,35 @@ class MovimientoProductoController extends Controller
 
     }
 
+    public function actualizarMovimientoProducto(Request $request){
+        if ($request->ajax()){
+
+            try{
+                $movimientoProducto = MovimientoProducto::find($request->MovimientoProductoId);
+
+                $movimientoProducto->PresentacionId = $request['PresentacionId'];
+                $movimientoProducto->Descripcion = $request['Descripcion'];
+                $movimientoProducto->Fecha = $request['Fecha'];
+                $movimientoProducto->AnioCosecha = $request['AnioCosecha'];
+                $movimientoProducto->Cantidad = $request['Cantidad'];
+                $movimientoProducto->ClienteId = $request['ClienteId'];
+                $movimientoProducto->MovimientoConceptoId = $request['MovimientoConceptoId'];
+                $movimientoProducto->Monto = $request['Monto'];
+               
+               //revisar la respuesta que obtiene el json y asi poder enviar el mensaje
+               //(he de suponer que se debe hacer un paso extra de verificacion)
+
+               $req = MovimientoProdcuto::actualizarMovimiento($MovimientoProducto);
+                return response()->json($req, 200)->header('Content-Type','application/json');
+            }
+            catch(\Exception $e){
+                $error = ['error'=>$e->getMessage()];
+                return response()->json($error)->header('Content-Type','application/json');
+            }
+    
+        };
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -189,5 +252,24 @@ class MovimientoProductoController extends Controller
             return response()->json($error)->header('Content-Type','application/json');
         }
 
+    }
+
+    public function eliminarMovimientoProducto(Request $request){
+        if ($request->ajax()){
+            try{
+                $movimientoProducto = MovimientoProducto::find($request->MovimientoProductoId);
+                $req = MovimientoProducto::eliminarMovimiento($movimientoProducto);
+                //revisar la respuesta que obtiene el json y asi poder enviar el mensaje
+               //(he de suponer que se debe hacer un paso extra de verificacion)
+                return response()->json($req, 200)->header('Content-Type','application/json');
+            }
+            catch(\Exception $e){
+                $error = ['error'=>$e->getMessage()];
+                return response()->json($error)->header('Content-Type','application/json');
+            }
+    
+          
+
+        };
     }
 }

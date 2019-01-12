@@ -13,6 +13,14 @@ class InventarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('permission:inventario.index')->only(['index','obtenerInventario']);
+        $this->middleware('permission:inventario.create')->only(['create','store']);
+        $this->middleware('permission:inventario.edit')->only(['edit','update','actualizarInventario']);
+        $this->middleware('permission:inventario.destroy')->only(['destroy','eliminarInventario']);
+    }
     public function index()
     {
         //
@@ -24,8 +32,8 @@ class InventarioController extends Controller
             ->join('activos as a','pr.ActivoId','=','a.ActivoId')
             ->join('productos as p','pr.ProductoId','=','p.ProductoId')
             ->get();
-
-            return response()->json($inventario, 200)->header('Content-Type','application/json');
+            return view('inventario.index',compact('inventario'));
+           // return response()->json($inventario, 200)->header('Content-Type','application/json');
     
         }
         catch(\Exception $e){
@@ -34,6 +42,25 @@ class InventarioController extends Controller
         }
     }
 
+
+    public function obtenerInventario(){
+        try{
+
+            $inventario = DB::table('inventarios as i')
+            ->select('i.PresentacionId','pr.ProductoId','p.ProductoNombre as Nombre','pr.ActivoId','a.ActivoNombre as envase','i.Cantidad')
+            ->join('presentaciones as pr','i.PresentacionId','=','pr.PresentacionId')
+            ->join('activos as a','pr.ActivoId','=','a.ActivoId')
+            ->join('productos as p','pr.ProductoId','=','p.ProductoId')
+            ->get();
+           // return view('inventario.index',compact('inventario'));
+            return response()->json($inventario, 200)->header('Content-Type','application/json');
+    
+        }
+        catch(\Exception $e){
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -149,6 +176,18 @@ class InventarioController extends Controller
         }
     }
 
+    public function actualizarInventario(Request $request){
+        if($request->ajax()){
+            $inventario = Inventario::find($request->PresentacionId);
+            $inventario->Cantidad = $request['Cantidad'];
+            $inventario->save();
+            return response()->json([
+                "mensaje" => "Inventario actualizado correctamente"], 200)->header('Content-Type','application/json');
+
+
+        };
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -169,5 +208,17 @@ class InventarioController extends Controller
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
+    }
+
+    public function eliminarInventario(Request $request){
+        if ($request->ajax()){
+            $inventario = Inventario::find($request->PresentacionId);
+            $inventario->destroy();
+            return response()->json([
+                "mensaje" => "Inventario eliminado correctamente"], 200)->header('Content-Type','application/json');
+
+
+        };
+     
     }
 }

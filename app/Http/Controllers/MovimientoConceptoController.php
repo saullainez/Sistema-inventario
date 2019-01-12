@@ -13,9 +13,30 @@ class MovimientoConceptoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('auth');
+        $this->middleware('permission:movimiento-concepto.index')->only(['index','obtenerMovimientoConcepto']);
+        $this->middleware('permission:movimiento-concepto.create')->only(['create','store']);
+        $this->middleware('permission:movimiento-concepto.edit')->only('edit','update','actualizarMovimientoConcepto');
+        $this->middleware('permission:movimiento-concepto.destroy')->only(['destroy','eliminarMovimientoConcepto']);
+    }
     public function index()
     {
         //
+        try
+        {
+            $conceptos = MovimientoConcepto::get();
+            //return response()->json($conceptos, 200)->header('Content-Type','application/json');
+            return view('movimientoConcepto.index',compact('conceptos'));
+        }
+        catch(\Exception $e){
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-type','application/json');
+        }
+    }
+
+    public function obtenerMovimientoConcepto(){
         try
         {
             $conceptos = MovimientoConcepto::get();
@@ -24,7 +45,7 @@ class MovimientoConceptoController extends Controller
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-type','application/json');
-        }
+        } 
     }
 
     /**
@@ -109,6 +130,18 @@ class MovimientoConceptoController extends Controller
         }
     }
 
+    public function actualizarMovimientoConcepto(Request $request){
+        if ($request->ajax()){
+            $movimientoConcepto = MovimientoConcepto::find($request->MovimientoConceptoId);
+            $movimientoConcepto->Nombre = $request['Nombre'];
+            $movimientoConcepto->TipoMovimiento = $request['TipoMovimiento'];
+            $movimientoConcepto->save();
+            return response()->json([
+                "mensaje" => "Concepto actualizado correctamente"], 200)->header('Content-Type','application/json');
+
+        };
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -130,9 +163,19 @@ class MovimientoConceptoController extends Controller
         }
     }
 
+    public function eliminarMovimientoConcepto(Request $request){
+        if ($request->ajax()){
+            $movimientoConcepto = MovimientoConcepto::find($request->MovimientoConceptoId);
+            $movimientoConcepto->destroy();
+            return response()->json([
+                "mensaje" => "concepto eliminado correctamente"], 200)->header('Content-Type','application/json');
+
+        };
+    }
+
     //
     //funcion que unicamente devuelve los movimientos de tipo salida
-    //su funcion es para los select (o cualquier otra idea) que sean de tipo entrada
+    //su funcion es para los select (o cualquier otra idea) que sean de tipo salida
     public function salidas(){
         try{
             $movimientos = DB::table('movimiento_conceptos')

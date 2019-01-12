@@ -13,6 +13,17 @@ class MovimientoActivoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+
+        $this->middleware('auth');
+        $this->middleware('permission:movimiento-activo.index')->only(['index','obtenerMovimientoActivo']);
+        $this->middleware('permission:movimiento-activo.create')->only(['create','store']);
+        $this->middleware('permission:movimiento-activo.edit')->only(['edit','update','actualizarMovimientoActivo']);
+        $this->middleware('permission:movimiento-activo.destroy')->only(['destroy','eliminarMovimientoActivo']);
+
+    }
+
     public function index()
     {
         //
@@ -28,7 +39,8 @@ class MovimientoActivoController extends Controller
             ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
             ->get();
             
-            return response()->json($movimientoActivo, 200)->header('Content-Type','application/json');
+            return view('movimientoActivo.index',compact('movimientoActivo'));
+           // return response()->json($movimientoActivo, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -36,6 +48,27 @@ class MovimientoActivoController extends Controller
         }
     }
 
+    public function obtenerMovimientoActivo(){
+        try{
+            // $movimientoActivo = MovimientoActivo::get();
+             
+             $movimientoActivo = DB::table('movimiento_activos as ma')
+             ->select('ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+             'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
+             'ma.MovimientoConceptoId','mc.Nombre')
+             ->join('activos as a','ma.ActivoId','=','a.ActivoId')
+             ->join('empresas as e','ma.ProveedorId','=','e.EmpresaId')
+             ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+             ->get();
+             
+            // return view('movimientoActivo.index',compact('movimientoActivo'));
+             return response()->json($movimientoActivo, 200)->header('Content-Type','application/json');
+         }
+         catch(\Exception $e){
+             $error = ['error'=>$e->getMessage()];
+             return response()->json($error)->header('Content-Type','application/json');
+         }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -170,6 +203,35 @@ class MovimientoActivoController extends Controller
        
     }
 
+    public function actualizarMovimientoActivo(Request $request){
+
+        if($request->ajax()){
+
+            try{
+                // return "hola";
+                $movimientoActivo = MovimientoActivo::find($request->MovimientoActivoId);
+                $movimientoActivo->ActivoId = $request['ActivoId'];
+                $movimientoActivo->Descripcion = $request['Descripcion'];
+                $movimientoActivo->Fecha = $request['Fecha'];
+                $movimientoActivo->Cantidad = $request['Cantidad'];
+                $movimientoActivo->Monto = $request['Monto'];
+                $movimientoActivo->ProveedorId = $request['ProveedorId'];
+                $movimientoActivo->MovimientoConceptoId = $request['MovimientoConceptoId'];
+        
+                 $req = MovimientoActivo::actualizarMovimiento($movimientoActivo);
+
+                 //vertificar como es la respuesta para enviar el mensaje a la vista
+                 return response()->json($req, 200)->header('Content-Type','application/json');
+             }
+             catch(\Exception $e){
+                 $error = ['error'=>$e->getMessage()];
+                 return response()->json($error)->header('Content-Type','application/json');
+             }
+            
+        };
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -191,5 +253,24 @@ class MovimientoActivoController extends Controller
             return response()->json($error)->header('Content-Type','application/json');
         }
       
+    }
+
+    public function eliminarMovimientoActivo(Request $request){
+
+        if($request->ajax()){
+            try{
+                $movimientoActivo = MovimientoActivo::find($request->MovimientoActivoId);
+                //$query = $movimientoActivo->delete();
+                //$req = ['elimino'=>$query];
+                $req = MovimientoActivo::eliminarMovimiento($movimientoActivo);
+                //verificar la respuesta que envia el json para mostrar el mensaje en la vista
+                return response()->json($req, 200)->header('Content-Type','application/json');
+            }
+            catch(\Exception $e){
+                $error = ['error'=>$e->getMessage()];
+                return response()->json($error)->header('Content-Type','application/json');
+            }
+           
+        };
     }
 }

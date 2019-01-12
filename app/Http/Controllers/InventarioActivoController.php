@@ -13,9 +13,35 @@ class InventarioActivoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __consturct(){
+        $this->middleware('auth');
+        $this->middleware('permission:inventario-activo.index')->only(['index','obtenerInventarioactivo']);
+        $this->middleware('permission:inventario-activo.create')->only(['create','store']);
+        $this->middleware('permission:inventario-activo.edit')->only(['edit','update','actualizarInventarioActivo']);
+        $this->middleware('permission:inventario-activo.destroy')->only(['destroy','eliminarInventarioActivo']);
+
+     }
+
     public function index()
     {
         //
+        try{
+            $inventario = DB::table('inventario_activos as i')
+            ->select('i.ActivoId','a.ActivoNombre','i.Cantidad')
+            ->join('activos as a','i.ActivoId','=','a.ActivoId')->get();
+            return view('',compact('inventario'));
+        }
+        catch(\Exception $e){
+            $error = ['error'=>$e->getMessage()];
+            return response()->json($error)->header('Content-Type','application/json');
+        }
+       
+       
+    }
+
+    public function obtenerInventarioActivo(){
+
         try{
             $inventario = DB::table('inventario_activos as i')
             ->select('i.ActivoId','a.ActivoNombre','i.Cantidad')
@@ -26,7 +52,6 @@ class InventarioActivoController extends Controller
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
-       
     }
 
     /**
@@ -151,5 +176,30 @@ class InventarioActivoController extends Controller
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
+    }
+
+    public function actualizarInventarioActivo(Request $request){
+
+        if($request->ajax()){
+            $inventarioActivo = InventarioActivo::find($request->ActivoId);
+            $inventarioActivo->Cantidad = $request['Cantidad'];
+            $inventarioActivo->save();
+            return response()->json([
+                "mensaje" => "Inventario actualizado correctamente"
+            ]);
+        };
+
+    }
+
+    public function eliminarInventarioActivo(Request $request){
+
+        if($request->ajax()){
+            $inventarioActivo = InventarioActivo::find($request->ActivoId);
+            $inventarioActivo->destroy();
+            return response()->json([
+                "mensaje" => "Inventario eliminado correctamente"
+            ]);
+        }
+
     }
 }
