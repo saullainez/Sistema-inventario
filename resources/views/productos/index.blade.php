@@ -55,6 +55,7 @@
 </div>
 @include('productos.modales.crear')
 @include('productos.modales.editar')
+@include('productos.modales.eliminar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/producto.js"></script>

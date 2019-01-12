@@ -6,6 +6,10 @@ function modalEditarProducto(id, ProductoNombre, ProductoDescripcion, TipoBebida
     $("#actualizarProductoModal").modal();
     
 };
+function modalEliminarProducto(id){
+    $("#borrarProducto").attr('onClick', `eliminarProducto(${id})`);
+    $("#eliminarProductoModal").modal();
+};
 function cargarProductos(){
     $.ajax({
         url: `/obtenerproductos`,
@@ -97,6 +101,27 @@ function actualizarProducto(id) {
             cargarProductos();
         },
         error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function eliminarProducto(id){
+    var tokenEliminar = $("#tokenEliminar").val();
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/eliminarproducto`,
+        headers: {'X-CSRF-TOKEN': tokenEliminar},
+        method: "DELETE",
+        data: data,
+        dataType: "json",
+        success: function(res){
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarProductos();
+        },
+        error: function(error){
             console.error(error);
         }
     });

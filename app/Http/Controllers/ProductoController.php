@@ -171,6 +171,15 @@ class ProductoController extends Controller
                 "mensaje" => "Producto actualizado correctamente"
             ]);
         };
-
+    }
+    public function eliminarProducto(Request $request)
+    {
+        if($request->ajax()){
+            $producto = Producto::find($request->id);
+            $producto->delete();
+            return response()->json([
+                "mensaje" => "Producto eliminado correctamente"
+            ]);
+        };
     }
 }
