@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\presentacion;
+use App\inventario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -169,5 +170,19 @@ class PresentacionController extends Controller
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
+    }
+    public function actualizarPresentacion(Request $request)
+    {
+        if($request->ajax()){
+            $presentacion = Presentacion::find($request->pId);
+            $presentacion->ActivoId = $request->ActivoId;
+            $presentacion->ProductoId = $request->ProductoId;
+            $id = "{$request->ProductoId}{$request->ActivoId}";
+            $presentacion->PresentacionId = $id;
+            $presentacion->save();
+            return response()->json([
+                "mensaje" => "Presentacion actualizada correctamente"
+            ]);
+        };
     }
 }

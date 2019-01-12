@@ -1,3 +1,10 @@
+function modalEditarPresentacion(PresentacionId, producto, envase){
+    $("#nuevoProductoP").val(producto);
+    $("#nuevoEnvase").val(envase);
+    $("#actualizarPresentacion").attr('onClick', `actualizarPresentacion(${PresentacionId})`);
+    $("#actualizarPresentacionModal").modal();
+    
+};
 function cargarPresentaciones(){
     $.ajax({
         url: `/obtenerpresentaciones`,
@@ -11,7 +18,7 @@ function cargarPresentaciones(){
                     <td>${res[i].PresentacionId}</td>
                     <td>${res[i].producto}</td>
                     <td>${res[i].envase}</td>
-                    <td><a onclick="modalEditarPresentacion(${res[i].PresentacionId}, '${res[i].producto}', '${res[i].envase}');" class="btn btn-sm btn-default">Editar</a></td>
+                    <td><a onclick="modalEditarPresentacion(${res[i].PresentacionId}, '${res[i].ProductoId}', '${res[i].ActivoId}');" class="btn btn-sm btn-default">Editar</a></td>
                     <td><a onclick="modalEliminarPresentacion(${res[i].PresentacionId});" class="btn btn-sm btn-danger">Eliminar</a></td>
                 </tr>`);
             }
@@ -29,12 +36,12 @@ function cargarActivos(){
         dataType: "json",
         success: function (res) {
             $("#envase").html(" ");
-            //$("#nuevoEnvase").html(" ");
+            $("#nuevoEnvase").html(" ");
             for (var i = 0; i < res.length; i++) {
                 $("#envase").append(`
                 <option value="${res[i].ActivoId}"><td>${res[i].ActivoNombre}</td></option>`);
-                /*$("#nuevoEnvase").append(`
-                <option value="${res[i].ActivoId}"><td>${res[i].Activonombre}</td></option>`);*/
+                $("#nuevoEnvase").append(`
+                <option value="${res[i].ActivoId}"><td>${res[i].ActivoNombre}</td></option>`);
             }
             
         },
@@ -50,12 +57,12 @@ function cargarProductos(){
         dataType: "json",
         success: function (res) {
             $("#productoP").html(" ");
-            //$("#nuevoProducto").html(" ");
+            $("#nuevoProductoP").html(" ");
             for (var i = 0; i < res.length; i++) {
                 $("#productoP").append(`
                 <option value="${res[i].ProductoId}"><td>${res[i].ProductoNombre}</td></option>);`);
-                /*$("#nuevoProducto").append(`
-                <option value="${res[i].ProductoId}"><td>${res[i].Productonombre}</td></option>);`);*/
+                $("#nuevoProductoP").append(`
+                <option value="${res[i].ProductoId}"><td>${res[i].ProductoNombre}</td></option>);`);
             }
             
         },
@@ -80,7 +87,30 @@ function crearPresentacion() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
+            cargarPresentaciones();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function actualizarPresentacion(id) {
+    var tokenEditar = $("#tokenEditar").val();
+    var data = {
+        pId: id,
+        ActivoId: $("#nuevoEnvase").val(),
+        ProductoId: $("#nuevoProductoP").val()
+    };
+    $.ajax({
+        url: `/actualizarpresentacion`,
+        headers: {'X-CSRF-TOKEN': tokenEditar},
+        method: "PUT",
+        data: data,
+        dataType: "json",
+        success: function (res) {
             console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
             cargarPresentaciones();
         },
         error: function (error) {

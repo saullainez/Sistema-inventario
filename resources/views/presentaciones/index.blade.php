@@ -53,6 +53,7 @@
     </div>
 </div>
 @include('presentaciones.modales.crear')
+@include('presentaciones.modales.editar')
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/presentacion.js"></script>
