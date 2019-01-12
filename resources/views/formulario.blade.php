@@ -8,9 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    
+
     <div class="container">
         <div class="row">
+            <!--
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Registro de producto</div>
@@ -132,6 +133,25 @@
                     </div>
                 </div>
             </div>
+        -->
+<table>
+    <thead>
+        <th>ActivoId</th>
+        <th>Nombre</th>
+        <th>Cantidad</th>
+    </thead>
+    <tbody>
+        @foreach ($inventarios as $inventario)
+            <tr>
+                <td>{{$inventario->ActivoId}}</td>
+                <td>{{$inventario->ActivoNombre}}</td>
+                <td>{{$inventario->Cantidad}}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+       
+        
         </div>
     </div>
     

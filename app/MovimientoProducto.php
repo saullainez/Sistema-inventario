@@ -54,7 +54,7 @@ class MovimientoProducto extends Model
             $movimientoProducto->AnioCosecha,
             $movimientoProducto->ClienteId,
             $movimientoProducto->MovimientoConceptoId,
-            $movimientoProducto->Monto
+            $movimientoProducto->Monto,
             $movimientoProducto->MovimientoProductoId
         ]);
 

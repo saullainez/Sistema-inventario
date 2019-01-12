@@ -72,3 +72,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//rutas para reportes
+
+Route::get('/reporte-inventario','reportes\repInvController@totalInventario');
+/*
+Route::get('/reporte-inventario/entradas-salidas/{fechaInicio}/{fechaFin}',function($fecha1,$fecha2){
+    dd($fecha1);
+});
+*/
+Route::get('/reporte-inventario/entradas-salidas/{fechaInicio}/{fechaFin}','reportes\repInvController@compraVentaInv');
