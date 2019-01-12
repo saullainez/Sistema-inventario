@@ -11,7 +11,7 @@ class ProductoController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:producto.index')->only(['index', 'obtenerProducto']);
+        $this->middleware('permission:producto.index')->only(['index', 'obtenerProductos']);
         $this->middleware('permission:producto.create')->only(['create', 'store']);
         $this->middleware('permission:producto.edit')->only(['edit', 'update', 'actualizarProducto']);
         $this->middleware('permission:producto.destroy')->only(['destroy', 'eliminarProducto']);

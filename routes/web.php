@@ -69,6 +69,8 @@ Route::get('/obtenerproductos', 'ProductoController@obtenerProductos');
 Route::put('/actualizarproducto', 'ProductoController@actualizarProducto');
 Route::delete('/eliminarproducto', 'ProductoController@eliminarProducto');
 
+Route::get('/obtenerpresentaciones', 'PresentacionController@obtenerPresentaciones');
+
 Route::get('/identificacion', function(){
     return csrf_token();
 });

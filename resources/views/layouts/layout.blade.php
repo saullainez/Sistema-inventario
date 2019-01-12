@@ -93,6 +93,10 @@
                                 <a id = "productoMenu" href="/producto" class="nav-link">
                                     <i class="fas fa-boxes mr-3"></i>Productos</a>
                                 @endcan
+                                @can('presentacion.index')
+                                <a id = "presentacionMenu" href="/presentacion" class="nav-link">
+                                    <i class="fas fa-wine-bottle mr-3"></i>Presentaciones</a>
+                                @endcan
                             </div>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -176,6 +180,11 @@
                     <a id = "producto" href="/producto" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-boxes mr-3"></i>Productos</a>
                 @endcan
+                @can('presentacion.index')
+                    <a id = "presentacion" href="/presentacion" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-wine-bottle mr-3"></i>Presentaciones</a>
+                @endcan
+                
 
             </div>
 
