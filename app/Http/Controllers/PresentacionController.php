@@ -70,7 +70,7 @@ class PresentacionController extends Controller
             $presentacion->PresentacionId = $id;
             //$presentacion->save();
             $res = Presentacion::crearPresentacion($presentacion);
-            return response()->json($res, 200)->header('Content-Type','application/json');
+            return response()->json([$res, "mensaje"=>"Presentación creada correctamente"], 200)->header('Content-Type','application/json');
 
         }
         catch(\Exception $e){

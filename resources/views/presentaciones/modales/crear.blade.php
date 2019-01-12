@@ -16,7 +16,7 @@
                         <input type="hidden" name="_tokenAgregar" value="{{ csrf_token() }}" id="tokenAgregar">
                         <div class="mb-3">
                             <h6>Producto</h6>
-                            <select class="browser-default custom-select" name="producto" id="producto">
+                            <select class="browser-default custom-select" name="productoP" id="productoP">
 
                             </select>
                         </div>
