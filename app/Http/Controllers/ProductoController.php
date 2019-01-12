@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:producto.index')->only(['index', 'obtenerProducto']);
+        $this->middleware('permission:producto.create')->only(['create', 'store']);
+        $this->middleware('permission:producto.edit')->only(['edit', 'update', 'actualizarProducto']);
+        $this->middleware('permission:producto.destroy')->only(['destroy', 'eliminarProducto']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,19 +27,28 @@ class ProductoController extends Controller
         try{
           
             
-            $productos = DB::table('productos as p')
+            /*$productos = DB::table('productos as p')
             ->select('p.ProductoId', 'p.ProductoNombre','p.ProductoDescripcion','p.TipoBebidaId','tb.nombre as TipoBebida')
-            ->join('tipo_bebidas as tb','p.TipoBebidaId','=','tb.TipoBebidaId')->get();
+            ->join('tipo_bebidas as tb','p.TipoBebidaId','=','tb.TipoBebidaId')->get();*/
             //dd($productos);
            
             
-            return response()->json($productos, 200);
+            //return response()->json($productos, 200);
+            return view ('productos.index');
         }
         catch(\Exception $e){
             $error = ['error' => $e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
        
+    }
+
+    public function obtenerProductos()
+    {
+            $productos = DB::table('productos as p')
+            ->select('p.ProductoId', 'p.ProductoNombre','p.ProductoDescripcion','p.TipoBebidaId','tb.nombre as TipoBebida')
+            ->join('tipo_bebidas as tb','p.TipoBebidaId','=','tb.TipoBebidaId')->get();        
+            return response()->json($productos, 200);
     }
 
     /**

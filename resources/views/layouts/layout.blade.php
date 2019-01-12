@@ -60,42 +60,40 @@
 
                     <!-- Right -->
                     <ul class="navbar-nav ml-auto">
-                        <li>
-                            @can('usuarios.index')
-                                <a id = "usuariosMenu" href="/usuarios" class="nav-link">
-                                    <i class="fa fa-user mr-3"></i>Usuarios</a>
-                            @endcan
-                        </li>
-                        <li>
-                            @can('roles.index')
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Menú <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
+                                @can('usuarios.index')
+                                    <a id = "usuariosMenu" href="/usuarios" class="nav-link">
+                                        <i class="fa fa-user mr-3"></i>Usuarios</a>
+                                @endcan
+                                @can('roles.index')
                                 <a id = "rolesMenu" href="/roles" class="nav-link">
                                     <i class="fa fa-user-shield mr-3"></i>Roles</a>
-                            @endcan
-                        </li>
-                        <li>
-                            @can('permisos.index')
+                                @endcan
+                                @can('permisos.index')
                                 <a id = "permisosMenu" href="/permisos" class="nav-link">
                                     <i class="fas fa-lock-open mr-3"></i>Permisos</a>
-                            @endcan
-                        </li>
-                        <li>
-                            @can('tipo-bebida.index')
+                                @endcan
+                                @can('tipo-bebida.index')
                                 <a id = "tbMenu" href="/tipo-bebida" class="nav-link">
                                     <i class="fas fa-wine-glass mr-3"></i>Tipo de bebida</a>
-                            @endcan
-                        </li>
-                        <li>
-                            @can('activo.index')
+                                @endcan
+                                @can('activo.index')
                                 <a id = "activoMenu" href="/activo" class="nav-link">
                                     <i class="far fa-check-circle mr-3"></i>Activos</a>
-                            @endcan
-                        </li>
-                        <li>
-                            @can('empresa.index')
+                                @endcan
+                                @can('empresa.index')
                                 <a id = "empresaMenu" href="/empresa" class="nav-link">
                                     <i class="far fa-building mr-3"></i>Empresas</a>
-                            @endcan
-                        </li>
+                                @endcan
+                                @can('producto.index')
+                                <a id = "productoMenu" href="/producto" class="nav-link">
+                                    <i class="fas fa-boxes mr-3"></i>Productos</a>
+                                @endcan
+                            </div>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -173,6 +171,10 @@
                 @can('empresa.index')
                     <a id = "empresa" href="/empresa" class="list-group-item list-group-item-action waves-effect">
                         <i class="far fa-building mr-3"></i>Empresas</a>
+                @endcan
+                @can('producto.index')
+                    <a id = "producto" href="/producto" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-boxes mr-3"></i>Productos</a>
                 @endcan
 
             </div>

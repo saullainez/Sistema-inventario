@@ -65,6 +65,10 @@ Route::get('/obtenerempresas', 'EmpresaController@obtenerEmpresas');
 Route::put('/actualizarempresa', 'EmpresaController@actualizarEmpresa');
 Route::delete('/eliminarempresa', 'EmpresaController@eliminarEmpresa');
 
+Route::get('/obtenerproductos', 'ProductoController@obtenerProductos');
+Route::put('/actualizarproducto', 'ProductoController@actualizarProducto');
+Route::delete('/eliminarproducto', 'ProductoController@eliminarProducto');
+
 Route::get('/identificacion', function(){
     return csrf_token();
 });
