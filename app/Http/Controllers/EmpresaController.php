@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class EmpresaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:empresa.index')->only(['index', 'obtenerEmpresa']);
+        $this->middleware('permission:empresa.create')->only(['create', 'store']);
+        $this->middleware('permission:empresa.edit')->only(['edit', 'update', 'actualizarEmpresa']);
+        $this->middleware('permission:empresa.destroy')->only(['destroy', 'eliminarEmpresa']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,13 +26,20 @@ class EmpresaController extends Controller
         //
         try{
             $empresas = Empresa::get();
-            return response()->json($empresas, 200)->header('Content-Type','application/json');
+            return view ('empresas.index', compact('empresas'));
+            //return response()->json($empresas, 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
 
+    }
+
+    public function obtenerEmpresas()
+    {
+        $empresas = Empresa::get();
+        return response()->json($empresas, 200);
     }
 
     /**
@@ -60,7 +75,8 @@ class EmpresaController extends Controller
             $empresa->tipo = $request->Input('Tipo');
 
             $empresa->save();
-            return response()->json($empresa, 200)->header('Content-Type','application/json');
+
+            return response()->json([$empresa, "mensaje" => "Empresa creada correctamente"], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -122,6 +138,37 @@ class EmpresaController extends Controller
             $error = ['error'=>$e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
         }
+    }
+
+    public function actualizarEmpresa(Request $request)
+    {
+        if($request->ajax()){
+            $empresa = Empresa::find($request->EmpresaId);
+            $empresa->EmpresaNombre = $request->Input('EmpresaNombre');
+            $empresa->EmpresaDireccion = $request->Input('EmpresaDireccion');
+            $empresa->EmpresaTelefono = $request->Input('EmpresaTelefono');
+            $empresa->EmpresaCorreo = $request->Input('EmpresaCorreo');
+            $empresa->Contacto = $request->Input('Contacto');
+            $empresa->ContactoTelefono = $request->Input('ContactoTelefono');
+            $empresa->ContactoCorreo = $request->Input('ContactoCorreo');
+            $empresa->FechaPago = $request->Input('FechaPago');
+            $empresa->Tipo = $request->Input('Tipo');
+            $empresa->save();
+            return response()->json([
+                "mensaje" => "Empresa actualizada correctamente"
+            ]);
+        };
+
+    }
+    public function eliminarEmpresa(Request $request)
+    {
+        if($request->ajax()){
+            $empresa = Empresa::find($request->EmpresaId);
+            $empresa->delete();
+            return response()->json([
+                "mensaje" => "Empresa eliminada correctamente"
+            ]);
+        };
     }
 
     /**

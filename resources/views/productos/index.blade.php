@@ -7,7 +7,7 @@
             <span>/</span>
             <a href="/home">Dashboard</a>
             <span>/</span>
-            <span>Activos</span>
+            <span>Productos</span>
         </h4>
     </div>
 </div>
@@ -22,18 +22,18 @@
         <div class="container">
             <div class="card-header row">
                 <div class="col-6 col-sm-7 col-md-8">
-                    <h5 style="position: relative; top: 1rem;">Administrar Activos</h5>
+                    <h5 style="position: relative; top: 1rem;">Administrar Productos</h5>
                 </div> 
-                @can('activo.create')
+                @can('producto.create')
                     <div class="col-6 col-sm-5 col-md-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarActivoModal">Agregar activo</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarProductoModal">Agregar producto</button>
                     </div>
                 @endcan
             </div>
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de activos</h5>
+            <h5 class="card-title">Listado de productos</h5>
             <div class="table-responsive">
                 <table class="table table-stripped table-hover">
                     <thead>
@@ -45,7 +45,7 @@
                             <th colspan="2">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaActivo">
+                    <tbody id="tablaProducto">
                         
                     </tbody>
                 </table>
@@ -53,10 +53,10 @@
         </div>
     </div>
 </div>
-@include('activos.modales.crear')
-@include('activos.modales.editar')
-@include('activos.modales.eliminar')
+@include('productos.modales.crear')
+@include('productos.modales.editar')
+@include('productos.modales.eliminar')
 @endsection
 @section('scripts')
-<script type="text/javascript" src="js/activo.js"></script>
+<script type="text/javascript" src="js/producto.js"></script>
 @endsection

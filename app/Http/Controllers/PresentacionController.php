@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\DB;
 
 class PresentacionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:presentacion.index')->only(['index', 'obtenerPresentaciones']);
+        $this->middleware('permission:presentacion.create')->only(['create', 'store']);
+        $this->middleware('permission:presentacion.edit')->only(['edit', 'update', 'actualizarPresentacion']);
+        $this->middleware('permission:presentacion.destroy')->only(['destroy', 'eliminarPresentacion']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +24,12 @@ class PresentacionController extends Controller
      */
     public function index()
     {
-        //
+        return view ('presentaciones.index');
+
+    }
+
+    public function obtenerPresentaciones()
+    {
         try{
             $presentaciones = DB::table('presentaciones as p')
             ->select('p.PresentacionId','p.ProductoId','b.ProductoNombre as producto','p.ActivoId','a.ActivoNombre as envase')

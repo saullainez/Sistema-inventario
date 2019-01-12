@@ -7,7 +7,7 @@
             <span>/</span>
             <a href="/home">Dashboard</a>
             <span>/</span>
-            <span>Activos</span>
+            <span>Presentaciones</span>
         </h4>
     </div>
 </div>
@@ -22,30 +22,29 @@
         <div class="container">
             <div class="card-header row">
                 <div class="col-6 col-sm-7 col-md-8">
-                    <h5 style="position: relative; top: 1rem;">Administrar Activos</h5>
+                    <h5 style="position: relative; top: 1rem;">Administrar Presentaciones</h5>
                 </div> 
-                @can('activo.create')
+                @can('presentacion.create')
                     <div class="col-6 col-sm-5 col-md-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarActivoModal">Agregar activo</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarPresentacionModal">Agregar presentacion</button>
                     </div>
                 @endcan
             </div>
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de activos</h5>
+            <h5 class="card-title">Listado de presentaciones</h5>
             <div class="table-responsive">
                 <table class="table table-stripped table-hover">
                     <thead>
                         <tr>
                             <th style="width: 6rem;">ID</th>
-                            <th style="width: 35rem;">Nombre</th>
-                            <th style="width: 35rem;">Descripción</th>
-                            <th style="width: 35rem;">Tipo</th>
+                            <th style="width: 35rem;">Producto</th>
+                            <th style="width: 35rem;">Envase</th>
                             <th colspan="2">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaActivo">
+                    <tbody id="tablaPresentacion">
                         
                     </tbody>
                 </table>
@@ -53,10 +52,8 @@
         </div>
     </div>
 </div>
-@include('activos.modales.crear')
-@include('activos.modales.editar')
-@include('activos.modales.eliminar')
+@include('presentaciones.modales.crear')
 @endsection
 @section('scripts')
-<script type="text/javascript" src="js/activo.js"></script>
+<script type="text/javascript" src="js/presentacion.js"></script>
 @endsection
