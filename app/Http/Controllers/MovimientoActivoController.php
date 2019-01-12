@@ -31,7 +31,7 @@ class MovimientoActivoController extends Controller
            // $movimientoActivo = MovimientoActivo::get();
             
             $movimientoActivo = DB::table('movimiento_activos as ma')
-            ->select('ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+            ->select('ma.MovimientoActivoId, ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
             'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
             'ma.MovimientoConceptoId','mc.Nombre')
             ->join('activos as a','ma.ActivoId','=','a.ActivoId')
@@ -53,7 +53,7 @@ class MovimientoActivoController extends Controller
             // $movimientoActivo = MovimientoActivo::get();
              
              $movimientoActivo = DB::table('movimiento_activos as ma')
-             ->select('ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+             ->select('ma.MovimientoActivoId, ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
              'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
              'ma.MovimientoConceptoId','mc.Nombre')
              ->join('activos as a','ma.ActivoId','=','a.ActivoId')
@@ -161,7 +161,7 @@ class MovimientoActivoController extends Controller
             ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
             ->whereraw('ma.MovimientoActivoId = ?',[$movimientoActivo->MovimientoActivoId])
             ->get();
-            return response()->json($movimientoActivo, 200)->header('Content-Type','application/json');
+            return response()->json(['mensaje'=>$movimientoActivo], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
@@ -221,7 +221,7 @@ class MovimientoActivoController extends Controller
                  $req = MovimientoActivo::actualizarMovimiento($movimientoActivo);
 
                  //vertificar como es la respuesta para enviar el mensaje a la vista
-                 return response()->json($req, 200)->header('Content-Type','application/json');
+                 return response()->json(['mensaje'=>$req], 200)->header('Content-Type','application/json');
              }
              catch(\Exception $e){
                  $error = ['error'=>$e->getMessage()];
@@ -264,7 +264,7 @@ class MovimientoActivoController extends Controller
                 //$req = ['elimino'=>$query];
                 $req = MovimientoActivo::eliminarMovimiento($movimientoActivo);
                 //verificar la respuesta que envia el json para mostrar el mensaje en la vista
-                return response()->json($req, 200)->header('Content-Type','application/json');
+                return response()->json(['mensaje'=>$req], 200)->header('Content-Type','application/json');
             }
             catch(\Exception $e){
                 $error = ['error'=>$e->getMessage()];
