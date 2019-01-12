@@ -25,8 +25,7 @@
                         <div class="mb-3">
                             <h6>Tipo de bebida</h6>
                             <select class="browser-default custom-select" name="tipo" id="tipo">
-                                <option value="consumible">Consumible</option>
-                                <option value="equipo">Equipo</option>
+
                             </select>
                         </div>
                     </form>

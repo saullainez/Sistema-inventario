@@ -23,8 +23,51 @@ function cargarProductos(){
         }
     });
 };
+function cargarTipoBebida(){
+    $.ajax({
+        url: `/obtenertipobebida`,
+        method: "GET",
+        dataType: "json",
+        success: function (res) {
+            $("#tipo").html(" ");
+            for (var i = 0; i < res.length; i++) {
+                $("#tipo").append(`
+                <option value="${res[i].TipoBebidaId}"><td>${res[i].nombre}</td></option>`);
+            }
+            
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function crearProducto() {
+    var tokenAgregar = $("#tokenAgregar").val();
+    var data = {
+        ProductoNombre: $("#nombre").val(),
+        ProductoDescripcion: $("#descripcion").val(),
+        TipoBebidaId: $("#tipo").val()
+    };
+    $.ajax({
+        url: `/producto`,
+        headers: {'X-CSRF-TOKEN': tokenAgregar},
+        method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarProductos();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
 $(document).ready(function () {
     $("#producto").addClass("active");
     $("#productoMenu").addClass("active");
     cargarProductos();
+    cargarTipoBebida();
 });

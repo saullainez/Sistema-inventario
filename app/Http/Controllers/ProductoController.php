@@ -80,7 +80,7 @@ class ProductoController extends Controller
             $producto->save();
             
           
-            return response()->json($producto, 200);
+            return response()->json([$producto, "mensaje" => "Producto creado correctamente"], 200);
         }catch(\Exception $e){
             $error = ['error' => $e->getMessage()];
             return response()->json($error)->header('Content-Type','application/json');
