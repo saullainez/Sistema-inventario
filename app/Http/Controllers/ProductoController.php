@@ -159,4 +159,18 @@ class ProductoController extends Controller
        
 
     }
+    public function actualizarProducto(Request $request)
+    {
+        if($request->ajax()){
+            $producto = Producto::find($request->ProductoId);
+            $producto->ProductoNombre = $request->Input('ProductoNombre');
+            $producto->ProductoDescripcion = $request->Input('ProductoDescripcion');
+            $producto->TipoBebidaId = $request->Input('TipoBebidaId');
+            $producto->save();
+            return response()->json([
+                "mensaje" => "Producto actualizado correctamente"
+            ]);
+        };
+
+    }
 }

@@ -1,3 +1,11 @@
+function modalEditarProducto(id, ProductoNombre, ProductoDescripcion, TipoBebida){
+    $("#nuevoNombre").val(ProductoNombre);
+    $("#NuevaDescripcion").val(ProductoDescripcion);
+    $("#nuevoTipo").val(TipoBebida);
+    $("#actualizarProducto").attr('onClick', `actualizarProducto(${id})`);
+    $("#actualizarProductoModal").modal();
+    
+};
 function cargarProductos(){
     $.ajax({
         url: `/obtenerproductos`,
@@ -12,7 +20,7 @@ function cargarProductos(){
                     <td>${res[i].ProductoNombre}</td>
                     <td>${res[i].ProductoDescripcion}</td>
                     <td>${res[i].TipoBebida}</td>
-                    <td><a onclick="modalEditarProducto(${res[i].ProductoId}, '${res[i].ProductoNombre}', '${res[i].ProductoDescripcion}', '${res[i].TipoBebida}');" class="btn btn-sm btn-default">Editar</a></td>
+                    <td><a onclick="modalEditarProducto(${res[i].ProductoId}, '${res[i].ProductoNombre}', '${res[i].ProductoDescripcion}', '${res[i].TipoBebidaId}');" class="btn btn-sm btn-default">Editar</a></td>
                     <td><a onclick="modalEliminarProducto(${res[i].ProductoId});" class="btn btn-sm btn-danger">Eliminar</a></td>
                 </tr>`);
             }
@@ -30,8 +38,11 @@ function cargarTipoBebida(){
         dataType: "json",
         success: function (res) {
             $("#tipo").html(" ");
+            $("#nuevoTipo").html(" ");
             for (var i = 0; i < res.length; i++) {
                 $("#tipo").append(`
+                <option value="${res[i].TipoBebidaId}"><td>${res[i].nombre}</td></option>`);
+                $("#nuevoTipo").append(`
                 <option value="${res[i].TipoBebidaId}"><td>${res[i].nombre}</td></option>`);
             }
             
@@ -52,6 +63,31 @@ function crearProducto() {
         url: `/producto`,
         headers: {'X-CSRF-TOKEN': tokenAgregar},
         method: "POST",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            $("#alert").show().fadeOut(3000);
+            $("#mensaje").html(res.mensaje);
+            cargarProductos();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function actualizarProducto(id) {
+    var tokenEditar = $("#tokenEditar").val();
+    var data = {
+        ProductoId: id,
+        ProductoNombre: $("#nuevoNombre").val(),
+        ProductoDescripcion: $("#NuevaDescripcion").val(),
+        TipoBebidaId: $("#nuevoTipo").val()
+    };
+    $.ajax({
+        url: `/actualizarproducto`,
+        headers: {'X-CSRF-TOKEN': tokenEditar},
+        method: "PUT",
         data: data,
         dataType: "json",
         success: function (res) {
