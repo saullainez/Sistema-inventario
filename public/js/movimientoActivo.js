@@ -62,8 +62,8 @@ function cargarMovimientos(){
                         <td><a onClick="modalEditarMovimiento(${res[i].MovimientoActivoId},${res[i].ActivoId},${res[i].Descripcion},
                             ${res[i].Fecha},${res[i].Cantidad},
                             ${res[i].Monto},${res[i].ProveedorId},
-                            ${res[i].movimientoConceptoId})">
-                        <td><a onClick="modalEliminarMovimientoActivo(${res[i].movimientoActivoId})"></td>
+                            ${res[i].movimientoConceptoId})">actualizar</a></td>
+                        <td><a onClick="modalEliminarMovimientoActivo(${res[i].movimientoActivoId})">eliminar</a></td>
 
                     </tr>`
                 )
