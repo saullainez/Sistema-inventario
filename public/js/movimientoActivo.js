@@ -159,3 +159,10 @@ function eliminarMovimiento(id){
         }
     });
 }
+
+$(document).ready(function () {
+    $("#movimientoActivo").addClass("active");
+    $("#movimientoActivoMenu").addClass("active");
+    cargarMovimientos();
+    cargarProveedores();
+});
