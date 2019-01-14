@@ -1,6 +1,6 @@
 function modalEditarMovimientoConcepto(id,nombre,tipoMovimiento){
-    $("#NuevoNombre").val(nombre);
-    $("#NuevoTipoMovimiento").val(tipoMovimiento);
+    $("#nuevoNombre").val(nombre);
+    $("#nuevoTipoMovimiento").val(tipoMovimiento);
     $("#actualizarMovmientoConcepto").attr('onClick',`actualizarMovimiento(${id})`);
     $("#actualizarMovimientoConceptoModal").modal();
 }
@@ -24,7 +24,7 @@ function cargarMovimientos(){
                         <td>${res[i].Nombre}</td>
                         <td>${res[i].TipoMovimiento}</td>
                         <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimientoConcepto(${res[i].MovimientoConceptoId},
-                            ${res[i].Nombre},${res[i].TipoMovimiento});">Editar</a></td>
+                            '${res[i].Nombre}','${res[i].TipoMovimiento}');">Editar</a></td>
                         <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoConcepto(${res[i].MovimientoConceptoId});">Eliminar</a></td>
                     </tr>
                 `);
@@ -64,12 +64,13 @@ function crearMovimientoConcepto(){
 function actualizarMovimiento(id){
     var tokenEditar = $("#tokenEditar").val();
     var data = {
-        Nombre:$("#NuevoNombre").val(),
-        TipoMovimientoId:$("#NuevoTipoMovimiento").val(),
+        MovimientoConceptoId:id,
+        Nombre:$("#nuevoNombre").val(),
+        TipoMovimiento:$("#nuevoTipoMovimiento").val(),
     };
 
     $.ajax({
-        url:"/actualizarmovimientoconcepto",
+        url:"/actualizarmovimientocontepto",
         headers:{'X-CSRF-TOKEN':tokenEditar},
         data:data,
         method:"PUT",
