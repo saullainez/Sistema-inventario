@@ -114,4 +114,8 @@ $(document).ready(function () {
     $("#movimientoConceptoMenu").addClass("active");
     cargarMovimientos();
 
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 9fa66ae025efaaea959ce2c95b52cdaf310e2c0e
