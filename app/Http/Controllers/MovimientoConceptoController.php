@@ -166,9 +166,9 @@ class MovimientoConceptoController extends Controller
     public function eliminarMovimientoConcepto(Request $request){
         if ($request->ajax()){
             $movimientoConcepto = MovimientoConcepto::find($request->MovimientoConceptoId);
-            $movimientoConcepto->destroy();
+            $movimientoConcepto->delete();
             return response()->json([
-                "mensaje" => "concepto eliminado correctamente"], 200)->header('Content-Type','application/json');
+                "mensaje" => "Concepto eliminado correctamente"], 200)->header('Content-Type','application/json');
 
         };
     }

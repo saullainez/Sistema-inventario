@@ -56,6 +56,7 @@
 </div>
 @include('movimientoConcepto.modales.crear')
 @include('movimientoConcepto.modales.editar')
+@include('movimientoConcepto.modales.eliminar')
 
 @endsection
 @section('scripts')

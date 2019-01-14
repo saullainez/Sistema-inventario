@@ -6,8 +6,8 @@ function modalEditarMovimientoConcepto(id,nombre,tipoMovimiento){
 }
 
 function modalEliminarMovimientoConcepto(id){
-    $("#eliminarMovimientoConcepto").attr('onClick',`eliminarMovimiento(${id})`);
-    $("#borrarMovimientoConceptoModal").modal();
+    $("#borrarMovimientoConceptoModal").attr('onClick',`eliminarMovimiento(${id})`);
+    $("#eliminarMovimientoConcepto").modal();
 }
 
 function cargarMovimientos(){
@@ -89,10 +89,8 @@ function actualizarMovimiento(id){
 
 
 function eliminarMovimiento(id){
-
     var tokenEliminar = $("#tokenEliminar").val();
     data = {MovimientoConceptoId:id};
-
     $.ajax({
         url: `/eliminarmovimientoconcepto`,
         headers: {'X-CSRF-TOKEN': tokenEliminar},
