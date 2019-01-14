@@ -48,21 +48,18 @@ function cargarMovimientos(){
                 $("#tablaMovimientoActivos").append(
                     `<tr>
                         <td>${res[i].MovimientoActivoId}</td>
-                        <td>${res[i].ActivoId}</td>
                         <td>${res[i].ActivoNombre}</td>
                         <td>${res[i].Descripcion}</td>
                         <td>${res[i].Fecha}</td>
                         <td>${res[i].Cantidad}</td>
                         <td>${res[i].Monto}</td>
-                        <td>${res[i].ProveedorId}</td>
                         <td>${res[i].EmpresaNombre}</td>
-                        <td>${res[i].MovimientoConceptoId}</td>
                         <td>${res[i].Nombre}</td>
-                        <td><a onClick="modalEditarMovimiento(${res[i].MovimientoActivoId},${res[i].ActivoId},${res[i].Descripcion},
+                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimiento(${res[i].MovimientoActivoId},${res[i].ActivoId},${res[i].Descripcion},
                             ${res[i].Fecha},${res[i].Cantidad},
                             ${res[i].Monto},${res[i].ProveedorId},
-                            ${res[i].movimientoConceptoId})">actualizar</a></td>
-                        <td><a onClick="modalEliminarMovimientoActivo(${res[i].movimientoActivoId})">eliminar</a></td>
+                            ${res[i].movimientoConceptoId})">Editar</a></td>
+                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoActivo(${res[i].movimientoActivoId})">Eliminar</a></td>
 
                     </tr>`
                 )
@@ -160,8 +157,8 @@ function eliminarMovimiento(id){
 }
 
 $(document).ready(function () {
-    $("#movimientoActivo").addClass("active");
-    $("#movimientoActivoMenu").addClass("active");
+    $("#movimientos").addClass("active");
+    $("#movimientosMenu").addClass("active");
     cargarMovimientos();
     cargarProveedores();
 });

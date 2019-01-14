@@ -7,7 +7,9 @@
             <span>/</span>
             <a href="/home">Dashboard</a>
             <span>/</span>
-            <span>Movimientos de activos</span>
+            <a href="/movimientos">Movimientos</a>
+            <span>/</span>
+            <span>Activos</span>
         </h4>
     </div>
 </div>
@@ -38,13 +40,18 @@
                 <table class="table table-stripped table-hover">
                     <thead>
                         <tr>
-                            <th style="width: 6rem;">ID</th>
-                            <th style="width: 35rem;">Producto</th>
-                            <th style="width: 35rem;">Envase</th>
+                            <th>ID</th>
+                            <th>Activo</th>
+                            <th>Descripción</th>
+                            <th>Fecha</th>
+                            <th>Cantidad</th>
+                            <th>Monto</th>
+                            <th>Empresa</th>
+                            <th >Concepto</th>
                             <th colspan="2">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaPresentacion">
+                    <tbody id="tablaMovimientoActivos">
                         
                     </tbody>
                 </table>
@@ -57,5 +64,5 @@
 @include('presentaciones.modales.eliminar')
 @endsection
 @section('scripts')
-<script type="text/javascript" src="js/presentacion.js"></script>
+<script type="text/javascript" src="js/movimientoActivo.js"></script>
 @endsection

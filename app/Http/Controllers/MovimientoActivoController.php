@@ -31,7 +31,7 @@ class MovimientoActivoController extends Controller
            // $movimientoActivo = MovimientoActivo::get();
             
             $movimientoActivo = DB::table('movimiento_activos as ma')
-            ->select('ma.MovimientoActivoId, ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+            ->select('ma.MovimientoActivoId', 'ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
             'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
             'ma.MovimientoConceptoId','mc.Nombre')
             ->join('activos as a','ma.ActivoId','=','a.ActivoId')
@@ -53,7 +53,7 @@ class MovimientoActivoController extends Controller
             // $movimientoActivo = MovimientoActivo::get();
              
              $movimientoActivo = DB::table('movimiento_activos as ma')
-             ->select('ma.MovimientoActivoId, ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
+             ->select('ma.MovimientoActivoId', 'ma.ActivoId','a.ActivoNombre','ma.Descripcion','ma.Fecha',
              'ma.Cantidad','ma.Monto','ma.ProveedorId','e.EmpresaNombre',
              'ma.MovimientoConceptoId','mc.Nombre')
              ->join('activos as a','ma.ActivoId','=','a.ActivoId')
