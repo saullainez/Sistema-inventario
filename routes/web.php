@@ -99,6 +99,8 @@ Route::get('/identificacion', function(){
     return csrf_token();
 });
 
+Route::get('/movimientos', 'movimientosController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

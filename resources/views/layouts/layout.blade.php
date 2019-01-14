@@ -97,6 +97,10 @@
                                 <a id = "presentacionMenu" href="/presentacion" class="nav-link">
                                     <i class="fas fa-wine-bottle mr-3"></i>Presentaciones</a>
                                 @endcan
+                                @can('movimientos.index')
+                                <a id = "movimientosMenu" href="/movimientos" class="nav-link">
+                                    <i class="fas fa-exchange-alt mr-3"></i>Movimientos</a>
+                                @endcan
                             </div>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -149,40 +153,44 @@
             </a>
 
             <div class="list-group list-group-flush">
-                <a id = "home" href="/home" class="list-group-item list-group-item-action waves-effect">
+                <a id = "home" style="padding: 0.75rem 0.50rem;" href="/home" class="list-group-item list-group-item-action waves-effect">
                     <i class="fas fa-chart-pie mr-3"></i>Dashboard
                 </a>
                 @can('usuarios.index')
-                    <a id = "usuarios" href="/usuarios" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "usuarios" style="padding: 0.75rem 0.50rem;" href="/usuarios" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-user mr-3"></i>Usuarios</a>
                 @endcan
                 @can('roles.index')
-                    <a id = "roles" href="/roles" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "roles" style="padding: 0.75rem 0.50rem;" href="/roles" class="list-group-item list-group-item-action waves-effect">
                         <i class="fa fa-user-shield mr-3"></i>Roles</a>
                 @endcan
                 @can('permisos.index')
-                    <a id = "permisos" href="/permisos" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "permisos" style="padding: 0.75rem 0.50rem;" href="/permisos" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-lock-open mr-3"></i>Permisos</a>
                 @endcan
                 @can('tipo-bebida.index')
-                    <a id = "tb" href="/tipo-bebida" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "tb" style="padding: 0.75rem 0.50rem;" href="/tipo-bebida" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-wine-glass mr-3"></i>Tipo de bebida</a>
                 @endcan
                 @can('activo.index')
-                    <a id = "activo" href="/activo" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "activo" style="padding: 0.75rem 0.50rem;" href="/activo" class="list-group-item list-group-item-action waves-effect">
                         <i class="far fa-check-circle mr-3"></i>Activos</a>
                 @endcan
                 @can('empresa.index')
-                    <a id = "empresa" href="/empresa" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "empresa" style="padding: 0.75rem 0.50rem;" href="/empresa" class="list-group-item list-group-item-action waves-effect">
                         <i class="far fa-building mr-3"></i>Empresas</a>
                 @endcan
                 @can('producto.index')
-                    <a id = "producto" href="/producto" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "producto" style="padding: 0.75rem 0.50rem;" href="/producto" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-boxes mr-3"></i>Productos</a>
                 @endcan
                 @can('presentacion.index')
-                    <a id = "presentacion" href="/presentacion" class="list-group-item list-group-item-action waves-effect">
+                    <a id = "presentacion" style="padding: 0.75rem 0.50rem;" href="/presentacion" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-wine-bottle mr-3"></i>Presentaciones</a>
+                @endcan
+                @can('movimientos.index')
+                    <a style="padding: 0.75rem 0.50rem;" id = "movimientos" href="/movimientos" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-exchange-alt mr-2"></i>Movimientos</a>
                 @endcan
                 
 

@@ -18,7 +18,6 @@ function modalEliminarMovimientoActivo(id){
 
 //funcion que deberia cagar en un select los proveedores
 function cargarProveedores(){
-  
     $.ajax({
         url:"/proveedor",
         method:"GET",
@@ -121,7 +120,7 @@ function actualizarMovimiento(id){
 
     $.ajax({
         url:"/actualizarmovimientoactivo",
-        headers:{'X-CSRF-TOKEN':tokenAgregar},
+        headers:{'X-CSRF-TOKEN':tokenEditar},
         method:"PUT",
         data:data,
         dataType:"json",
