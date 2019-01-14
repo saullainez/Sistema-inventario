@@ -106,7 +106,7 @@ class MovimientoActivoController extends Controller
             */
             //dd($res);
             //return $res;
-            return response()->json($res, 200)->header('Content-Type','application/json');
+            return response()->json([$res, "mensaje"=>"Movimiento creado correctamente"], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];

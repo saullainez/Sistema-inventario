@@ -59,7 +59,7 @@
         </div>
     </div>
 </div>
-@include('presentaciones.modales.crear')
+@include('movimientoActivo.modales.crear')
 @include('presentaciones.modales.editar')
 @include('presentaciones.modales.eliminar')
 @endsection

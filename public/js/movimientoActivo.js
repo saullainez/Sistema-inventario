@@ -23,10 +23,50 @@ function cargarProveedores(){
         method:"GET",
         dataType:"json",
         success: function(res){
-            $("#proveedor").html(" ");
+            console.log(res);
+            $("#proveedorId").html(" ");
             for(var i = 0; i< res.length; i++){
-                $("proveedor").append(`
-                    <option value="${res[i].EmpresaId}">${res[i].Empresanombre}</option>
+                $("#proveedorId").append(`
+                    <option value="${res[i].EmpresaId}">${res[i].EmpresaNombre}</option>
+                `);
+            }
+        },
+        error: function(error){
+            console.error(error);
+        }
+    });
+}
+
+function cargarActivos(){
+    $.ajax({
+        url:"/obteneractivos",
+        method:"GET",
+        dataType:"json",
+        success: function(res){
+            console.log(res);
+            $("#activoId").html(" ");
+            for(var i = 0; i< res.length; i++){
+                $("#activoId").append(`
+                    <option value="${res[i].ActivoId}">${res[i].ActivoNombre}</option>
+                `);
+            }
+        },
+        error: function(error){
+            console.error(error);
+        }
+    });
+}
+function cargarConceptos(){
+    $.ajax({
+        url:"/obtenermovimientoconceptos",
+        method:"GET",
+        dataType:"json",
+        success: function(res){
+            console.log(res);
+            $("#movimientoConceptoId").html(" ");
+            for(var i = 0; i< res.length; i++){
+                $("#movimientoConceptoId").append(`
+                    <option value="${res[i].MovimientoConceptoId}">${res[i].Nombre}</option>
                 `);
             }
         },
@@ -43,7 +83,7 @@ function cargarMovimientos(){
         method:"GET",
         dataType:'json',
         success: function (res) {
-            $("tablaMovimientoActivos").html(" ");
+            $("#tablaMovimientoActivos").html(" ");
             for(var i = 0; i < res.length; i++){
                 $("#tablaMovimientoActivos").append(
                     `<tr>
@@ -81,8 +121,9 @@ function crearMovimientoActivo(){
         Cantidad : $("#cantidad").val(),
         Monto : $("#monto").val(),
         ProveedorId : $("#proveedorId").val(),
-        MovimientoConceptoId : $("movimientoConceptoId").val()
+        MovimientoConceptoId : $("#movimientoConceptoId").val()
     };
+    
     $.ajax({
         url:"/movimiento-activo",
         headers:{'X-CSRF-TOKEN':tokenAgregar},
@@ -161,4 +202,6 @@ $(document).ready(function () {
     $("#movimientosMenu").addClass("active");
     cargarMovimientos();
     cargarProveedores();
+    cargarActivos();
+    cargarConceptos();
 });
