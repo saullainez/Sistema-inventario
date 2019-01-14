@@ -46,7 +46,7 @@
                             <th colspan="2">&nbsp;</th>
                         </tr>
                     </thead>
-                    <tbody id="tablaMovimientoConcepto">
+                    <tbody id="tablaMovimientoConceptos">
                         
                     </tbody>
                 </table>

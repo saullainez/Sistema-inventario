@@ -16,16 +16,16 @@ function cargarMovimientos(){
         method:"GET",
         dataType:"json",
         success: function(res){
-            $("tablaMovimientoConceptos").html(" ");
+            $("#tablaMovimientoConceptos").html(" ");
             for (var i = 0; i < res.length; i++){
-                $("tablaMovimientoConceptos").append(`
+                $("#tablaMovimientoConceptos").append(`
                     <tr>
                         <td>${res[i].MovimientoConceptoId}</td>
-                        <td>${res[i].MovimientoConceptoNombre}</td>
+                        <td>${res[i].Nombre}</td>
                         <td>${res[i].TipoMovimiento}</td>
-                        <td><a onClick="modalEditarMovimientoConcepto(${res[i].MovimientoConceptoId},
-                            ${res[i].MovimientoConceptoNombre},${res[i].TipoMovimiento});">actualizar</a></td>
-                        <td><a onClick="modalEliminarMovimientoConcepto(${res[i].MovimientoConceptoId});">eliminar</a></td>
+                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimientoConcepto(${res[i].MovimientoConceptoId},
+                            ${res[i].Nombre},${res[i].TipoMovimiento});">Editar</a></td>
+                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoConcepto(${res[i].MovimientoConceptoId});">Eliminar</a></td>
                     </tr>
                 `);
             }
@@ -110,12 +110,7 @@ function eliminarMovimiento(id){
 }
 
 $(document).ready(function () {
-    $("#movimientoConcepto").addClass("active");
-    $("#movimientoConceptoMenu").addClass("active");
+    $("#movimientos").addClass("active");
+    $("#movimientosMenu").addClass("active");
     cargarMovimientos();
-
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 9fa66ae025efaaea959ce2c95b52cdaf310e2c0e
