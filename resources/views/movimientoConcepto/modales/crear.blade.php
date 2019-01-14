@@ -20,8 +20,9 @@
                         </div>
                         <div class="mb-3">
                             <h6>Tipo de movimiento</h6>
-                            <select class="browser-default custom-select" name="tipo" id="tipo">
-
+                            <select class="browser-default custom-select" name="tipoMovimiento" id="tipoMovimiento">
+                                <option value="Entrada">Entrada</option>
+                                <option value="Salida">Salida</option>
                             </select>
                         </div>
                     </form>

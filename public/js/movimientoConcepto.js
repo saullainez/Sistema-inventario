@@ -40,7 +40,7 @@ function crearMovimientoConcepto(){
     var tokenAgregar = $("#tokenAgregar").val();
     var data = {
         Nombre:$("#nombre").val(),
-        TipoMovimientoId:$("#tipoMovimiento").val(),
+        TipoMovimiento:$("#tipoMovimiento").val(),
     };
 
     $.ajax({

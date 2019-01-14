@@ -73,7 +73,7 @@ class MovimientoConceptoController extends Controller
             $movimiento->Nombre = $request->Input('Nombre');
             $movimiento->TipoMovimiento = $request->Input('TipoMovimiento');
             $movimiento->save();
-            return response()->json($movimiento, 200)->header('Content-Type','application/json');
+            return response()->json([$movimiento, "mensaje"=>"Concepto creado correctamente"], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
