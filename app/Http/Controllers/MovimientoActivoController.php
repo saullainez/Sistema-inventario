@@ -204,11 +204,8 @@ class MovimientoActivoController extends Controller
     }
 
     public function actualizarMovimientoActivo(Request $request){
-
         if($request->ajax()){
-
             try{
-                // return "hola";
                 $movimientoActivo = MovimientoActivo::find($request->MovimientoActivoId);
                 $movimientoActivo->ActivoId = $request['ActivoId'];
                 $movimientoActivo->Descripcion = $request['Descripcion'];
@@ -216,18 +213,16 @@ class MovimientoActivoController extends Controller
                 $movimientoActivo->Cantidad = $request['Cantidad'];
                 $movimientoActivo->Monto = $request['Monto'];
                 $movimientoActivo->ProveedorId = $request['ProveedorId'];
-                $movimientoActivo->MovimientoConceptoId = $request['MovimientoConceptoId'];
-        
-                 $req = MovimientoActivo::actualizarMovimiento($movimientoActivo);
+                $movimientoActivo->MovimientoConceptoId = $request['MovimientoConceptoId'];        
+                $req = MovimientoActivo::actualizarMovimiento($movimientoActivo);
 
                  //vertificar como es la respuesta para enviar el mensaje a la vista
-                 return response()->json(['mensaje'=>$req], 200)->header('Content-Type','application/json');
+                 return response()->json([$req, "mensaje" => "Movimiento actualizado correctamente"], 200)->header('Content-Type','application/json');
              }
              catch(\Exception $e){
                  $error = ['error'=>$e->getMessage()];
                  return response()->json($error)->header('Content-Type','application/json');
              }
-            
         };
 
     }

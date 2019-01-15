@@ -25,10 +25,14 @@ function cargarProveedores(){
         success: function(res){
             console.log(res);
             $("#proveedorId").html(" ");
+            $("#NuevoProveedor").html(" ");
             for(var i = 0; i< res.length; i++){
                 $("#proveedorId").append(`
                     <option value="${res[i].EmpresaId}">${res[i].EmpresaNombre}</option>
                 `);
+                $("#NuevoProveedor").append(`
+                <option value="${res[i].EmpresaId}">${res[i].EmpresaNombre}</option>
+            `);
             }
         },
         error: function(error){
@@ -45,10 +49,14 @@ function cargarActivos(){
         success: function(res){
             console.log(res);
             $("#activoId").html(" ");
+            $("#NuevoActivoId").html(" ");
             for(var i = 0; i< res.length; i++){
                 $("#activoId").append(`
                     <option value="${res[i].ActivoId}">${res[i].ActivoNombre}</option>
                 `);
+                $("#NuevoActivoId").append(`
+                <option value="${res[i].ActivoId}">${res[i].ActivoNombre}</option>
+            `);
             }
         },
         error: function(error){
@@ -64,10 +72,14 @@ function cargarConceptos(){
         success: function(res){
             console.log(res);
             $("#movimientoConceptoId").html(" ");
+            $("#NuevoConcepto").html(" ");
             for(var i = 0; i< res.length; i++){
                 $("#movimientoConceptoId").append(`
                     <option value="${res[i].MovimientoConceptoId}">${res[i].Nombre}</option>
                 `);
+                $("#NuevoConcepto").append(`
+                <option value="${res[i].MovimientoConceptoId}">${res[i].Nombre}</option>
+            `);
             }
         },
         error: function(error){
@@ -95,10 +107,10 @@ function cargarMovimientos(){
                         <td>${res[i].Monto}</td>
                         <td>${res[i].EmpresaNombre}</td>
                         <td>${res[i].Nombre}</td>
-                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimiento(${res[i].MovimientoActivoId},${res[i].ActivoId},${res[i].Descripcion},
-                            ${res[i].Fecha},${res[i].Cantidad},
+                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimiento(${res[i].MovimientoActivoId},${res[i].ActivoId},'${res[i].Descripcion}',
+                            '${res[i].Fecha}',${res[i].Cantidad},
                             ${res[i].Monto},${res[i].ProveedorId},
-                            ${res[i].movimientoConceptoId})">Editar</a></td>
+                            ${res[i].MovimientoConceptoId})">Editar</a></td>
                         <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoActivo(${res[i].movimientoActivoId})">Eliminar</a></td>
 
                     </tr>`
@@ -155,7 +167,6 @@ function actualizarMovimiento(id){
         ProveedorId : $("#NuevoProveedor").val(),
         MovimientoConceptoId : $("#NuevoConcepto").val()
     };
-
     $.ajax({
         url:"/actualizarmovimientoactivo",
         headers:{'X-CSRF-TOKEN':tokenEditar},
