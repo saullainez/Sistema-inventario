@@ -61,7 +61,8 @@
 </div>
 @include('movimientoActivo.modales.crear')
 @include('movimientoActivo.modales.editar')
-@include('presentaciones.modales.eliminar')
+@include('movimientoActivo.modales.eliminar')
+
 @endsection
 @section('scripts')
 <script type="text/javascript" src="js/movimientoActivo.js"></script>

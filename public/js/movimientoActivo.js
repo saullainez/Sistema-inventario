@@ -111,7 +111,7 @@ function cargarMovimientos(){
                             '${res[i].Fecha}',${res[i].Cantidad},
                             ${res[i].Monto},${res[i].ProveedorId},
                             ${res[i].MovimientoConceptoId})">Editar</a></td>
-                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoActivo(${res[i].movimientoActivoId})">Eliminar</a></td>
+                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoActivo(${res[i].MovimientoActivoId})">Eliminar</a></td>
 
                     </tr>`
                 )
@@ -198,6 +198,7 @@ function eliminarMovimiento(id){
         data: data,
         dataType: "json",
         success: function(res){
+            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             cargarMovimientos();

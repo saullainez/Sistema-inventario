@@ -59,7 +59,7 @@ class MovimientoActivo extends Model
 
     }
 
-    public static function eliminarMovimiento($MovimientoActivo){
+    public static function eliminarMovimiento($movimientoActivo){
 
         $movimiento = DB::select('call eliminar_mov_act(?)', 
         [

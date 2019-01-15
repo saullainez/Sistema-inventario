@@ -251,7 +251,7 @@ class MovimientoActivoController extends Controller
     }
 
     public function eliminarMovimientoActivo(Request $request){
-
+        
         if($request->ajax()){
             try{
                 $movimientoActivo = MovimientoActivo::find($request->MovimientoActivoId);
@@ -259,7 +259,7 @@ class MovimientoActivoController extends Controller
                 //$req = ['elimino'=>$query];
                 $req = MovimientoActivo::eliminarMovimiento($movimientoActivo);
                 //verificar la respuesta que envia el json para mostrar el mensaje en la vista
-                return response()->json(['mensaje'=>$req], 200)->header('Content-Type','application/json');
+                return response()->json([$req, "mensaje"=>"Movimiento eliminado correctamente"], 200)->header('Content-Type','application/json');
             }
             catch(\Exception $e){
                 $error = ['error'=>$e->getMessage()];
