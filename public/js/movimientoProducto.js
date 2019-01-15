@@ -27,26 +27,23 @@ function cargarMovimientos(){
         success:function(res){
             $("#tablaMovimientoProductos").html(" ");
             for(var i = 0; i < res.length; i++){
-               $("tablaMovimientoProductos").append(`
+               $("#tablaMovimientoProductos").append(`
                     <tr>
                         <td>${res[i].MovimientoProductoId}</td>
                         <td>${res[i].PresentacionId}</td>
-                        <td>${res[i].PresentacionNombre}</td>
                         <td>${res[i].Descripcion}</td>
                         <td>${res[i].Fecha}</td>
                         <td>${res[i].AnioCosecha}</td>
                         <td>${res[i].Cantidad}</td>
-                        <td>${res[i].Monto}</td>
-                        <td>${res[i].ClienteId}</td>
                         <td>${res[i].EmpresaNombre}</td>
-                        <td>${res[i].MovimientoConceptoId}</td>
                         <td>${res[i].MovimientoConceptoNombre}</td>
-                        <td><a onClick="modalEditarMovimientoProducto(${res[i].MovimientoProductoId},
+                        <td>${res[i].Monto}</td>
+                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimientoProducto(${res[i].MovimientoProductoId},
                             ${res[i].PresentacionId},${res[i].Descripcion},${res[i].Fecha},
                             ${res[i].AnioCosecha}, ${res[i].Cantidad},${res[i].ClienteId},
                             ${res[i].MovimientoConceptoId},${res[i].Monto});">
-                        </a>actualizar<td>
-                        <td><a onClick="modalEliminarMovimientoProducto(${res[i].MovimientoProductoId});">eliminar</a></td>
+                        Editar</a><td>
+                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoProducto(${res[i].MovimientoProductoId});">eliminar</a></td>
                     </tr>
                `); 
             }
@@ -164,8 +161,8 @@ function eliminarMovimiento(id){
 }
 
 $(document).ready(function () {
-    $("#movimientoProducto").addClass("active");
-    $("#movimientoProductoMenu").addClass("active");
+    $("#movimientos").addClass("active");
+    $("#movimientosMenu").addClass("active");
     cargarMovimientos();
     cargarClientes();
 });

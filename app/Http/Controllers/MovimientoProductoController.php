@@ -27,9 +27,19 @@ class MovimientoProductoController extends Controller
     {
         //
         try{
-            $movimientos = DB::table('movimiento_productos as mp')
+            /*$movimientos = DB::table('movimiento_productos as mp')
             ->select('mp.MovimientoProductoId','mp.PresentacionId',
             'p.PresentacionNombre','mp.Descripcion','mp.Fecha',
+            'mp.AnioCosecha','mp.Cantidad','mp.ClienteId','e.EmpresaNombre',
+            'mp.MovimientoConceptoId','mc.Nombre as MovimientoConceptoNombre',
+            'mp.Monto')
+            ->join('presentaciones as p','mp.PresentacionId','=','p.PresentacionId')
+            ->join('empresas as e','mp.ClienteId','=','e.EmpresaId')
+            ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->get();*/
+            $movimientos = DB::table('movimiento_productos as mp')
+            ->select('mp.MovimientoProductoId','mp.PresentacionId',
+            'mp.Descripcion','mp.Fecha',
             'mp.AnioCosecha','mp.Cantidad','mp.ClienteId','e.EmpresaNombre',
             'mp.MovimientoConceptoId','mc.Nombre as MovimientoConceptoNombre',
             'mp.Monto')
@@ -50,9 +60,19 @@ class MovimientoProductoController extends Controller
 
     public function obtenerMovimientoProducto(){
         try{
-            $movimientos = DB::table('movimiento_productos as mp')
+            /*$movimientos = DB::table('movimiento_productos as mp')
             ->select('mp.MovimientoProductoId','mp.PresentacionId',
             'p.PresentacionNombre','mp.Descripcion','mp.Fecha',
+            'mp.AnioCosecha','mp.Cantidad','mp.ClienteId','e.EmpresaNombre',
+            'mp.MovimientoConceptoId','mc.Nombre as MovimientoConceptoNombre',
+            'mp.Monto')
+            ->join('presentaciones as p','mp.PresentacionId','=','p.PresentacionId')
+            ->join('empresas as e','mp.ClienteId','=','e.EmpresaId')
+            ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->get();*/
+            $movimientos = DB::table('movimiento_productos as mp')
+            ->select('mp.MovimientoProductoId','mp.PresentacionId',
+            'mp.Descripcion','mp.Fecha',
             'mp.AnioCosecha','mp.Cantidad','mp.ClienteId','e.EmpresaNombre',
             'mp.MovimientoConceptoId','mc.Nombre as MovimientoConceptoNombre',
             'mp.Monto')
