@@ -43,7 +43,7 @@ class MovimientoProducto extends Model
 
     }
 
-    public static function actualizarMovimiento($movimientoProcucto){
+    public static function actualizarMovimiento($movimientoProducto){
 
         $movimiento = DB::select('call actualizar_mov_pro(?,?,?,?,?,?,?,?,?)',
         [

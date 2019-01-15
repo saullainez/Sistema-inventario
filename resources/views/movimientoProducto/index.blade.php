@@ -61,7 +61,7 @@
     </div>
 </div>
 @include('movimientoProducto.modales.crear')
-@include('movimientoActivo.modales.editar')
+@include('movimientoProducto.modales.editar')
 @include('movimientoActivo.modales.eliminar')
 
 @endsection

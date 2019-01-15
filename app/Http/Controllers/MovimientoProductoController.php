@@ -227,6 +227,7 @@ class MovimientoProductoController extends Controller
 
             try{
                 $movimientoProducto = MovimientoProducto::find($request->MovimientoProductoId);
+                
 
                 $movimientoProducto->PresentacionId = $request['PresentacionId'];
                 $movimientoProducto->Descripcion = $request['Descripcion'];
@@ -236,12 +237,13 @@ class MovimientoProductoController extends Controller
                 $movimientoProducto->ClienteId = $request['ClienteId'];
                 $movimientoProducto->MovimientoConceptoId = $request['MovimientoConceptoId'];
                 $movimientoProducto->Monto = $request['Monto'];
+
                
                //revisar la respuesta que obtiene el json y asi poder enviar el mensaje
                //(he de suponer que se debe hacer un paso extra de verificacion)
 
-               $req = MovimientoProdcuto::actualizarMovimiento($MovimientoProducto);
-                return response()->json($req, 200)->header('Content-Type','application/json');
+               $req = MovimientoProducto::actualizarMovimiento($movimientoProducto);
+               return response()->json([$req,"mensaje" => "Movimiento actualizado correctamente"], 200)->header('Content-Type','application/json');
             }
             catch(\Exception $e){
                 $error = ['error'=>$e->getMessage()];

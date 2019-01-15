@@ -39,7 +39,7 @@ function cargarMovimientos(){
                         <td>${res[i].MovimientoConceptoNombre}</td>
                         <td>${res[i].Monto}</td>
                         <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimientoProducto(${res[i].MovimientoProductoId},
-                            ${res[i].PresentacionId},${res[i].Descripcion},${res[i].Fecha},
+                            ${res[i].PresentacionId},'${res[i].Descripcion}','${res[i].Fecha}',
                             ${res[i].AnioCosecha}, ${res[i].Cantidad},${res[i].ClienteId},
                             ${res[i].MovimientoConceptoId},${res[i].Monto});">
                         Editar</a><td>
@@ -62,14 +62,14 @@ function cargarPresentaciones(){
         success: function(res){
             console.log(res);
             $("#presentacionId").html(" ");
-            //$("#nuevapresentacionId").html(" ");
+            $("#NuevapresentacionId").html(" ");
             for(var i = 0; i< res.length; i++){
                 $("#presentacionId").append(`
                     <option value="${res[i].PresentacionId}">${res[i].envase}</option>
                 `);
-                /*$("#nuevapresentacionId").append(`
+                $("#NuevapresentacionId").append(`
                 <option value="${res[i].PresentacionId}">${res[i].envase}</option>
-            `)*/;
+            `);
             }
         },
         error: function(error){
@@ -85,10 +85,14 @@ function cargarClientes(){
         dataType:"json",
         success: function(res){
             $("#cliente").html(" ");
+            $("#NuevoCliente").html(" ");
             for(var i = 0; i< res.length; i++){
                 $("#cliente").append(`
                     <option value="${res[i].EmpresaId}">${res[i].EmpresaNombre}</option>
                 `);
+                $("#NuevoCliente").append(`
+                <option value="${res[i].EmpresaId}">${res[i].EmpresaNombre}</option>
+            `);
             }
         },
         error: function(error){
@@ -104,14 +108,14 @@ function cargarConceptos(){
         success: function(res){
             console.log(res);
             $("#movimientoConceptoId").html(" ");
-            //$("#NuevoConcepto").html(" ");
+            $("#NuevoConcepto").html(" ");
             for(var i = 0; i< res.length; i++){
                 $("#movimientoConceptoId").append(`
                     <option value="${res[i].MovimientoConceptoId}">${res[i].Nombre}</option>
                 `);
-                /*$("#NuevoConcepto").append(`
+                $("#NuevoConcepto").append(`
                 <option value="${res[i].MovimientoConceptoId}">${res[i].Nombre}</option>
-            `);*/
+            `);
             }
         },
         error: function(error){
@@ -151,21 +155,21 @@ function crearMovimientoProducto(){
     });
 }
 
-function actualizarMovimiento($id){
+function actualizarMovimiento(id){
     var tokenEditar = $("#tokenEditar").val();
     var data = {
+        MovimientoProductoId:id,
         PresentacionId: $("#NuevapresentacionId").val(),
         Descripcion: $("#NuevaDescripcion").val(),
-        Fecha: $("#NuevaFecha"),
+        Fecha: $("#NuevaFecha").val(),
         AnioCosecha: $("#NuevoAnio").val(),
-        Cantidad:$("#NuevaCantidad"),
-        ClienteId:$("#NuevoCiente"),
+        Cantidad:$("#NuevaCantidad").val(),
+        ClienteId:$("#NuevoCliente").val(),
         MovimientoConceptoId:$("#NuevoConcepto").val(),
-        Monto:$("#NuevoMonto")
-
+        Monto:$("#NuevoMonto").val()
     };
     $.ajax({
-        url:'/actualizarMovimientoProducto',
+        url:'/actualizarmovimientoproducto',
         headers:{'X-CSRF-TOKEN':tokenEditar},
         data:data,
         method:"PUT",
@@ -173,7 +177,7 @@ function actualizarMovimiento($id){
         success: function(res){
             console.log(res);
             $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res);
+            $("#mensaje").html(res.mensaje);
             cargarMovimientos(); 
         },
         error: function(error){
