@@ -60,7 +60,7 @@
         </div>
     </div>
 </div>
-@include('movimientoActivo.modales.crear')
+@include('movimientoProducto.modales.crear')
 @include('movimientoActivo.modales.editar')
 @include('movimientoActivo.modales.eliminar')
 

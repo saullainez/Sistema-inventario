@@ -54,17 +54,22 @@ function cargarMovimientos(){
     });
 }
 
-function cargarClientes(){
+function cargarPresentaciones(){
     $.ajax({
-        url:"/cliente",
+        url:"/obtenerpresentaciones",
         method:"GET",
         dataType:"json",
         success: function(res){
-            $("#cliente").html(" ");
+            console.log(res);
+            $("#presentacionId").html(" ");
+            //$("#nuevapresentacionId").html(" ");
             for(var i = 0; i< res.length; i++){
-                $("#cliente").append(`
-                    <option value="${res[i].EmpresaId}">${res[i].Empresanombre}</option>
+                $("#presentacionId").append(`
+                    <option value="${res[i].PresentacionId}">${res[i].envase}</option>
                 `);
+                /*$("#nuevapresentacionId").append(`
+                <option value="${res[i].PresentacionId}">${res[i].envase}</option>
+            `)*/;
             }
         },
         error: function(error){
@@ -73,18 +78,59 @@ function cargarClientes(){
     });
 }
 
-function crearMovimientoPresentacion(){
+function cargarClientes(){
+    $.ajax({
+        url:"/clientes",
+        method:"GET",
+        dataType:"json",
+        success: function(res){
+            $("#cliente").html(" ");
+            for(var i = 0; i< res.length; i++){
+                $("#cliente").append(`
+                    <option value="${res[i].EmpresaId}">${res[i].EmpresaNombre}</option>
+                `);
+            }
+        },
+        error: function(error){
+            console.error(error);
+        }
+    });
+}
+function cargarConceptos(){
+    $.ajax({
+        url:"/obtenermovimientoconceptos",
+        method:"GET",
+        dataType:"json",
+        success: function(res){
+            console.log(res);
+            $("#movimientoConceptoId").html(" ");
+            //$("#NuevoConcepto").html(" ");
+            for(var i = 0; i< res.length; i++){
+                $("#movimientoConceptoId").append(`
+                    <option value="${res[i].MovimientoConceptoId}">${res[i].Nombre}</option>
+                `);
+                /*$("#NuevoConcepto").append(`
+                <option value="${res[i].MovimientoConceptoId}">${res[i].Nombre}</option>
+            `);*/
+            }
+        },
+        error: function(error){
+            console.error(error);
+        }
+    });
+}
+
+function crearMovimientoProducto(){
     var tokenAgregar = $("#tokenAgregar").val();
     var data = {
         PresentacionId: $("#presentacionId").val(),
         Descripcion: $("#descripcion").val(),
-        Fecha: $("#fecha"),
+        Fecha: $("#fecha").val(),
         AnioCosecha: $("#anioCosecha").val(),
-        Cantidad:$("#cantidad"),
-        ClienteId:$("#clienteId"),
+        Cantidad:$("#cantidad").val(),
+        ClienteId:$("#cliente").val(),
         MovimientoConceptoId:$("#movimientoConceptoId").val(),
-        Monto:$("#monto")
-
+        Monto:$("#monto").val()
     };
 
     $.ajax({
@@ -164,5 +210,7 @@ $(document).ready(function () {
     $("#movimientos").addClass("active");
     $("#movimientosMenu").addClass("active");
     cargarMovimientos();
+    cargarPresentaciones();
+    cargarConceptos();
     cargarClientes();
 });

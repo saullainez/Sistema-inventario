@@ -26,7 +26,7 @@ class MovimientoProducto extends Model
         return $this->belongsTo('App\Presentacion','presentacion_mov_fk','PresentacionId');
     }
 
-    public static function crearMovimiento($MovimientoProducto){
+    public static function crearMovimiento($movimientoProducto){
 
         $movimiento = DB::select('call crear_mov_pro(?,?,?,?,?,?,?,?)',
         [

@@ -122,7 +122,7 @@ class MovimientoProductoController extends Controller
             $movimiento->Monto = $request->Monto;
             //$movimiento->save();
             $req = MovimientoProducto::crearMovimiento($movimiento);
-            return response()->json($req, 200)->header('Content-Type','application/json');
+            return response()->json([$req,"mensaje" => "Movimiento creado correctamente"], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error'=>$e->getMessage()];
