@@ -283,7 +283,7 @@ class MovimientoProductoController extends Controller
                 $req = MovimientoProducto::eliminarMovimiento($movimientoProducto);
                 //revisar la respuesta que obtiene el json y asi poder enviar el mensaje
                //(he de suponer que se debe hacer un paso extra de verificacion)
-                return response()->json($req, 200)->header('Content-Type','application/json');
+                return response()->json([$req, "mensaje"=>"Movimiento eliminado correctamente"], 200)->header('Content-Type','application/json');
             }
             catch(\Exception $e){
                 $error = ['error'=>$e->getMessage()];
