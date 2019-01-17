@@ -21,34 +21,50 @@
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
-                <div class="col-7 col-sm-8 col-md-9">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-6">
                     <h5 style="position: relative; top: 1rem;">Administrar Permisos</h5>
                 </div> 
                 @can('roles.create')
-                    <div class="col-5 col-sm-4 col-md-3">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarPermisoModal">Nuevo permiso</button>
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 6rem; margin-right: -3rem;">
+                        <button type="button" class="btn btn-primary btn-panel" data-toggle="modal" data-target="#agregarPermisoModal"><i class="fas fa-plus mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('roles.create')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-right: -3rem;">
+                        <button disabled type="button" class="btn btn-default btn-panel" id="actPermiso"><i class="fas fa-pencil-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('roles.create')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2">
+                        <button disabled type="button" class="btn btn-danger btn-panel" id="elPermiso"><i class="far fa-trash-alt mt-0"></i></button>
                     </div>
                 @endcan
             </div>
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de permisos</h5>
-            <div class="table-responsive">
-                <table class="table table-stripped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 3rem;">ID</th>
-                            <th style="width: 17rem;">Nombre</th>
-                            <th style="width: 17rem;">Slug</th>
-                            <th style="width: 29rem;">Descripción</th>
-                            <th colspan="2">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaPermisos">
-                        
-                    </tbody>
-                </table>
+            <h4 class="card-title text-center">Listado de permisos</h4>
+            <div class="px-4">
+                <div class="table-wrapper table-responsive">
+                    <table id="tablaPermisos" class="table table-hover table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Slug</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Slug</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
