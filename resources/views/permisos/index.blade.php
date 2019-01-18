@@ -25,18 +25,18 @@
                     <h5 style="position: relative; top: 1rem;">Administrar Permisos</h5>
                 </div> 
                 @can('permisos.create')
-                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 6rem; margin-right: -3rem;">
-                        <button type="button" class="btn btn-primary btn-panel" data-toggle="modal" data-target="#agregarPermisoModal"><i class="fas fa-plus mt-0"></i></button>
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem; margin-right: -1rem;">
+                        <button type="button" class="btn btn-primary btn-panel1" data-toggle="modal" data-target="#agregarPermisoModal"><i class="fas fa-plus mt-0"></i></button>
                     </div>
                 @endcan
                 @can('permisos.edit')
                     <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-right: -3rem;">
-                        <button disabled type="button" class="btn btn-default btn-panel" id="actPermiso"><i class="fas fa-pencil-alt mt-0"></i></button>
+                        <button disabled type="button" class="btn btn-default btn-panel1" id="actPermiso"><i class="fas fa-pencil-alt mt-0"></i></button>
                     </div>
                 @endcan
                 @can('permisos.destroy')
-                    <div class="col-4 col-sm-4 col-md-3 col-lg-2">
-                        <button disabled type="button" class="btn btn-danger btn-panel" id="elPermiso"><i class="far fa-trash-alt mt-0"></i></button>
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem;">
+                        <button disabled type="button" class="btn btn-danger btn-panel1" id="elPermiso"><i class="far fa-trash-alt mt-0"></i></button>
                     </div>
                 @endcan
             </div>

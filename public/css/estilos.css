@@ -58,7 +58,9 @@ table.dataTable {
     padding-left: 1rem;
     padding-right: 1rem;
 }
-
+.btn-panel1{
+    border-radius: 3rem;
+}
 .movil {
     display: none;
 }
