@@ -40,32 +40,6 @@ function agregarRol(id){
         }
     });
 }
-/*function cargarUsuarios(){
-    $.ajax({
-        url: `/obtenerusuarios`,
-        method: "GET",
-        dataType: "json",
-        success: function (res) {
-            $("#tablaUsuarios").html(" ");
-            for (var i = 0; i < res.length; i++) {
-                $("#tablaUsuarios").append(`
-                <tr>
-                    <td>${res[i].id}</td>
-                    <td>${res[i].name}</td>
-                    <td>${res[i].email}</td>
-                    <td><a onclick="modalEditarUsuario(${res[i].id}, '${res[i].name}', '${res[i].email}');" class="btn btn-sm btn-default">Editar</a></td>
-                    <td><a style="width:7.3rem;"  onclick="cargarRolesDeUsuario(${res[i].id});" class="btn btn-sm btn-default">Ver roles</a></td>
-                    <td><a style="width:7.3rem;"  onclick="modalAgregarRolUsuario(${res[i].id});" class="btn btn-sm btn-default">Asignar rol</a></td>
-                    <td><a onclick="modalEliminarUsuario(${res[i].id});" class="btn btn-sm btn-danger">Eliminar</a></td>
-                </tr>`);
-            }
-            
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
-};*/
 function cargarRoles(){
     $.ajax({
         url: `/obtenerroles`,
