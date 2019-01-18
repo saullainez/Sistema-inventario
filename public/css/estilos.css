@@ -55,4 +55,21 @@ table.dataTable {
 
 .btn-panel{
     border-radius: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
+.btn-panel1{
+    border-radius: 3rem;
+}
+.movil {
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .movil {
+      display: block;
+    }
+    .normal {
+        display: none;
+      }
+  }

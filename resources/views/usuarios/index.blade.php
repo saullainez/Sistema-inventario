@@ -20,63 +20,95 @@
     </div>
     <div class="card" style="width:100%;">
         <div class="container">
-            <div class="card-header row">
-                <div class="col-7 col-sm-8 col-md-9">
+            <div class="card-header row normal">
+                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                     <h5 style="position: relative; top: 1rem;">Administrar Usuarios</h5>
                 </div> 
                 @can('usuarios.create')
-                    <div class="col-5 col-sm-4 col-md-3">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarUsuarioModal">Nuevo usuario</button>
+                    <div class="col-4 col-sm-1 col-md-1 col-lg-1" style="margin-left: 9rem; margin-right: -3rem;">
+                        <button type="button" class="btn btn-primary btn-panel" data-toggle="modal" data-target="#agregarUsuarioModal"><i class="fas fa-plus mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('usuarios.edit')
+                    <div class="col-4 col-sm-1 col-md-1 col-lg-1" style="margin-right: -5rem; margin-left: 2rem;">
+                        <button disabled type="button" class="btn btn-default btn-panel" id="actUsuario"><i class="fas fa-pencil-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('usuarios.destroy')
+                    <div class="col-4 col-sm-1 col-md-1 col-lg-1" style="margin-left: 4rem;">
+                        <button disabled type="button" class="btn btn-danger btn-panel" id="elUsuario"><i class="far fa-trash-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('roles.index')
+                    <div class="col-4 col-sm-2 col-md-2 col-lg-2" style="margin-left: -1rem; margin-right: -3rem;">
+                        <button id="VerRolUsuario" disabled style="margin-right: -1rem; padding-right: 1rem; padding-left: 1rem;" type="button" class="btn btn-default btn-panel"><i class="fas fa-eye mt-0 mr-1"></i>Roles</button>
+                    </div>
+                @endcan
+                @can('usuarios.agregarrol')
+                    <div class="col-4 col-sm-2 col-md-2 col-lg-2" style="margin-left: 0rem;">
+                        <button id="AgregarRolUsuario" disabled style="margin-right: -1rem; padding-right: 1rem; padding-left: 1rem;" type="button" class="btn btn-primary btn-panel"><i class="fas fa-plus mt-0 mr-1"></i>Roles</button>
                     </div>
                 @endcan
             </div>
         </div>
+        <div class="container movil">
+            <div class="row mb-2">
+                <div class="col-12 text-center">
+                    <h5 style="position: relative; top: 1rem;">Administrar Usuarios</h5>
+                </div> 
+            </div>
+            <div class="row">
+                @can('usuarios.create')
+                    <div class="col-2">
+                        <button  type="button" class="btn btn-primary btn-panel" data-toggle="modal" data-target="#agregarUsuarioModal"><i class="fas fa-plus mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('usuarios.edit')
+                    <div class="col-2">
+                        <button disabled type="button" class="btn btn-default btn-panel" id="actUsuarioM"><i class="fas fa-pencil-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('usuarios.destroy')
+                    <div class="col-2">
+                        <button disabled type="button" class="btn btn-danger btn-panel" id="elUsuarioM"><i class="far fa-trash-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('roles.index')
+                    <div class="col-2">
+                        <button disabled style="margin-right: -1rem; padding-right: 1rem; padding-left: 1rem;" type=" disabled" class="btn btn-primary btn-panel" id="VerRolUsuarioM"><i class="fas fa-eye mt-0 mr-1"></i>Roles</button>
+                    </div>
+                @endcan
+                @can('usuarios.agregarrol')
+                    <div class="col-2">
+                        <button disabled style="margin-right: -1rem; padding-right: 1rem; padding-left: 1rem;" type="button" class="btn btn-primary btn-panel" id="AgregarRolUsuarioM"><i class="fas fa-plus mt-0 mr-1"></i>Roles</button>
+                    </div>
+                @endcan
+            </div>
+
+        </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de usuarios</h5>
-            <table class="table table-stripped table-hover">
-                <thead>
-                    <tr>
-                        <th style="width: 3rem;">ID</th>
-                        <th style="width: 14rem;">Nombre</th>
-                        <th style="width: 27rem;">Correo electrónico</th>
-                        <th colspan="4">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaUsuarios">
-                    
-                </tbody>
-            </table>
-            <!--<table class="table table-stripped table-hover">
-                <thead>
-                    <tr>
-                        <th style="width: 3rem;">ID</th>
-                        <th style="width: 14rem;">Nombre</th>
-                        <th style="width: 27rem;">Correo electrónico</th>
-                        <th colspan="2">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            @can('usuarios.edit')
-                                <a href="#" class="btn btn-sm btn-default">Editar</a> 
-                            @endcan
-                        </td> 
-                        <td>
-                            @can('usuarios.destroy')
-                                <a href="#" class="btn btn-sm btn-danger">Eliminar</a> 
-                            @endcan
-                        </td> 
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            {{ $users->render() }}-->
+            <h4 class="card-title text-center">Listado de usuarios</h4>
+            <div class="px-4">
+                <div class="table-wrapper table-responsive">
+                    <table id="tablaUsuarios" class="table table-hover table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo electrónico</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo electrónico</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
