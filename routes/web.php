@@ -126,3 +126,9 @@ Route::get('/reporte-producto','reportes\repInvPresController@inventarioPresenta
 
 Route::get('/reporte-producto/entradas-salidas/{fechaInicio}/{fechafin}/{impuesto}','reportes\repInvPresController@movimientosProducto');
 Route::get('reporte-producto/clientes/{fechaInicio}/{fechafin}','reportes/repInvPresController@mejorCliente');
+
+route::get('/prueba', function(){
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->stream();
+});

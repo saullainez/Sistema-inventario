@@ -69,6 +69,7 @@ class repInvController extends Controller
 
 
         //return response()->json($arreglo, 200);
+        /*
         return view(
             'reportes.movimientoActivo',
             [
@@ -82,6 +83,23 @@ class repInvController extends Controller
                 'resumenEntrada' => $resumenEntrada,
                 'resumenSalida' => $resumenSalida
             ]);
+            */
+            
+            $pdf = \PDF::loadView('reportes.movimientoActivo',
+            [
+                'movimientosEntrada'=>$movimientosEntrada,
+                'totalEntrada'=>$totalEntrada,
+                'movimientosSalida'=>$movimientosSalida,
+                'totalSalida'=>$totalSalida,
+                'impuesto'=>$impuesto,
+                'fechaInicio'=>$fechaInicio,
+                'fechaFin'=>$fechaFin,
+                'resumenEntrada' => $resumenEntrada,
+                'resumenSalida' => $resumenSalida
+            ]);
+        
+            $pdf->setPaper('a4','landscape');
+            return $pdf->stream();
             
     }
 
@@ -93,6 +111,7 @@ class repInvController extends Controller
             'fechaInicio'=>$fechaInicio,
             'fechaFin'=>$fechaFin
         ]);
+        return view('reportes.mejorProveedor',['proveedores'=>$proveedores]);
     }
     
 
