@@ -126,7 +126,7 @@ $(document).ready(function () {
         data = tabla.row(this).data();
         $("#actPermiso").attr('onClick', `modalEditarPermiso(${data.id}, '${data.name}', '${data.slug}', '${data.description}')`);
         $("#elPermiso").attr('onClick', `modalEliminarPermiso(${data.id})`);
-    } );
+    });
     $('.dataTables_length').addClass('bs-select');
     $("#permisos").addClass("active");
     $("#permisosMenu").addClass("active");

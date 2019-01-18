@@ -10,6 +10,7 @@ function modalEliminarUsuario(id){
     $("#eliminarUsuarioModal").modal();
 };
 function modalAgregarRolUsuario(id){
+    cargarRoles();
     $("#agregarRolUsuarioModal").modal();
     $("#agregarRol").attr('onClick', `agregarRol(${id})`);
 }
@@ -24,7 +25,7 @@ function agregarRol(id){
         roles: roles
     };
     $.ajax({
-        url: `/agregarrolusuario`,
+        url: `/agregarrol`,
         headers: {'X-CSRF-TOKEN': tokenAR},
         method: "POST",
         data: data,
@@ -33,14 +34,13 @@ function agregarRol(id){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarUsuarios();
         },
         error: function (error) {
             console.error(error);
         }
     });
 }
-function cargarUsuarios(){
+/*function cargarUsuarios(){
     $.ajax({
         url: `/obtenerusuarios`,
         method: "GET",
@@ -65,7 +65,7 @@ function cargarUsuarios(){
             console.error(error);
         }
     });
-};
+};*/
 function cargarRoles(){
     $.ajax({
         url: `/obtenerroles`,
@@ -125,7 +125,7 @@ function crearUsuario() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarUsuarios();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -149,7 +149,7 @@ function actualizarUsuario(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarUsuarios();
+            reload();
         },
         error: function(error){
             console.error(error);
@@ -171,7 +171,7 @@ function eliminarUsuario(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarUsuarios();
+            reload();
         },
         error: function(error){
             console.error(error);
@@ -179,9 +179,74 @@ function eliminarUsuario(id){
     });
 };
 
+function reload() {
+    $('#tablaUsuarios').DataTable().ajax.reload();
+    $("#actUsuario").attr("disabled", "true");
+    $("#elUsuario").attr("disabled", "true");
+    $("#VerRolUsuario").attr("disabled", "true");
+    $("#AgregarRolUsuario").attr("disabled", "true");
+    $("#actUsuarioM").attr("disabled", "true");
+    $("#elUsuarioM").attr("disabled", "true");
+    $("#VerRolUsuarioM").attr("disabled", "true");
+    $("#AgregarRolUsuarioM").attr("disabled", "true");
+
+}
+
 $(document).ready(function () {
+    $('#tablaUsuarios').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenerusuarios",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "email" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    var tabla = $('#tablaUsuarios').dataTable().api();
+    
+    $('#tablaUsuarios').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actUsuario").attr("disabled", "true");
+            $("#elUsuario").attr("disabled", "true");
+            $("#VerRolUsuario").attr("disabled", "true");
+            $("#AgregarRolUsuario").attr("disabled", "true");
+            $("#actUsuarioM").attr("disabled", "true");
+            $("#elUsuarioM").attr("disabled", "true");
+            $("#VerRolUsuarioM").attr("disabled", "true");
+            $("#AgregarRolUsuarioM").attr("disabled", "true");
+        }
+        else{
+            $("#actUsuario").removeAttr("disabled");
+            $("#elUsuario").removeAttr("disabled");
+            $("#VerRolUsuario").removeAttr("disabled");
+            $("#AgregarRolUsuario").removeAttr("disabled");
+            $("#actUsuarioM").removeAttr("disabled");
+            $("#elUsuarioM").removeAttr("disabled");
+            $("#VerRolUsuarioM").removeAttr("disabled");
+            $("#AgregarRolUsuarioM").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actUsuario").attr('onClick', `modalEditarUsuario(${data.id}, '${data.name}', '${data.email}')`);
+        $("#elUsuario").attr('onClick', `modalEliminarUsuario(${data.id})`);
+        $("#VerRolUsuario").attr('onClick', `cargarRolesDeUsuario(${data.id})`);
+        $("#AgregarRolUsuario").attr('onClick', `modalAgregarRolUsuario(${data.id})`);
+        $("#actUsuarioM").attr('onClick', `modalEditarUsuario(${data.id}, '${data.name}', '${data.email}')`);
+        $("#elUsuarioM").attr('onClick', `modalEliminarUsuario(${data.id})`);
+        $("#VerRolUsuarioM").attr('onClick', `cargarRolesDeUsuario(${data.id})`);
+        $("#AgregarRolUsuarioM").attr('onClick', `modalAgregarRolUsuario(${data.id})`);
+    });
     $("#usuarios").addClass("active");
     $("#usuariosMenu").addClass("active");
-    cargarUsuarios();
-    cargarRoles()
 })
