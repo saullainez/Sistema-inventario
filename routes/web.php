@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('/registro', function(){
     return view('formulario');
 });
+
+
 Route::resource('tipo-bebida', 'TipoBebidaController');
 Route::resource('presentacion', 'PresentacionController');
 Route::resource('producto', 'ProductoController');
@@ -117,4 +119,10 @@ Route::get('/reporte-inventario/entradas-salidas/{fechaInicio}/{fechaFin}',funct
     dd($fecha1);
 });
 */
-Route::get('/reporte-inventario/entradas-salidas/{fechaInicio}/{fechaFin}','reportes\repInvController@compraVentaInv');
+Route::get('/reporte-inventario/entradas-salidas/{fechaInicio}/{fechaFin}/{impuesto}','reportes\repInvController@compraVentaInv');
+Route::get('/reporte-inventario/proveedores/{fechaInicio}/{fechaFin}','reportes\repInvController@mejorProveedor');
+
+Route::get('/reporte-producto','reportes\repInvPresController@inventarioPresentacion');
+
+Route::get('/reporte-producto/entradas-salidas/{fechaInicio}/{fechafin}/{impuesto}','reportes\repInvPresController@movimientosProducto');
+Route::get('reporte-producto/clientes/{fechaInicio}/{fechafin}','reportes/repInvPresController@mejorCliente');
