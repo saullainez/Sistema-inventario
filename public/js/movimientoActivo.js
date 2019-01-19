@@ -1,4 +1,4 @@
-function modalEditarMovimiento(id,activoId,Descripcion,fecha,
+function modalEditarMovimientoActivo(id,activoId,Descripcion,fecha,
     cantidad,monto,proveedor,movimientoConceptoId){
         $("#NuevoActivoId").val(activoId);
         $("#NuevaDescripcion").val(Descripcion);
@@ -88,42 +88,6 @@ function cargarConceptos(){
     });
 }
 
-function cargarMovimientos(){
-
-    $.ajax({
-        url:'/obtenermovimientoactivos',
-        method:"GET",
-        dataType:'json',
-        success: function (res) {
-            $("#tablaMovimientoActivos").html(" ");
-            for(var i = 0; i < res.length; i++){
-                $("#tablaMovimientoActivos").append(
-                    `<tr>
-                        <td>${res[i].MovimientoActivoId}</td>
-                        <td>${res[i].ActivoNombre}</td>
-                        <td>${res[i].Descripcion}</td>
-                        <td>${res[i].Fecha}</td>
-                        <td>${res[i].Cantidad}</td>
-                        <td>${res[i].Monto}</td>
-                        <td>${res[i].EmpresaNombre}</td>
-                        <td>${res[i].Nombre}</td>
-                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimiento(${res[i].MovimientoActivoId},${res[i].ActivoId},'${res[i].Descripcion}',
-                            '${res[i].Fecha}',${res[i].Cantidad},
-                            ${res[i].Monto},${res[i].ProveedorId},
-                            ${res[i].MovimientoConceptoId})">Editar</a></td>
-                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoActivo(${res[i].MovimientoActivoId})">Eliminar</a></td>
-
-                    </tr>`
-                )
-            }
-        },
-        error:function(error){
-            console.error(error);
-        }
-    });
-
-}
-
 function crearMovimientoActivo(){
     var tokenAgregar = $("#tokenAgregar").val();
     var data = {
@@ -146,7 +110,7 @@ function crearMovimientoActivo(){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();
+            reload();
         },
         error:function(error){
             console.error(error);
@@ -177,7 +141,7 @@ function actualizarMovimiento(id){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();
+            reload();
         },
         error:function(error){
             console.error(error);
@@ -201,18 +165,67 @@ function eliminarMovimiento(id){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();
+            reload();
         },
         error: function(error){
             console.error(error);
         }
     });
 }
+function reload() {
+    $('#tablaMovimientoActivos').DataTable().ajax.reload();
+    $("#actMovimientoActivo").attr("disabled", "true");
+    $("#elMovimientoActivo").attr("disabled", "true");
+}
 
 $(document).ready(function () {
+    $('#tablaMovimientoActivos').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenermovimientoactivos",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "MovimientoActivoId" },
+            { "data": "ActivoNombre" },
+            { "data": "Descripcion" },
+            { "data": "Fecha" },
+            { "data": "Cantidad" },
+            { "data": "Monto" },
+            { "data": "EmpresaNombre" },
+            { "data": "Nombre" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaMovimientoActivos').dataTable().api();
+    
+    $('#tablaMovimientoActivos').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actMovimientoActivo").attr("disabled", "true");
+            $("#elMovimientoActivo").attr("disabled", "true");
+        }
+        else{
+            $("#actMovimientoActivo").removeAttr("disabled");
+            $("#elMovimientoActivo").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actMovimientoActivo").attr('onClick', `modalEditarMovimientoActivo(${data.MovimientoActivoId},${data.ActivoId},'${data.Descripcion}',
+        '${data.Fecha}',${data.Cantidad},
+        ${data.Monto},${data.ProveedorId},
+        ${data.MovimientoConceptoId})`);
+        $("#elMovimientoActivo").attr('onClick', `modalEliminarMovimientoActivo(${data.MovimientoActivoId})`);
+    });
     $("#movimientos").addClass("active");
     $("#movimientosMenu").addClass("active");
-    cargarMovimientos();
     cargarProveedores();
     cargarActivos();
     cargarConceptos();

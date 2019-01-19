@@ -45,7 +45,7 @@
         </div>
 
         <div class="card-body">
-            <h4 class="card-title">Listado de conceptos</h4>
+            <h4 class="card-title text-center">Listado de conceptos</h4>
             <div class="px-4">
                 <div class="table-wrapper table-responsive">
                     <table id="tablaMovimientoConceptos" class="table table-hover table-bordered" cellspacing="0" width="100%">
