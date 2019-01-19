@@ -17,7 +17,10 @@ class repPresController extends Controller
         ->join('activos as a','p.ActivoId','=','a.ActivoId')
         ->join('productos as p2','p.ProductoId','=','p2.ProductoId')
         ->get();
-        return view('reportes.inventarioPresentacion',['inventario'=>$inventario]);
+        $pdf = \PDF::loadView('reportes.inventarioPresentacion',['inventario'=>$inventario]);
+
+        return $pdf->stream();
+       // return view('reportes.inventarioPresentacion',['inventario'=>$inventario]);
     }
 
     public function movimientosProducto($fechaInicio, $fechaFin,$impuesto){
@@ -53,6 +56,21 @@ class repPresController extends Controller
         $resumenSalida = DB::select('call reporte_resumen_mov_producto(?,?,?)',
         [$fechaInicio,$fechaFin,'salida'] );
 
+        $pdf = \PDF::loadView('reportes.movimientoProducto',
+        [
+            'movimientosEntrada'=>$movimientosEntrada,
+            'totalEntrada'=>$totalEntrada,
+            'movimientosSalida'=>$movimientosSalida,
+            'totalSalida'=>$totalSalida,
+            'impuesto'=>$impuesto,
+            'fechaInicio'=>$fechaInicio,
+            'fechaFin'=>$fechaFin,
+            'resumenEntrada' => $resumenEntrada,
+            'resumenSalida' => $resumenSalida
+        ]);
+        $pdf->setPaper('a4','landscape');
+        return $pdf->stream();
+        /*
         return view(
             'reportes.movimientoProducto',
             [
@@ -66,10 +84,14 @@ class repPresController extends Controller
                 'resumenEntrada' => $resumenEntrada,
                 'resumenSalida' => $resumenSalida
             ]);
+            */
     }
 
     public function mejorCliente($fechaInicio, $fechaFin){
         $clientes = DB::select('call reporte_mejor_cliente(?,?)', [$fechaInicio,$fechaFin]);
-        return view('reportes.mejorCliente',['clientes'=>$clientes,'fechaInicio'=>$fechaInicio, 'fechaFin'=>$fechaFin]);
+        $pdf = \PDF::loadView('reportes.mejorCliente',['clientes'=>$clientes,'fechaInicio'=>$fechaInicio, 'fechaFin'=>$fechaFin]);
+       
+        return $pdf->stream();
+       // return view('reportes.mejorCliente',['clientes'=>$clientes,'fechaInicio'=>$fechaInicio, 'fechaFin'=>$fechaFin]);
     }
 }

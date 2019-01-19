@@ -3,25 +3,26 @@
 
     <div class="container">
             <h4 style="text-align:center;">Reporte de movimiento de productos</h4>
-            <h4 style="text-align:center;">Desde:{{$fechaInicio}} - Hasta:{{$fechaFin}}</h4>
-
+            <h5 style="text-align:center;">Desde:{{$fechaInicio}} - Hasta:{{$fechaFin}}</h5>
+            <br>
             <h4>Movimientos de entrada</h4>
             <table class="table table-sm">
                 <thead>
-                    <th>PresentacionId</th>
-                    <th>Producto</th>
-                    <th>Activo</th>
-                    <th>Descripcion movimiento</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Cliente</th>
-                    <th>Movimiento</th>
-                    <th>Monto</th>
+                    <tr>
+                        <th>PresentacionId</th>
+                        <th>Producto</th>
+                        <th>Activo</th>
+                        <th>Descripcion movimiento</th>
+                        <th>Fecha</th>
+                        <th>Cantidad</th>
+                        <th>Cliente</th>
+                        <th>Movimiento</th>
+                        <th>Monto</th>
+                    </tr>
+
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
+ 
                     @foreach ($movimientosEntrada as $movimiento)
                     <tr>
                         <td>{{$movimiento->PresentacionId}}</td>
@@ -44,17 +45,18 @@
             <h4>Resumen Movimientos producto Tipo Entrada</h4>
             <table class="table table-sm">
                 <thead>
-                    <th>PresentacionId</th>
-                    <th>Producto</th>
-                    <th>Activo</th>
-                    <th>Movimiento</th>
-                    <th>Cantidad movimientos</th>
-                    <th>Total generado por movimiento</th>
+                    <tr>
+                        <th>PresentacionId</th>
+                        <th>Producto</th>
+                        <th>Activo</th>
+                        <th>Movimiento</th>
+                        <th>Cantidad movimientos</th>
+                        <th>Total generado por movimiento</th>
+                    </tr>
+
                 </thead>
                 <tbody>
-                        <tr>
-                                <td>&nbsp;</td>
-                            </tr>
+
                     @foreach ($resumenEntrada as $movimiento)
                         <tr>
                             <td>{{$movimiento->PresentacionId}}</td>
@@ -73,20 +75,21 @@
             
             <table class="table table-sm">
                 <thead>
-                    <th>PresentacionId</th>
-                    <th>ProductoNombre</th>
-                    <th>ActivoNombre</th>
-                    <th>Descripcion movimiento</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Cliente</th>
-                    <th>Movimiento</th>
-                    <th>Monto</th>
+                    <tr>
+                        <th>PresentacionId</th>
+                        <th>ProductoNombre</th>
+                        <th>ActivoNombre</th>
+                        <th>Descripcion movimiento</th>
+                        <th>Fecha</th>
+                        <th>Cantidad</th>
+                        <th>Cliente</th>
+                        <th>Movimiento</th>
+                        <th>Monto</th>
+                    </tr>
+
                 </thead>
                 <tbody>
-                        <tr>
-                                <td>&nbsp;</td>
-                            </tr>
+
                     @foreach ($movimientosSalida as $movimiento)
                     <tr>
                         <td>{{$movimiento->PresentacionId}}</td>
@@ -109,17 +112,18 @@
             <h4>Resumen Movimientos productos Tipo Salida</h4>
             <table class="table table-sm">
                 <thead>
-                    <th>PresentacionId</th>
-                    <th>Producto</th>
-                    <th>Activo</th>
-                    <th>Movimiento</th>
-                    <th>Cantidad movimientos</th>
-                    <th>Total generado por movimiento</th>
+                    <tr>
+                        <th>PresentacionId</th>
+                        <th>Producto</th>
+                        <th>Activo</th>
+                        <th>Movimiento</th>
+                        <th>Cantidad movimientos</th>
+                        <th>Total generado por movimiento</th>
+                    </tr>
+
                 </thead>
                 <tbody>
-                        <tr>
-                                <td>&nbsp;</td>
-                            </tr>
+
                     @foreach ($resumenEntrada as $movimiento)
                         <tr>
                             <td>{{$movimiento->PresentacionId}}</td>
