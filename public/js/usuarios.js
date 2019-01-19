@@ -163,7 +163,6 @@ function reload() {
     $("#elUsuarioM").attr("disabled", "true");
     $("#VerRolUsuarioM").attr("disabled", "true");
     $("#AgregarRolUsuarioM").attr("disabled", "true");
-
 }
 
 $(document).ready(function () {

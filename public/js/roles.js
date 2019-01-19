@@ -10,37 +10,6 @@ function modalEliminarRol(id){
     $("#borrarRol").attr('onClick', `eliminarRol(${id})`);
     $("#eliminarRolModal").modal();
 };
-function modalAgregarPermisoRol(id){
-    $("#agregarPermisoRolModal").modal();
-    $("#agregarPermiso").attr('onClick', `agregarPermiso(${id})`);
-}
-function cargarRoles(){
-    $.ajax({
-        url: `/obtenerroles`,
-        method: "GET",
-        dataType: "json",
-        success: function (res) {
-            $("#tablaRoles").html(" ");
-            for (var i = 0; i < res.length; i++) {
-                $("#tablaRoles").append(`
-                <tr>
-                    <td>${res[i].id}</td>
-                    <td>${res[i].name}</td>
-                    <td>${res[i].slug}</td>
-                    <td>${res[i].description}</td>
-                    <td>${res[i].special}</td>
-                    <td><a onclick="modalEditarRol(${res[i].id}, '${res[i].name}', '${res[i].slug}', '${res[i].description}', '${res[i].special}');" class="btn btn-sm btn-default" style="padding: 0.5rem 0.8rem;">Editar</a></td>
-                    <td><a onclick="cargarPermisosDeRol(${res[i].id});" class="btn btn-sm btn-default" style="width: 7.62rem; padding: 0.5rem 0.8rem;">Ver permisos</a></td>
-                    <td><a onclick="modalAgregarPermisoRol(${res[i].id});" class="btn btn-sm btn-default" style="width: 8.736rem; padding: 0.5rem 0.8rem;">Añadir permisos</a></td>
-                    <td><a onclick="modalEliminarRol(${res[i].id});" class="btn btn-sm btn-danger" style="padding: 0.5rem 0.8rem;">Eliminar</a></td>
-                </tr>`);
-            }
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
-};
 
 function agregarPermiso(id){
     var permisos = [];
@@ -53,7 +22,7 @@ function agregarPermiso(id){
         permissions: permisos
     };
     $.ajax({
-        url: `/agregarpermisorol`,
+        url: `/agregarpermiso`,
         headers: {'X-CSRF-TOKEN': tokenAP},
         method: "POST",
         data: data,
@@ -62,7 +31,7 @@ function agregarPermiso(id){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarUsuarios();
+            limpiar();
         },
         error: function (error) {
             console.error(error);
@@ -80,10 +49,11 @@ function cargarPermisos(){
             for (var i = 0; i < res.length; i++) {
                 $("#listaPermisos").append(`
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="${res[i].id}" value="${res[i].id}">
+                        <input type="checkbox" class="custom-control-input" id="${res[i].id}" value="${res[i].id}" name="${res[i].slug}">
                         <label class="custom-control-label" for="${res[i].id}">${res[i].name}</label>
                     </div>`);
             }
+
         },
         error: function (error) {
             console.error(error);
@@ -103,10 +73,54 @@ function cargarPermisosDeRol(id){
         success: function (res) {
             $("#verPermisos").html(" ");
             for (var i = 0; i < res.length; i++) {
+
                 $("#verPermisos").append(`
                     <h4>${res[i]}</h4>`);
             };
             $("#verPermisoRolModal").modal();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+};
+function llenarPermisosDeRol(id){
+    limpiar();
+    var permisos = [];
+    var data = {
+        id: id
+    };
+    $.ajax({
+        url: `/obtenerpermisorol`,
+        method: "GET",
+        data: data,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            for (var i = 0; i < res.length; i++) {
+                permisos.push(res[i]);
+                /*permisos.push(res[i]);
+                alert(permisos[i]);*/
+            };
+            $(`input[type=checkbox]`).each(function(index){
+                //console.log("Nombre: " + this.name);
+                for (var i = 0; i < permisos.length; i++){
+                    //console.log("Permiso: " + permisos[i])
+                    if(this.name == permisos[i]){
+                        //console.log("Permisos " + permisos[i]);
+                        $(`input:checkbox[name="${permisos[i]}"]`).attr('checked', 'true');
+                        //$(`input[type=checkbox name="${permisos[index]}"]`).attr('checked', 'true');
+                        //$("input[type=checkbox]").attr('checked', 'true');
+                    }
+                }
+                
+
+
+                    
+                //$("input[type=checkbox]").attr('checked', 'true');
+            });
+            $("#agregarPermisoRolModal").modal();
+            $("#agregarPermiso").attr('onClick', `agregarPermiso(${id})`);
         },
         error: function (error) {
             console.error(error);
@@ -132,7 +146,7 @@ function crearRol() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarRoles();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -159,7 +173,7 @@ function actualizarRol(id) {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarRoles();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -181,7 +195,7 @@ function eliminarRol(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarRoles();
+            reload();
         },
         error: function(error){
             console.error(error);
@@ -189,9 +203,84 @@ function eliminarRol(id){
     });
 };
 
+function reload() {
+    $('#tablaRoles').DataTable().ajax.reload();
+    $("#actRol").attr("disabled", "true");
+    $("#elRol").attr("disabled", "true");
+    $("#VerPermisoRol").attr("disabled", "true");
+    $("#AgregarPermisoRol").attr("disabled", "true");
+    $("#actRolM").attr("disabled", "true");
+    $("#elRolM").attr("disabled", "true");
+    $("#VerPermisoRolM").attr("disabled", "true");
+    $("#AgregarPermisoRolM").attr("disabled", "true");
+}
+function limpiar(){
+    $(`input:checkbox`).each(function(){
+        if($(this).is(':checked')){
+            console.log($(this).value);
+            $(this).attr('checked', false);
+        }
+    });
+}
+
 $(document).ready(function () {
+    $('#tablaRoles').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenerroles",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "id" },
+            { "data": "name" },
+            { "data": "slug" },
+            { "data": "description" },
+            { "data": "special" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    var tabla = $('#tablaRoles').dataTable().api();
+    
+    $('#tablaRoles').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actRol").attr("disabled", "true");
+            $("#elRol").attr("disabled", "true");
+            $("#VerPermisoRol").attr("disabled", "true");
+            $("#AgregarPermisoRol").attr("disabled", "true");
+            $("#actRolM").attr("disabled", "true");
+            $("#elRolM").attr("disabled", "true");
+            $("#VerPermisoRolM").attr("disabled", "true");
+            $("#AgregarPermisoRolM").attr("disabled", "true");
+        }
+        else{
+            $("#actRol").removeAttr("disabled");
+            $("#elRol").removeAttr("disabled");
+            $("#VerPermisoRol").removeAttr("disabled");
+            $("#AgregarPermisoRol").removeAttr("disabled");
+            $("#actRolM").removeAttr("disabled");
+            $("#elRolM").removeAttr("disabled");
+            $("#VerPermisoRolM").removeAttr("disabled");
+            $("#AgregarPermisoRolM").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actRol").attr('onClick', `modalEditarRol(${data.id}, '${data.name}', '${data.slug}', '${data.description}', '${data.special}')`);
+        $("#elRol").attr('onClick', `modalEliminarRol(${data.id})`);
+        $("#VerPermisoRol").attr('onClick', `cargarPermisosDeRol(${data.id})`);
+        $("#AgregarPermisoRol").attr('onClick', `llenarPermisosDeRol(${data.id})`);
+        $("#actRolM").attr('onClick', `modalEditarRol(${data.id}, '${data.name}', '${data.slug}', '${data.description}', '${data.special}')`);
+        $("#elRolM").attr('onClick', `modalEliminarRol(${data.id})`);
+        $("#VerPermisoRolM").attr('onClick', `cargarPermisosDeRol(${data.id})`);
+        $("#AgregarPermisoRolM").attr('onClick', `llenarPermisosDeRol(${data.id})`);
+    });
     $("#roles").addClass("active");
     $("#rolesMenu").addClass("active");
-    cargarRoles();
     cargarPermisos();
 })

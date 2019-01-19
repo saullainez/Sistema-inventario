@@ -48,7 +48,7 @@ Route::get('/obtenerrolsusuario', 'UserController@verRolUsuario');
 Route::get('/obtenerroles', 'RoleController@obtenerRoles');
 Route::put('/actualizarrol', 'RoleController@actualizarRol');
 Route::delete('/eliminarrol', 'RoleController@eliminarRol');
-Route::post('/agregarpermisorol', 'RoleController@agregarPermisoRol');
+Route::post('/agregarpermiso', 'RoleController@agregarPermisoRol');
 Route::get('/obtenerpermisorol', 'RoleController@verPermisoRol');
 
 Route::get('/obtenerpermisos', 'PermisosController@obtenerPermisos');
