@@ -39,7 +39,7 @@
                         <button disabled type="button" class="btn btn-danger btn-panel" id="elEmpresa"><i class="far fa-trash-alt mt-0"></i></button>
                     </div>
                 @endcan
-                @can('empresa.destroy')
+                @can('empresa.index')
                     <div class="col-4 col-sm-4 col-md-2 col-lg-2" style="margin-left: -3.7rem;">
                         <button disabled style="padding-right: 0.7rem; padding-left: 0.7rem;" type="button" class="btn btn-default btn-panel" id="verContacto"><i class="fas fa-eye mt-0 mr-1"></i>Contacto</button>
                     </div>
