@@ -8,29 +8,6 @@ function modalEliminarTipoBebida(id){
     $("#borrarTipoBebida").attr('onClick', `eliminarTipoBebida(${id})`);
     $("#eliminarTipoBebidaModal").modal();
 };
-function cargarTipoBebida(){
-    $.ajax({
-        url: `/obtenertipobebida`,
-        method: "GET",
-        dataType: "json",
-        success: function (res) {
-            $("#tablaTipoBebida").html(" ");
-            for (var i = 0; i < res.length; i++) {
-                $("#tablaTipoBebida").append(`
-                <tr>
-                    <td>${res[i].TipoBebidaId}</td>
-                    <td>${res[i].nombre}</td>
-                    <td><a onclick="modalEditarTipoBebida(${res[i].TipoBebidaId}, '${res[i].nombre}');" class="btn btn-sm btn-default">Editar</a></td>
-                    <td><a onclick="modalEliminarTipoBebida(${res[i].TipoBebidaId});" class="btn btn-sm btn-danger">Eliminar</a></td>
-                </tr>`);
-            }
-            
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
-};
 function crearTipoBebida() {
     var tokenAgregar = $("#tokenAgregar").val();
     var data = {
@@ -46,7 +23,7 @@ function crearTipoBebida() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarTipoBebida();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -68,7 +45,7 @@ function actualizarTipoBebida(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarTipoBebida();
+            reload();
         },
         error: function(error){
             console.error(error);
@@ -89,15 +66,56 @@ function eliminarTipoBebida(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarTipoBebida();
+            reload();
         },
         error: function(error){
             console.error(error);
         }
     });
 };
+function reload() {
+    $('#tablaTipoBebida').DataTable().ajax.reload();
+    $("#actTipoBebida").attr("disabled", "true");
+    $("#elTipoBebida").attr("disabled", "true");
+
+}
 $(document).ready(function () {
+    $('#tablaTipoBebida').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenertipobebida",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "TipoBebidaId" },
+            { "data": "nombre" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaTipoBebida').dataTable().api();
+    
+    $('#tablaTipoBebida').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actTipoBebida").attr("disabled", "true");
+            $("#elTipoBebida").attr("disabled", "true");
+        }
+        else{
+            $("#actTipoBebida").removeAttr("disabled");
+            $("#elTipoBebida").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actTipoBebida").attr('onClick', `modalEditarTipoBebida(${data.TipoBebidaId}, '${data.nombre}')`);
+        $("#elTipoBebida").attr('onClick', `modalEliminarTipoBebida(${data.TipoBebidaId})`);
+    });
     $("#tb").addClass("active");
     $("#tbMenu").addClass("active");
-    cargarTipoBebida();
 });

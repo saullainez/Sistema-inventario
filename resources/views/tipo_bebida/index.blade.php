@@ -21,32 +21,46 @@
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
-                <div class="col-6 col-sm-7 col-md-8">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-6">
                     <h5 style="position: relative; top: 1rem;">Administrar Tipos de bebida</h5>
                 </div> 
-                @can('roles.create')
-                    <div class="col-6 col-sm-5 col-md-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarTipoBebidaModal">Agregar tipo de bebida</button>
+                @can('tipo-bebida.create')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem; margin-right: -1rem;">
+                        <button type="button" class="btn btn-primary btn-panel1" data-toggle="modal" data-target="#agregarTipoBebidaModal"><i class="fas fa-plus mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('tipo-bebida.edit')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-right: -3rem;">
+                        <button disabled type="button" class="btn btn-default btn-panel1" id="actTipoBebida"><i class="fas fa-pencil-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('tipo-bebida.destroy')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem;">
+                        <button disabled type="button" class="btn btn-danger btn-panel1" id="elTipoBebida"><i class="far fa-trash-alt mt-0"></i></button>
                     </div>
                 @endcan
             </div>
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de tipos de bebidas</h5>
-            <div class="table-responsive">
-                <table class="table table-stripped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 6rem;">ID</th>
-                            <th style="width: 35rem;">Nombre</th>
-                            <th colspan="2">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaTipoBebida">
-                        
-                    </tbody>
-                </table>
+            <h4 class="card-title text-center">Listado de tipos de bebidas</h4>
+            <div class="px-4">
+                <div class="table-wrapper table-responsive">
+                    <table id="tablaTipoBebida" class="table table-hover table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
