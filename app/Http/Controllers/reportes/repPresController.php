@@ -20,10 +20,10 @@ class repPresController extends Controller
         return view('reportes.inventarioPresentacion',['inventario'=>$inventario]);
     }
 
-    public function movimientosProducto($fechaInicio, $fechafin,$impuesto){
+    public function movimientosProducto($fechaInicio, $fechaFin,$impuesto){
 
-        $movimientosEntrada = DB::select('call reportes_movimiento_producto(?,?,?)', 
-        [$fechaInicio,$fechafin,'entrada']);
+        $movimientosEntrada = DB::select('call reporte_movimiento_producto(?,?,?)', 
+        [$fechaInicio,$fechaFin,'entrada']);
 
         $totalEntrada = DB::table('movimiento_productos as mp')
         ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
@@ -35,8 +35,8 @@ class repPresController extends Controller
         ])
         ->sum('mp.Monto');
 
-        $movimientosSalida = DB::select('call reportes_movimiento_producto(?,?,?)', 
-        [$fechaInicio,$fechafin,'salida']);
+        $movimientosSalida = DB::select('call reporte_movimiento_producto(?,?,?)', 
+        [$fechaInicio,$fechaFin,'salida']);
         $totalSalida = DB::table('movimiento_productos as mp')
         ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
         ->whereraw('mp.Fecha >= ? and mp.Fecha <= ? and mc.TipoMovimiento = ?',
@@ -47,11 +47,11 @@ class repPresController extends Controller
         ])
         ->sum('mp.Monto');
 
-        $resumenEntrada = DB::select('call reportes_resumen_mov_producto(?,?,?)',
-        [$fechaInicio,$fechafin,'entrada'] );
+        $resumenEntrada = DB::select('call reporte_resumen_mov_producto(?,?,?)',
+        [$fechaInicio,$fechaFin,'entrada'] );
 
-        $resumenSalida = DB::select('call reportes_resumen_mov_producto(?,?,?)',
-        [$fechaInicio,$fechafin,'salida'] );
+        $resumenSalida = DB::select('call reporte_resumen_mov_producto(?,?,?)',
+        [$fechaInicio,$fechaFin,'salida'] );
 
         return view(
             'reportes.movimientoProducto',

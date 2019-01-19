@@ -1,22 +1,25 @@
 @extends('layouts.reporte')
 @section('content')
 
-    <div class="container">
-            <h2 style="text-align:center;">Reporte de movimiento de activos</h2>
-            <h2 style="text-align:center;">Desde:{{$fechaInicio}}</h2>
-            <h2 style="text-align:center;">Hasta:{{$fechaFin}}</h2>
-            <h4>Movimientos de entrada</h4>
-            <table class="table table-bordered">
+   
+            <h4 style="text-align:center;">Reporte de movimiento de activos</h4>
+            <h4 style="text-align:center;">Desde:{{$fechaInicio}} - Hasta:{{$fechaFin}}</h4>
+
+            <h5>Movimientos de entrada</h5>
+            <table class="table table-sm" style="font-size:10px;">
                 <thead>
-                    <th>Activo</th>
-                    <th>Descripcion movimiento</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Empresa</th>
-                    <th>Movimiento</th>
-                    <th>Monto</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Descripcion movimiento</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Movimiento</th>
+                    <th scope="col">Monto</th>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
                     @foreach ($movimientosEntrada as $movimiento)
                     <tr>
                         <td>{{$movimiento->ActivoNombre}}</td>
@@ -34,15 +37,19 @@
                     </tr>
                 </tbody>
             </table>
-            <h4>Resumen Movimientos Activo Tipo Entrada</h4>
-            <table class="table table-bordered">
+            <h5>Resumen Movimientos Activo Tipo Entrada</h5>
+            <table class="table table-sm">
                 <thead>
-                    <th>Activo</th>
-                    <th>Movimiento</th>
-                    <th>Cantidad movimientos</th>
-                    <th>Total generado por movimiento</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Movimiento</th>
+                    <th scope="col">Cantidad movimientos</th>
+                    <th scope="col">Total generado por movimiento</th>
                 </thead>
+  
                 <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
                     @foreach ($resumenEntrada as $movimiento)
                         <tr>
                             <td>{{$movimiento->ActivoNombre}}</td>
@@ -55,18 +62,22 @@
         
             </table>
         
-            <h4>Movimientos de salida</h4>
-            <table class="table table-bordered">
+            <h5>Movimientos de salida</h5>
+            <table class="table table-sm">
                 <thead>
-                    <th>Activo</th>
-                    <th>Descripcion movimiento</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Empresa</th>
-                    <th>Movimiento</th>
-                    <th>Monto</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Descripcion movimiento</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Empresa</th>
+                    <th scope="col">Movimiento</th>
+                    <th scope="col">Monto</th>
                 </thead>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>  
                 <tbody>
+     
                     @foreach ($movimientosSalida as $movimiento)
                     <tr>
                         <td>{{$movimiento->ActivoNombre}}</td>
@@ -84,15 +95,18 @@
                     </tr>
                 </tbody>
             </table>
-            <h4>Resumen Movimientos Activo Tipo Salida</h4>
-            <table class="table table-bordered">
+            <h5>Resumen Movimientos Activo Tipo Salida</h5>
+            <table class="table table-sm">
                 <thead>
-                    <th>Activo</th>
-                    <th>Movimiento</th>
-                    <th>Cantidad movimientos</th>
-                    <th>Total generado por movimiento</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Movimiento</th>
+                    <th scope="col">Cantidad movimientos</th>
+                    <th scope="col">Total generado por movimiento</th>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
                     @foreach ($resumenSalida as $movimiento)
                         <tr>
                             <td>{{$movimiento->ActivoNombre}}</td>
@@ -107,7 +121,7 @@
         
            
             <div>
-                <table class="table table-bordered">
+                <table class="table table-sm">
                     <tr>
                         <th>Impuesto por venta</th>
                         <td> {{$impuesto}}</td>
@@ -123,6 +137,6 @@
                 </table>
             
             </div>  
-    </div>
+
    
 @endsection

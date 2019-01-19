@@ -122,10 +122,10 @@ Route::get('/reporte-inventario/entradas-salidas/{fechaInicio}/{fechaFin}',funct
 Route::get('/reporte-inventario/entradas-salidas/{fechaInicio}/{fechaFin}/{impuesto}','reportes\repInvController@compraVentaInv');
 Route::get('/reporte-inventario/proveedores/{fechaInicio}/{fechaFin}','reportes\repInvController@mejorProveedor');
 
-Route::get('/reporte-producto','reportes\repInvPresController@inventarioPresentacion');
+Route::get('/reporte-producto','reportes\repPresController@inventarioPresentacion');
 
-Route::get('/reporte-producto/entradas-salidas/{fechaInicio}/{fechafin}/{impuesto}','reportes\repInvPresController@movimientosProducto');
-Route::get('reporte-producto/clientes/{fechaInicio}/{fechafin}','reportes/repInvPresController@mejorCliente');
+Route::get('/reporte-producto/entradas-salidas/{fechaInicio}/{fechafin}/{impuesto}','reportes\repPresController@movimientosProducto');
+Route::get('reporte-producto/clientes/{fechaInicio}/{fechafin}','reportes\repPresController@mejorCliente');
 
 route::get('/prueba', function(){
     $pdf = App::make('dompdf.wrapper');

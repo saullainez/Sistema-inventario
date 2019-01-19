@@ -2,8 +2,8 @@
 @section('content')
 
 <div class="container">
-    <h2 style="text-align:center;">Reporte de inventario de presentacion disponible</h2>
-    <table class="table table-bordered">
+    <h4 style="text-align:center;">Reporte de inventario de presentacion disponible</h4>
+    <table class="table table-sm">
         <thead>
             <th>PresentacionId</th>
             <th>ProductoNombre</th>
@@ -11,12 +11,12 @@
             <th>Cantidad</th>
         </thead>
         <tbody>
-            @foreach ($inventarios as $inventario)
+            @foreach ($inventario as $inv)
                 <tr>
-                    <td>{{$inventario->PresentacionId}}</td>
-                    <td>{{$inventario->ProductoNombre}}</td>
-                    <td>{{$inventario->ActivoNombre}}</td>
-                    <td>{{$inventario->Cantidad}}</td>
+                    <td>{{$inv->PresentacionId}}</td>
+                    <td>{{$inv->ProductoNombre}}</td>
+                    <td>{{$inv->ActivoNombre}}</td>
+                    <td>{{$inv->Cantidad}}</td>
                 </tr>
             @endforeach
         </tbody>
