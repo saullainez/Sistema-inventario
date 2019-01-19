@@ -21,33 +21,48 @@
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
-                <div class="col-6 col-sm-7 col-md-8">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-6">
                     <h5 style="position: relative; top: 1rem;">Administrar Presentaciones</h5>
                 </div> 
                 @can('presentacion.create')
-                    <div class="col-6 col-sm-5 col-md-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarPresentacionModal">Agregar presentacion</button>
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem; margin-right: -1rem;">
+                        <button type="button" class="btn btn-primary btn-panel1" data-toggle="modal" data-target="#agregarPresentacionModal"><i class="fas fa-plus mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('presentacion.edit')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-right: -3rem;">
+                        <button disabled type="button" class="btn btn-default btn-panel1" id="actPresentacion"><i class="fas fa-pencil-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('presentacion.destroy')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem;">
+                        <button disabled type="button" class="btn btn-danger btn-panel1" id="elPresentacion"><i class="far fa-trash-alt mt-0"></i></button>
                     </div>
                 @endcan
             </div>
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de presentaciones</h5>
-            <div class="table-responsive">
-                <table class="table table-stripped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 6rem;">ID</th>
-                            <th style="width: 35rem;">Producto</th>
-                            <th style="width: 35rem;">Envase</th>
-                            <th colspan="2">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaPresentacion">
-                        
-                    </tbody>
-                </table>
+            <h4 class="card-title text-center">Listado de presentaciones</h4>
+            <div class="px-4">
+                <div class="table-wrapper table-responsive">
+                    <table id="tablaPresentacion" class="table table-hover table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Envase</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Envase</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

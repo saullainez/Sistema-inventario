@@ -9,7 +9,7 @@ function modalEliminarPresentacion(id){
     $("#borrarPresentacion").attr('onClick', `eliminarPresentacion(${id})`);
     $("#eliminarPresentacionModal").modal();
 };
-function cargarPresentaciones(){
+/*function cargarPresentaciones(){
     $.ajax({
         url: `/obtenerpresentaciones`,
         method: "GET",
@@ -32,7 +32,7 @@ function cargarPresentaciones(){
             console.error(error);
         }
     });
-};
+};*/
 function cargarActivos(){
     $.ajax({
         url: `/obteneractivos`,
@@ -91,7 +91,7 @@ function crearPresentacion() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarPresentaciones();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -115,7 +115,7 @@ function actualizarPresentacion(id) {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarPresentaciones();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -136,17 +136,59 @@ function eliminarPresentacion(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarPresentaciones();
+            reload();
         },
         error: function(error){
             console.error(error);
         }
     });
 };
+function reload() {
+    $('#tablaPresentacion').DataTable().ajax.reload();
+    $("#actPresentacion").attr("disabled", "true");
+    $("#elPresentacion").attr("disabled", "true");
+}
 $(document).ready(function () {
+    $('#tablaPresentacion').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenerpresentaciones",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "PresentacionId" },
+            { "data": "producto" },
+            { "data": "envase" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaPresentacion').dataTable().api();
+    
+    $('#tablaPresentacion').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actPresentacion").attr("disabled", "true");
+            $("#elPresentacion").attr("disabled", "true");
+        }
+        else{
+            $("#actPresentacion").removeAttr("disabled");
+            $("#elPresentacion").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actPresentacion").attr('onClick', `modalEditarPresentacion(${data.PresentacionId}, '${data.ProductoId}', '${data.ActivoId}')`);
+        $("#elPresentacion").attr('onClick', `modalEliminarPresentacion(${data.PresentacionId})`);
+    });
     $("#presentacion").addClass("active");
     $("#presentacionMenu").addClass("active");
-    cargarPresentaciones();
+    //cargarPresentaciones();
     cargarActivos();
     cargarProductos();
 });

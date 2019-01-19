@@ -25,7 +25,7 @@ class CreateMovimientoProductosTable extends Migration
             $table->double('Monto')->nullable();
             $table->timestamps();
 
-            $table->foreign('PresentacionId')->references('PresentacionId')->on('presentaciones')->onDelete('cascade');
+            $table->foreign('PresentacionId')->references('PresentacionId')->on('presentaciones')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('MovimientoConceptoId')->references('MovimientoConceptoId')->on('movimiento_conceptos')->onDelete('cascade');
             $table->foreign('ClienteId')->references('EmpresaId')->on('empresas')->onDelete('cascade');
         });
