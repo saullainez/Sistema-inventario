@@ -85,7 +85,6 @@ function reload() {
     $('#tablaActivo').DataTable().ajax.reload();
     $("#actActivo").attr("disabled", "true");
     $("#elActivo").attr("disabled", "true");
-
 }
 $(document).ready(function () {
     $('#tablaActivo').DataTable({

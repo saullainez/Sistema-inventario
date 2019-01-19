@@ -23,35 +23,6 @@ function modalEliminarEmpresa(id){
     $("#borrarEmpresa").attr('onClick', `eliminarEmpresa(${id})`);
     $("#eliminarEmpresaModal").modal();
 };
-function cargarEmpresas(){
-    $.ajax({
-        url: `/obtenerempresas`,
-        method: "GET",
-        dataType: "json",
-        success: function (res) {
-            $("#tablaEmpresa").html(" ");
-            for (var i = 0; i < res.length; i++) {
-                $("#tablaEmpresa").append(`
-                <tr>
-                    <td>${res[i].EmpresaId}</td>
-                    <td>${res[i].EmpresaNombre}</td>
-                    <td>${res[i].EmpresaDireccion}</td>
-                    <td>${res[i].EmpresaTelefono}</td>
-                    <td>${res[i].EmpresaCorreo}</td>
-                    <td>${res[i].FechaPago}</td>
-                    <td>${res[i].Tipo}</td>
-                    <td style="padding-right: -1rem;"><a style="width: 6.499rem;" onclick="modalContacto(${res[i].EmpresaId}, '${res[i].Contacto}', '${res[i].ContactoTelefono}', '${res[i].ContactoCorreo}');" class="btn btn-sm btn-default">Contacto</a></td>
-                    <td style="padding-left: 0rem;"><a style="width: 5.317rem;" onclick="modalEditarEmpresa(${res[i].EmpresaId}, '${res[i].EmpresaNombre}', '${res[i].EmpresaDireccion}', '${res[i].EmpresaTelefono}', '${res[i].EmpresaCorreo}', '${res[i].Contacto}', '${res[i].ContactoTelefono}', '${res[i].ContactoCorreo}', '${res[i].FechaPago}', '${res[i].Tipo}');" class="btn btn-sm btn-default">Editar</a></td>
-                    <td style="padding-left: 0rem;"><a style="width: 6.086rem;" onclick="modalEliminarEmpresa(${res[i].EmpresaId});" class="btn btn-sm btn-danger">Eliminar</a></td>
-                </tr>`);
-            }
-            
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
-};
 function crearEmpresa() {
     var tokenAgregar = $("#tokenAgregar").val();
     var data = {
@@ -75,7 +46,7 @@ function crearEmpresa() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarEmpresas();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -106,7 +77,7 @@ function actualizarEmpresa(id) {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarEmpresas();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -127,15 +98,64 @@ function eliminarEmpresa(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarEmpresas();
+            reload();
         },
         error: function(error){
             console.error(error);
         }
     });
 };
+function reload() {
+    $('#tablaEmpresa').DataTable().ajax.reload();
+    $("#actEmpresa").attr("disabled", "true");
+    $("#elEmpresa").attr("disabled", "true");
+    $("#verContacto").attr("disabled", "true");
+}
 $(document).ready(function () {
+    $('#tablaEmpresa').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenerempresas",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "EmpresaId" },
+            { "data": "EmpresaNombre" },
+            { "data": "EmpresaDireccion" },
+            { "data": "EmpresaTelefono" },
+            { "data": "EmpresaCorreo" },
+            { "data": "FechaPago" },
+            { "data": "Tipo" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaEmpresa').dataTable().api();
+    
+    $('#tablaEmpresa').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actEmpresa").attr("disabled", "true");
+            $("#elEmpresa").attr("disabled", "true");
+            $("#verContacto").attr("disabled", "true");
+        }
+        else{
+            $("#actEmpresa").removeAttr("disabled");
+            $("#elEmpresa").removeAttr("disabled");
+            $("#verContacto").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actEmpresa").attr('onClick', `modalEditarEmpresa(${data.EmpresaId}, '${data.EmpresaNombre}', '${data.EmpresaDireccion}', '${data.EmpresaTelefono}', '${data.EmpresaCorreo}', '${data.Contacto}', '${data.ContactoTelefono}', '${data.ContactoCorreo}', '${data.FechaPago}', '${data.Tipo}')`);
+        $("#elEmpresa").attr('onClick', `modalEliminarEmpresa(${data.EmpresaId})`);
+        $("#verContacto").attr('onClick', `modalContacto(${data.EmpresaId}, '${data.Contacto}', '${data.ContactoTelefono}', '${data.ContactoCorreo}')`);
+    });
     $("#empresa").addClass("active");
     $("#empresaMenu").addClass("active");
-    cargarEmpresas();
 });
