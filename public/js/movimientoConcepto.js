@@ -10,32 +10,6 @@ function modalEliminarMovimientoConcepto(id){
     $("#eliminarMovimientoConcepto").modal();
 }
 
-function cargarMovimientos(){
-    $.ajax({
-        url:"/obtenermovimientoconceptos",
-        method:"GET",
-        dataType:"json",
-        success: function(res){
-            $("#tablaMovimientoConceptos").html(" ");
-            for (var i = 0; i < res.length; i++){
-                $("#tablaMovimientoConceptos").append(`
-                    <tr>
-                        <td>${res[i].MovimientoConceptoId}</td>
-                        <td>${res[i].Nombre}</td>
-                        <td>${res[i].TipoMovimiento}</td>
-                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimientoConcepto(${res[i].MovimientoConceptoId},
-                            '${res[i].Nombre}','${res[i].TipoMovimiento}');">Editar</a></td>
-                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoConcepto(${res[i].MovimientoConceptoId});">Eliminar</a></td>
-                    </tr>
-                `);
-            }
-        },
-        error:function(error){
-            console.error(error);
-        }
-    });
-}
-
 function crearMovimientoConcepto(){
     var tokenAgregar = $("#tokenAgregar").val();
     var data = {
@@ -53,7 +27,7 @@ function crearMovimientoConcepto(){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();   
+            reload();   
         },
         error: function(error){
             console.error(error);
@@ -79,7 +53,7 @@ function actualizarMovimiento(id){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();   
+            reload();   
         },
         error: function(error){
             console.error(error);
@@ -100,16 +74,57 @@ function eliminarMovimiento(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();
+            reload();
         },
         error: function(error){
             console.error(error);
         }
     });
 }
+function reload() {
+    $('#tablaMovimientoConceptos').DataTable().ajax.reload();
+    $("#actMovimientoConcepto").attr("disabled", "true");
+    $("#elMovimientoConcepto").attr("disabled", "true");
+}
 
 $(document).ready(function () {
+    $('#tablaMovimientoConceptos').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenermovimientoconceptos",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "MovimientoConceptoId" },
+            { "data": "Nombre" },
+            { "data": "TipoMovimiento" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaMovimientoConceptos').dataTable().api();
+    
+    $('#tablaMovimientoConceptos').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actMovimientoConcepto").attr("disabled", "true");
+            $("#elMovimientoConcepto").attr("disabled", "true");
+        }
+        else{
+            $("#actMovimientoConcepto").removeAttr("disabled");
+            $("#elMovimientoConcepto").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actMovimientoConcepto").attr('onClick', `modalEditarMovimientoConcepto(${data.MovimientoConceptoId}, '${data.Nombre}','${data.TipoMovimiento}')`);
+        $("#elMovimientoConcepto").attr('onClick', `modalEliminarMovimientoConcepto(${data.MovimientoConceptoId})`);
+    });
     $("#movimientos").addClass("active");
     $("#movimientosMenu").addClass("active");
-    cargarMovimientos();
 });
