@@ -1,18 +1,22 @@
 @extends('layouts.reporte')
 @section('content')
 <div class="container">
-    <h2 style="text-align:center;">Reporte clientes mas solicitado por movimiento(entradas-salidas)</h2>
-    <h2 style="text-align:center;">Desde: {{$fechaInicio}}</h2>
-    <h2 style="text-align:center;">Hasta:{{$fechaFin}}</h2>
-    <table class="table table-bordered">
+    <h4 style="text-align:center;">Reporte clientes mas solicitado por movimiento(entradas-salidas)</h4>
+    <h5 style="text-align:center;">Desde: {{$fechaInicio}} - Hasta:{{$fechaFin}}</h5>
+    <br>
+
+    <table class="table table-sm">
         <thead>
-            <th>Empresa</th>
-            <th>Movimiento</th>
-            <th>Tipo Movimiento</th>
-            <th>Cantidad Movimientos</th>
-            <th>Monto total por movimiento</th>
+            <tr>
+                <th>Empresa</th>
+                <th>Movimiento</th>
+                <th>Tipo Movimiento</th>
+                <th>Cantidad Movimientos</th>
+                <th>Monto total por movimiento</th>
+            </tr>
         </thead>
         <tbody>
+
             @foreach ($clientes as $cliente)
                 <tr>
                     <td>{{$cliente->EmpresaNombre}}</td>

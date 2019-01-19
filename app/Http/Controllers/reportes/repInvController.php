@@ -20,7 +20,11 @@ class repInvController extends Controller
         ->join('activos as a','ia.ActivoId','=','a.ActivoId')->get();
         //var_dump($inventarios);
         //return response()->json($inventarios, 200); 
-       return view('reportes.inventarioActivo',['inventarios'=>$inventarios]);
+        $pdf = \PDF::loadView('reportes.inventarioActivo',['inventarios'=>$inventarios]);
+
+      // return view('reportes.inventarioActivo',['inventarios'=>$inventarios]);
+      
+       return $pdf->stream();
     }
 
     /**
@@ -69,6 +73,7 @@ class repInvController extends Controller
 
 
         //return response()->json($arreglo, 200);
+        /*
         return view(
             'reportes.movimientoActivo',
             [
@@ -82,17 +87,44 @@ class repInvController extends Controller
                 'resumenEntrada' => $resumenEntrada,
                 'resumenSalida' => $resumenSalida
             ]);
+            */
+            
+            $pdf = \PDF::loadView('reportes.movimientoActivo',
+            [
+                'movimientosEntrada'=>$movimientosEntrada,
+                'totalEntrada'=>$totalEntrada,
+                'movimientosSalida'=>$movimientosSalida,
+                'totalSalida'=>$totalSalida,
+                'impuesto'=>$impuesto,
+                'fechaInicio'=>$fechaInicio,
+                'fechaFin'=>$fechaFin,
+                'resumenEntrada' => $resumenEntrada,
+                'resumenSalida' => $resumenSalida
+            ]);
+        
+            $pdf->setPaper('a4','landscape');
+            return $pdf->stream();
             
     }
 
     public function mejorProveedor($fechaInicio, $fechaFin){
         $proveedores = DB::select('call reporte_mejor_proveedor(?,?)', 
         [$fechaInicio, $fechaFin]);
+        /*
         return view('reportes.mejorProveedor',
         ['proveedores'=>$proveedores,
             'fechaInicio'=>$fechaInicio,
             'fechaFin'=>$fechaFin
         ]);
+        */
+        $pdf = \PDF::loadView('reportes.mejorProveedor',
+        ['proveedores'=>$proveedores,
+            'fechaInicio'=>$fechaInicio,
+            'fechaFin'=>$fechaFin
+        ]);
+      //  $pdf->setPaper('a4','landscape');
+        return $pdf->stream();
+      //  return view('reportes.mejorProveedor',['proveedores'=>$proveedores]);
     }
     
 

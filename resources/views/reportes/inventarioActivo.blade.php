@@ -2,14 +2,20 @@
 @section('content')
 
 <div class="container">
-    <h2 style="text-align:center;">Reporte de inventario disponible</h2>
-    <table class="table table-bordered">
+    <h4 style="text-align:center;">Reporte de inventario disponible</h4>
+    <h5 style="text-align:center;">Fecha: {{date('Y-m-d')}}</h5>
+    <br>
+    <table class="table table-sm">
         <thead>
-            <th>ActivoId</th>
-            <th>Nombre</th>
-            <th>Cantidad</th>
+            <tr>
+                <th>ActivoId</th>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+            </tr>
+
         </thead>
         <tbody>
+
             @foreach ($inventarios as $inventario)
                 <tr>
                     <td>{{$inventario->ActivoId}}</td>
