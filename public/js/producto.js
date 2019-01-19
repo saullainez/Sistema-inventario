@@ -10,31 +10,6 @@ function modalEliminarProducto(id){
     $("#borrarProducto").attr('onClick', `eliminarProducto(${id})`);
     $("#eliminarProductoModal").modal();
 };
-function cargarProductos(){
-    $.ajax({
-        url: `/obtenerproductos`,
-        method: "GET",
-        dataType: "json",
-        success: function (res) {
-            $("#tablaProducto").html(" ");
-            for (var i = 0; i < res.length; i++) {
-                $("#tablaProducto").append(`
-                <tr>
-                    <td>${res[i].ProductoId}</td>
-                    <td>${res[i].ProductoNombre}</td>
-                    <td>${res[i].ProductoDescripcion}</td>
-                    <td>${res[i].TipoBebida}</td>
-                    <td><a onclick="modalEditarProducto(${res[i].ProductoId}, '${res[i].ProductoNombre}', '${res[i].ProductoDescripcion}', '${res[i].TipoBebidaId}');" class="btn btn-sm btn-default">Editar</a></td>
-                    <td><a onclick="modalEliminarProducto(${res[i].ProductoId});" class="btn btn-sm btn-danger">Eliminar</a></td>
-                </tr>`);
-            }
-            
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
-};
 function cargarTipoBebida(){
     $.ajax({
         url: `/obtenertipobebida`,
@@ -73,7 +48,7 @@ function crearProducto() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarProductos();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -98,7 +73,7 @@ function actualizarProducto(id) {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarProductos();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -119,16 +94,58 @@ function eliminarProducto(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarProductos();
+            reload();
         },
         error: function(error){
             console.error(error);
         }
     });
 };
+function reload() {
+    $('#tablaProducto').DataTable().ajax.reload();
+    $("#actProducto").attr("disabled", "true");
+    $("#elProducto").attr("disabled", "true");
+}
 $(document).ready(function () {
+    $('#tablaProducto').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenerproductos",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "ProductoId" },
+            { "data": "ProductoNombre" },
+            { "data": "ProductoDescripcion" },
+            { "data": "TipoBebida" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaProducto').dataTable().api();
+    
+    $('#tablaProducto').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actProducto").attr("disabled", "true");
+            $("#elProducto").attr("disabled", "true");
+        }
+        else{
+            $("#actProducto").removeAttr("disabled");
+            $("#elProducto").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actProducto").attr('onClick', `modalEditarProducto(${data.ProductoId}, '${data.ProductoNombre}', '${data.ProductoDescripcion}', '${data.TipoBebidaId}')`);
+        $("#elProducto").attr('onClick', `modalEliminarProducto(${data.ProductoId})`);
+    });
     $("#producto").addClass("active");
     $("#productoMenu").addClass("active");
-    cargarProductos();
     cargarTipoBebida();
 });

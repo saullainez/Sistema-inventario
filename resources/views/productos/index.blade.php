@@ -21,34 +21,50 @@
     <div class="card" style="width:100%;">
         <div class="container">
             <div class="card-header row">
-                <div class="col-6 col-sm-7 col-md-8">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-6">
                     <h5 style="position: relative; top: 1rem;">Administrar Productos</h5>
                 </div> 
                 @can('producto.create')
-                    <div class="col-6 col-sm-5 col-md-4">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarProductoModal">Agregar producto</button>
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem; margin-right: -1rem;">
+                        <button type="button" class="btn btn-primary btn-panel1" data-toggle="modal" data-target="#agregarProductoModal"><i class="fas fa-plus mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('producto.edit')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-right: -3rem;">
+                        <button disabled type="button" class="btn btn-default btn-panel1" id="actProducto"><i class="fas fa-pencil-alt mt-0"></i></button>
+                    </div>
+                @endcan
+                @can('producto.destroy')
+                    <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem;">
+                        <button disabled type="button" class="btn btn-danger btn-panel1" id="elProducto"><i class="far fa-trash-alt mt-0"></i></button>
                     </div>
                 @endcan
             </div>
         </div>
 
         <div class="card-body">
-            <h5 class="card-title">Listado de productos</h5>
-            <div class="table-responsive">
-                <table class="table table-stripped table-hover">
-                    <thead>
-                        <tr>
-                            <th style="width: 6rem;">ID</th>
-                            <th style="width: 35rem;">Nombre</th>
-                            <th style="width: 35rem;">Descripción</th>
-                            <th style="width: 35rem;">Tipo</th>
-                            <th colspan="2">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaProducto">
-                        
-                    </tbody>
-                </table>
+            <h4 class="card-title text-center">Listado de productos</h4>
+            <div class="px-4">
+                <div class="table-wrapper table-responsive">
+                    <table id="tablaProducto" class="table table-hover table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
