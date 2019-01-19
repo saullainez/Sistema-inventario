@@ -10,31 +10,7 @@ function modalEliminarActivo(id){
     $("#borrarActivo").attr('onClick', `eliminarActivo(${id})`);
     $("#eliminarActivoModal").modal();
 };
-function cargarActivos(){
-    $.ajax({
-        url: `/obteneractivos`,
-        method: "GET",
-        dataType: "json",
-        success: function (res) {
-            $("#tablaActivo").html(" ");
-            for (var i = 0; i < res.length; i++) {
-                $("#tablaActivo").append(`
-                <tr>
-                    <td>${res[i].ActivoId}</td>
-                    <td>${res[i].ActivoNombre}</td>
-                    <td>${res[i].ActivoDescripcion}</td>
-                    <td>${res[i].TipoActivo}</td>
-                    <td><a onclick="modalEditarActivo(${res[i].ActivoId}, '${res[i].ActivoNombre}', '${res[i].ActivoDescripcion}', '${res[i].TipoActivo}');" class="btn btn-sm btn-default">Editar</a></td>
-                    <td><a onclick="modalEliminarActivo(${res[i].ActivoId});" class="btn btn-sm btn-danger">Eliminar</a></td>
-                </tr>`);
-            }
-            
-        },
-        error: function (error) {
-            console.error(error);
-        }
-    });
-};
+
 function crearActivo() {
     var tokenAgregar = $("#tokenAgregar").val();
     var data = {
@@ -52,7 +28,7 @@ function crearActivo() {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarActivos();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -77,7 +53,7 @@ function actualizarActivo(id) {
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarActivos();
+            reload();
         },
         error: function (error) {
             console.error(error);
@@ -98,15 +74,58 @@ function eliminarActivo(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarActivos();
+            reload();
         },
         error: function(error){
             console.error(error);
         }
     });
 };
+function reload() {
+    $('#tablaActivo').DataTable().ajax.reload();
+    $("#actActivo").attr("disabled", "true");
+    $("#elActivo").attr("disabled", "true");
+
+}
 $(document).ready(function () {
+    $('#tablaActivo').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obteneractivos",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "ActivoId" },
+            { "data": "ActivoNombre" },
+            { "data": "ActivoDescripcion" },
+            { "data": "TipoActivo" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaActivo').dataTable().api();
+    
+    $('#tablaActivo').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actActivo").attr("disabled", "true");
+            $("#elActivo").attr("disabled", "true");
+        }
+        else{
+            $("#actActivo").removeAttr("disabled");
+            $("#elActivo").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actActivo").attr('onClick', `modalEditarActivo(${data.ActivoId}, '${data.ActivoNombre}', '${data.ActivoDescripcion}', '${data.TipoActivo}')`);
+        $("#elActivo").attr('onClick', `modalEliminarActivo(${data.ActivoId})`);
+    });
     $("#activo").addClass("active");
     $("#activoMenu").addClass("active");
-    cargarActivos();
 });
