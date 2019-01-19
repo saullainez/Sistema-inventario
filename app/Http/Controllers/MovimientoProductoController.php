@@ -46,6 +46,7 @@ class MovimientoProductoController extends Controller
             ->join('presentaciones as p','mp.PresentacionId','=','p.PresentacionId')
             ->join('empresas as e','mp.ClienteId','=','e.EmpresaId')
             ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->orderBy('mp.MovimientoProductoId','desc')
             ->get();
 
             return view('movimientoProducto.index',compact('movimientos'));
@@ -79,6 +80,7 @@ class MovimientoProductoController extends Controller
             ->join('presentaciones as p','mp.PresentacionId','=','p.PresentacionId')
             ->join('empresas as e','mp.ClienteId','=','e.EmpresaId')
             ->join('movimiento_conceptos as mc','mp.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->orderBy('mp.MovimientoProductoId','desc')
             ->get();
             
             //return view('movimientoProducto.index',compact('movimientos'));

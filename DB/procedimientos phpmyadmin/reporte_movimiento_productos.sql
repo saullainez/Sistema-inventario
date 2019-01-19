@@ -2,7 +2,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `reporte_movimiento_producto`(IN fechaInicio date, IN fechaFin date, IN tipo varchar(40))
 begin
     select a.MovimientoProductoId,p.PresentacionId,p2.ProductoNombre,a2.ActivoNombre,
-           a.Fecha,a.Descripcion,a.Cantidad,a.Monto,a.MovimientoConceptoId, mc.Nombre, mc.TipoMovimiento
+           a.Fecha,a.Descripcion,a.Cantidad,a.Monto,e.EmpresaNombre,a.MovimientoConceptoId, mc.Nombre, mc.TipoMovimiento
     from movimiento_productos a
     inner join movimiento_conceptos mc on a.MovimientoConceptoId = mc.MovimientoConceptoId
     inner join empresas e on a.ClienteId = e.EmpresaId

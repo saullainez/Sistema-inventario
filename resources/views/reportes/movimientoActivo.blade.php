@@ -124,18 +124,46 @@
         
            
             <div>
+                <h5>Resumen total</h5>
+                <br>
                 <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Formula</th>
+                            <th>total</th>
+                        </tr>
+                    </thead>
                     <tr>
-                        <th>Impuesto por venta</th>
-                        <td> {{$impuesto}}</td>
+                        <td>Impuesto por venta</td>
+                        <td colspan="2"> {{$impuesto}}</td>
                     </tr>
                     <tr>
-                        <th>Impuesto a pagar:</th>
+                        <td>Ganancia bruta por salidas</td>
+                        <td>sum(Monto por movimiento de salida)</td>
+                        <td>{{$totalSalida}}</td>
+                    </tr>
+                    <tr>
+                        <td>Perdidas por entradas</td>
+                        <td>sum(Monto por movimiento de entrada)</td>
+                        <td>{{$totalEntrada}}</td>
+                    </tr>
+                    <tr>
+                        <td>Ganancias por salidas:</td>
+                        <td>{{$totalSalida}} / {{$impuesto}}</td>
+                        <td>{{round(($totalSalida/$impuesto),2)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Impuesto a pagar:</td>
+                        <td>{{$totalSalida}} - {{round(($totalSalida/$impuesto),2)}}</td>
                         <td>{{$totalSalida - round(($totalSalida/$impuesto),2)}}</td>
                     </tr>
+
                     <tr>
-                        <th>Ganancia:</th>
-                        <td>{{$totalSalida-$totalEntrada}}</td>
+                        <td>Ganancia Neta:</td>
+                        <td>{{round(($totalSalida/$impuesto),2)}} - {{$totalEntrada}}</td>
+                        <td>{{round(($totalSalida/$impuesto),2)-$totalEntrada}}</td>
                     </tr>
                 </table>
             

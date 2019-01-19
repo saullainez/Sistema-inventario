@@ -37,6 +37,7 @@ class MovimientoActivoController extends Controller
             ->join('activos as a','ma.ActivoId','=','a.ActivoId')
             ->join('empresas as e','ma.ProveedorId','=','e.EmpresaId')
             ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+            ->orderBy('ma.MovimientoActivoId','desc')
             ->get();
             
             return view('movimientoActivo.index',compact('movimientoActivo'));
@@ -59,6 +60,7 @@ class MovimientoActivoController extends Controller
              ->join('activos as a','ma.ActivoId','=','a.ActivoId')
              ->join('empresas as e','ma.ProveedorId','=','e.EmpresaId')
              ->join('movimiento_conceptos as mc','ma.MovimientoConceptoId','=','mc.MovimientoConceptoId')
+             ->orderBy('ma.MovimientoActivoId','desc')
              ->get();
              
             // return view('movimientoActivo.index',compact('movimientoActivo'));

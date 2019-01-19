@@ -8,6 +8,7 @@ create procedure reporte_movimiento_producto(IN fechaInicio date, IN fechaFin da
            a.Descripcion,
            a.Cantidad,
            a.Monto,
+           e.EmpresaNombre,
            a.MovimientoConceptoId,
            mc.Nombre,
            mc.TipoMovimiento
