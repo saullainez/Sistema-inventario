@@ -18,42 +18,6 @@ function modalEliminarMovimientoProducto(id){
     $("#eliminarMovimientoProductoModal").modal();
 }
 
-function cargarMovimientos(){
-
-    $.ajax({
-        url:"/obtenermovimientoproductos",
-        method:"GET",
-        dataType:"json",
-        success:function(res){
-            $("#tablaMovimientoProductos").html(" ");
-            for(var i = 0; i < res.length; i++){
-               $("#tablaMovimientoProductos").append(`
-                    <tr>
-                        <td>${res[i].MovimientoProductoId}</td>
-                        <td>${res[i].PresentacionId}</td>
-                        <td>${res[i].Descripcion}</td>
-                        <td>${res[i].Fecha}</td>
-                        <td>${res[i].AnioCosecha}</td>
-                        <td>${res[i].Cantidad}</td>
-                        <td>${res[i].EmpresaNombre}</td>
-                        <td>${res[i].MovimientoConceptoNombre}</td>
-                        <td>${res[i].Monto}</td>
-                        <td><a class="btn btn-sm btn-default" onClick="modalEditarMovimientoProducto(${res[i].MovimientoProductoId},
-                            ${res[i].PresentacionId},'${res[i].Descripcion}','${res[i].Fecha}',
-                            ${res[i].AnioCosecha}, ${res[i].Cantidad},${res[i].ClienteId},
-                            ${res[i].MovimientoConceptoId},${res[i].Monto});">
-                        Editar</a><td>
-                        <td><a class="btn btn-sm btn-danger" onClick="modalEliminarMovimientoProducto(${res[i].MovimientoProductoId});">eliminar</a></td>
-                    </tr>
-               `); 
-            }
-        },
-        error:function(error){
-            console.error(error);
-        }
-    });
-}
-
 function cargarPresentaciones(){
     $.ajax({
         url:"/obtenerpresentaciones",
@@ -147,7 +111,7 @@ function crearMovimientoProducto(){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();   
+            reload();   
         },
         error:function(error){
             console.error(error);
@@ -178,7 +142,7 @@ function actualizarMovimiento(id){
             console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos(); 
+            reload(); 
         },
         error: function(error){
             console.error(error);
@@ -202,7 +166,7 @@ function eliminarMovimiento(id){
         success: function(res){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
-            cargarMovimientos();
+            reload();
         },
         error: function(error){
             console.error(error);
@@ -210,10 +174,61 @@ function eliminarMovimiento(id){
     });
 }
 
+function reload() {
+    $('#tablaMovimientoProductos').DataTable().ajax.reload();
+    $("#actMovimientoProducto").attr("disabled", "true");
+    $("#elMovimientoProducto").attr("disabled", "true");
+}
+
 $(document).ready(function () {
+    $('#tablaMovimientoProductos').DataTable({
+        responsive: true,
+        select: {
+            style: 'single'
+        },
+        "ajax": {
+            "url": "/obtenermovimientoproductos",
+            "dataSrc": ""
+        },
+        "columns": [
+            { "data": "MovimientoProductoId" },
+            { "data": "PresentacionId" },
+            { "data": "Descripcion" },
+            { "data": "Fecha" },
+            { "data": "AnioCosecha" },
+            { "data": "Cantidad" },
+            { "data": "EmpresaNombre" },
+            { "data": "MovimientoConceptoNombre" },
+            { "data": "Monto" }
+        ],
+        "language": {
+            "url":"//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json",
+            select: {
+                rows: "%d fila seleccionada"
+            }
+        }
+    });
+    $('.dataTables_length').addClass('bs-select');
+    var tabla = $('#tablaMovimientoProductos').dataTable().api();
+    
+    $('#tablaMovimientoProductos').on( 'click', 'tbody tr', function () {
+        if (tabla.row(this, { selected: true }).any()){
+            $("#actMovimientoProducto").attr("disabled", "true");
+            $("#elMovimientoProducto").attr("disabled", "true");
+        }
+        else{
+            $("#actMovimientoProducto").removeAttr("disabled");
+            $("#elMovimientoProducto").removeAttr("disabled");
+        }
+        data = tabla.row(this).data();
+        $("#actMovimientoProducto").attr('onClick', `modalEditarMovimientoProducto(${data.MovimientoProductoId},
+            ${data.PresentacionId},'${data.Descripcion}','${data.Fecha}',
+            ${data.AnioCosecha}, ${data.Cantidad},${data.ClienteId},
+            ${data.MovimientoConceptoId},${data.Monto})`);
+        $("#elMovimientoProducto").attr('onClick', `modalEliminarMovimientoProducto(${data.MovimientoProductoId})`);
+    });
     $("#movimientos").addClass("active");
     $("#movimientosMenu").addClass("active");
-    cargarMovimientos();
     cargarPresentaciones();
     cargarConceptos();
     cargarClientes();
