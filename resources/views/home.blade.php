@@ -152,8 +152,6 @@
         labels.push(inventarioActivos[i].ActivoNombre);
         data.push(inventarioActivos[i].Cantidad);
     }
-    console.log(labels);
-    console.log(data);
     var ctx = document.getElementById("myChart").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'bar',
