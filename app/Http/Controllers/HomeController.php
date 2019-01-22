@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Producto;
+use App\Presentacion;
+use App\Activo;
+use App\Http\Controllers\reportes\repInvController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +29,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $proveedores = DB::table('empresas')
+        ->whereraw('Tipo = ? or Tipo = ?',['Proveedor','Cliente-Proveedor'])
+        ->get();
+        $clientes = DB::table('empresas')
+        ->whereraw('Tipo = ? or Tipo = ?',['Cliente','Cliente-Proveedor'])
+        ->get();
+        $inventariosActivos = DB::table('inventario_activos as ia')
+        ->select('ia.ActivoId','a.ActivoNombre','ia.Cantidad')
+        ->join('activos as a','ia.ActivoId','=','a.ActivoId')->get();
+        $productos = Producto::get();
+        $usuarios = User::get();
+        $presentaciones = Presentacion::get();
+        $activos = Activo::get();
+        return view('home', compact('usuarios', 'clientes', 'proveedores', 'productos', 'presentaciones', 'activos', 'inventariosActivos'));
+        //return($usuarios);
     }
 }
