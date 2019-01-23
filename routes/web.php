@@ -132,3 +132,7 @@ route::get('/prueba', function(){
     $pdf->loadHTML('<h1>Test</h1>');
     return $pdf->stream();
 });
+
+Route::get('/reportes', function () {
+    return view('reportes.index');
+});

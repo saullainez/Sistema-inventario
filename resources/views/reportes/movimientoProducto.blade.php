@@ -176,7 +176,7 @@
                     <tr>
                         <th>Ganancia neta:</th>
                         <td>{{round(($totalSalida/$impuesto),2)}} - {{$totalEntrada}}</td>
-                        <td>{{$totalSalida-$totalEntrada}}</td>
+                        <td>{{round(($totalSalida/$impuesto),2)-$totalEntrada}}</td>
                     </tr>
                 </table>
             

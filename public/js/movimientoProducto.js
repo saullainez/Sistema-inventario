@@ -29,10 +29,10 @@ function cargarPresentaciones(){
             $("#NuevapresentacionId").html(" ");
             for(var i = 0; i< res.length; i++){
                 $("#presentacionId").append(`
-                    <option value="${res[i].PresentacionId}">${res[i].envase}</option>
+                    <option value="${res[i].PresentacionId}">${res[i].producto} ${res[i].envase}</option>
                 `);
                 $("#NuevapresentacionId").append(`
-                <option value="${res[i].PresentacionId}">${res[i].envase}</option>
+                <option value="${res[i].PresentacionId}">${res[i].producto} ${res[i].envase}</option>
             `);
             }
         },
