@@ -133,17 +133,46 @@ table.dataTable {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.caja-info-texto-chart {
+    text-transform: uppercase;
+    display: block;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align:center;
+}
 .caja-info-numero {
     display: block;
     font-weight: bold;
     font-size: 18px;
 }
+.caja-info-numero-chart {
+    text-align:center;
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .caja-info .caja-divisor {
     border-radius: 0;
     background: white;
     margin: 5px -10px 5px -10px;
     height: 2px;
 }
+.caja-info .caja-divisor-esp {
+    border-radius: 0;
+    background: white;
+    margin: -24px -10px 5px -10px;
+    height: 2px;
+}
+.caja-info .caja-divisor-chart {
+    border-radius: 0;
+    background: white;
+    margin: -11px -10px 5px -10px;
+    height: 2px;
+}
+
 .caja-administrar{
     margin: 0;
     display: block;
@@ -154,6 +183,39 @@ table.dataTable {
     color: white;
     text-align: center;
 }
+.caja-administrar-esp{
+    margin: -5px;
+    display: block;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+    text-align: center;
+}
+.caja-administrar-chart{
+    margin: -5px;
+    display: block;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+    text-align: center;
+}
+.caja-info-desc {
+    display: block;
+    font-size: 0.8rem;
+    position: relative;
+    top: -1.6rem;
+    left: 1.4rem;
+}
+.caja-info-chart {
+    position: relative;
+    font-size: 0.9rem;
+    top: -0.5rem;
+    left: 18.6rem;
+}
 .boton{
     color:white;
 }
@@ -162,6 +224,28 @@ table.dataTable {
 }
 
 @media only screen and (max-width: 991px) {
+    .caja-info-numero-chart {
+        text-align:left;
+        display: block;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .caja-info-texto-chart {
+        text-align: left;
+        text-transform: uppercase;
+        display: block;
+        font-size: 58%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .caja-info-chart {
+        position: relative;
+        font-size: 0.7rem;
+        top: -1.5rem;
+        left: 1.6rem;
+        display: block;
+    }
     .movil {
       display: block;
     }
