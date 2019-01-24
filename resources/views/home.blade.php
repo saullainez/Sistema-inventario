@@ -95,7 +95,7 @@
                     <i class="fas fa-wine-bottle"></i>
                 </span>
                 <div class="caja-info-contenido">
-                    <span class="caja-info-texto">Presentaciones</span>
+                    <span class="caja-info-texto">Producto final</span>
                     <span class="caja-info-numero">{{ count($presentaciones) }}</span>
                     <div class="caja-divisor"></div>
                     <span class="caja-administrar"><a href="/presentacion" class="boton">Administrar</a></span>

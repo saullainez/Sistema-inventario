@@ -71,7 +71,7 @@ class PresentacionController extends Controller
             $presentacion->PresentacionId = $id;
             //$presentacion->save();
             $res = Presentacion::crearPresentacion($presentacion);
-            return response()->json([$res, "mensaje"=>"Presentación creada correctamente"], 200)->header('Content-Type','application/json');
+            return response()->json([$res, "mensaje"=>"Producto final creado correctamente"], 200)->header('Content-Type','application/json');
 
         }
         catch(\Exception $e){
@@ -181,7 +181,7 @@ class PresentacionController extends Controller
             $presentacion->PresentacionId = $id;
             $presentacion->save();
             return response()->json([
-                "mensaje" => "Presentacion actualizada correctamente"
+                "mensaje" => "Producto final actualizado correctamente"
             ]);
         };
     }
@@ -191,7 +191,7 @@ class PresentacionController extends Controller
             $presentacion = Presentacion::find($request->id);
             $presentacion->delete();
             return response()->json([
-                "mensaje" => "Presentacion eliminada correctamente"
+                "mensaje" => "Producto final eliminado correctamente"
             ]);
         };
     }

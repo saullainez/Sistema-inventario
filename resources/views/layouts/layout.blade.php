@@ -99,7 +99,7 @@
                                 @endcan
                                 @can('presentacion.index')
                                 <a id = "presentacionMenu" href="/presentacion" class="nav-link">
-                                    <i class="fas fa-wine-bottle mr-3"></i>Presentaciones</a>
+                                    <i class="fas fa-wine-bottle mr-3"></i>Producto final</a>
                                 @endcan
                                 @can('movimientos.index')
                                 <a id = "movimientosMenu" href="/movimientos" class="nav-link">
@@ -190,7 +190,7 @@
                 @endcan
                 @can('presentacion.index')
                     <a id = "presentacion" style="padding: 0.75rem 0.50rem;" href="/presentacion" class="list-group-item list-group-item-action waves-effect">
-                        <i class="fas fa-wine-bottle mr-3"></i>Presentaciones</a>
+                        <i class="fas fa-wine-bottle mr-3"></i>Producto final</a>
                 @endcan
                 @can('movimientos.index')
                     <a style="padding: 0.75rem 0.50rem;" id = "movimientos" href="/movimientos" class="list-group-item list-group-item-action waves-effect">
