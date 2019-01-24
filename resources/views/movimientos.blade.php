@@ -40,8 +40,8 @@
                 <div class="col-12 col-sm-4 col-md-4 col-lg-4 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title"><a>Activos</a></h4>
-                            <a href="/movimiento-activo" class="btn btn-primary">Activos</a>
+                            <h4 class="card-title"><a>Materia prima</a></h4>
+                            <a href="/movimiento-activo" class="btn btn-primary">Materia prima</a>
                         </div>
                     </div>
                 </div>

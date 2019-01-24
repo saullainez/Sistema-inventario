@@ -17,7 +17,7 @@
                             <div class="col-12 col-md-12 col-sm-12 col-xs-12 col-lg-6 col-xl-6">
                                 <input type="hidden" name="_tokenEditar" value="{{ csrf_token() }}" id="tokenEditar">
                                 <div class="mb-3">
-                                    <h6>Activo</h6>
+                                    <h6>Materia prima</h6>
                                     <select class="browser-default custom-select" name="NuevoActivoId" id="NuevoActivoId">
 
                                     </select>

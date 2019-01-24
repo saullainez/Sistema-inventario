@@ -87,7 +87,7 @@
                                 @endcan
                                 @can('activo.index')
                                 <a id = "activoMenu" href="/activo" class="nav-link">
-                                    <i class="far fa-check-circle mr-3"></i>Activos</a>
+                                    <i class="far fa-check-circle mr-3"></i>Materia prima</a>
                                 @endcan
                                 @can('empresa.index')
                                 <a id = "empresaMenu" href="/empresa" class="nav-link">
@@ -178,7 +178,7 @@
                 @endcan
                 @can('activo.index')
                     <a id = "activo" style="padding: 0.75rem 0.50rem;" href="/activo" class="list-group-item list-group-item-action waves-effect">
-                        <i class="far fa-check-circle mr-3"></i>Activos</a>
+                        <i class="far fa-check-circle mr-3"></i>Materia prima</a>
                 @endcan
                 @can('empresa.index')
                     <a id = "empresa" style="padding: 0.75rem 0.50rem;" href="/empresa" class="list-group-item list-group-item-action waves-effect">
