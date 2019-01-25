@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Activo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ActivoController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:activo.index')->only(['index', 'obtenerActivo']);
+        $this->middleware('permission:activo.index')->only(['index', 'obtenerActivo', 'obtenerConsumibles']);
         $this->middleware('permission:activo.create')->only(['create', 'store']);
         $this->middleware('permission:activo.edit')->only(['edit', 'update', 'actualizarActivo']);
         $this->middleware('permission:activo.destroy')->only(['destroy', 'eliminarActivo']);
@@ -168,5 +169,13 @@ class ActivoController extends Controller
                 "mensaje" => "Materia prima eliminada correctamente"
             ]);
         };
+    }
+    public function obtenerConsumibles()
+    {
+        $consumibles = DB::table('inventario_activos as ia')
+        ->select('ia.ActivoId','a.ActivoNombre','ia.Cantidad')
+        ->whereraw('a.TipoActivo = ?',['Consumible'])
+        ->join('activos as a','ia.ActivoId','=','a.ActivoId')->get();
+        return response()->json($consumibles, 200);
     }
 }

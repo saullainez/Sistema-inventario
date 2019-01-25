@@ -21,7 +21,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <h6>Envase</h6>
+                            <h6>Materia prima</h6>
                             <select class="browser-default custom-select" name="envase" id="envase">
 
                             </select>
