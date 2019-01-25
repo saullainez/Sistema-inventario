@@ -100,6 +100,7 @@ function crearUsuario() {
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
+            limpiar();
         },
         error: function (error) {
             console.error(error);
@@ -165,7 +166,13 @@ function reload() {
     $("#AgregarRolUsuarioM").attr("disabled", "true");
 }
 
+function limpiar() {
+    $('.form-control').val(' ');
+    $('#pass').val($('#pass').val().replace(' ', ''));
+}
+
 $(document).ready(function () {
+    limpiar();
     $('#tablaUsuarios').DataTable({
         responsive: true,
         select: {

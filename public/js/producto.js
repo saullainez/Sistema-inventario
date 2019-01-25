@@ -49,6 +49,7 @@ function crearProducto() {
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
+            $('.form-control').val(' ');
         },
         error: function (error) {
             console.error(error);

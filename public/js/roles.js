@@ -147,6 +147,7 @@ function crearRol() {
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
+            limpiar();
         },
         error: function (error) {
             console.error(error);
@@ -215,6 +216,7 @@ function reload() {
     $("#AgregarPermisoRolM").attr("disabled", "true");
 }
 function limpiar(){
+    $('.form-control').val(' ');
     $(`input:checkbox`).each(function(){
         if($(this).is(':checked')){
             console.log($(this).value);
@@ -222,6 +224,7 @@ function limpiar(){
         }
     });
 }
+
 
 $(document).ready(function () {
     $('#tablaRoles').DataTable({
