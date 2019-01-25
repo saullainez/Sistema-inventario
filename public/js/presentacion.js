@@ -11,7 +11,7 @@ function modalEliminarPresentacion(id){
 };
 function cargarActivos(){
     $.ajax({
-        url: `/obteneractivos`,
+        url: `/obtenerconsumibles`,
         method: "GET",
         dataType: "json",
         success: function (res) {
@@ -164,7 +164,6 @@ $(document).ready(function () {
     });
     $("#presentacion").addClass("active");
     $("#presentacionMenu").addClass("active");
-    //cargarPresentaciones();
     cargarActivos();
     cargarProductos();
 });

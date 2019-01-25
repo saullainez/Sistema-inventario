@@ -51,14 +51,14 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Producto</th>
-                                <th>Envase</th>
+                                <th>Materia prima</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>ID</th>
                                 <th>Producto</th>
-                                <th>Envase</th>
+                                <th>Materia prima</th>
                             </tr>
                         </tfoot>
                     </table>
