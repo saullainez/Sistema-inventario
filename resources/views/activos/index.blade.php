@@ -7,7 +7,7 @@
             <span>/</span>
             <a href="/home">Dashboard</a>
             <span>/</span>
-            <span>Activos</span>
+            <span>Materia prima</span>
         </h4>
     </div>
 </div>
@@ -22,7 +22,7 @@
         <div class="container">
             <div class="card-header row">
                 <div class="col-12 col-sm-12 col-md-3 col-lg-6">
-                    <h5 style="position: relative; top: 1rem;">Administrar Activos</h5>
+                    <h5 style="position: relative; top: 1rem;">Administrar materia prima</h5>
                 </div> 
                 @can('activo.create')
                     <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem; margin-right: -1rem;">
@@ -43,7 +43,7 @@
         </div>
 
         <div class="card-body">
-            <h4 class="card-title text-center">Listado de activos</h4>
+            <h4 class="card-title text-center">Listado de materia prima</h4>
             <div class="px-4">
                 <div class="table-wrapper table-responsive">
                     <table id="tablaActivo" class="table table-hover table-bordered" cellspacing="0" width="100%">

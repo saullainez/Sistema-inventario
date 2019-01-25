@@ -9,7 +9,7 @@
             <span>/</span>
             <a href="/movimientos">Movimientos</a>
             <span>/</span>
-            <span>Activos</span>
+            <span>Materia prima</span>
         </h4>
     </div>
 </div>
@@ -24,7 +24,7 @@
         <div class="container">
             <div class="card-header row">
                 <div class="col-12 col-sm-12 col-md-3 col-lg-6">
-                    <h5 style="position: relative; top: 1rem;">Administrar movimientos de activos</h5>
+                    <h5 style="position: relative; top: 1rem;">Administrar movimientos de materia prima</h5>
                 </div> 
                 @can('movimiento-activo.create')
                     <div class="col-4 col-sm-4 col-md-3 col-lg-2" style="margin-left: 2rem; margin-right: -1rem;">
@@ -52,7 +52,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Activo</th>
+                                <th>Materia prima</th>
                                 <th>Descripción</th>
                                 <th>Fecha</th>
                                 <th>Cantidad</th>
@@ -64,7 +64,7 @@
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>Activo</th>
+                                <th>Materia prima</th>
                                 <th>Descripción</th>
                                 <th>Fecha</th>
                                 <th>Cantidad</th>

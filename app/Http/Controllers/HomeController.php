@@ -35,14 +35,20 @@ class HomeController extends Controller
         $clientes = DB::table('empresas')
         ->whereraw('Tipo = ? or Tipo = ?',['Cliente','Cliente-Proveedor'])
         ->get();
-        $inventariosActivos = DB::table('inventario_activos as ia')
+        $consumibles = DB::table('inventario_activos as ia')
         ->select('ia.ActivoId','a.ActivoNombre','ia.Cantidad')
+        ->whereraw('a.TipoActivo = ?',['Consumible'])
+        ->join('activos as a','ia.ActivoId','=','a.ActivoId')->get();
+        $equipos = DB::table('inventario_activos as ia')
+        ->select('ia.ActivoId','a.ActivoNombre','ia.Cantidad')
+        ->whereraw('a.TipoActivo = ?',['Equipo'])
         ->join('activos as a','ia.ActivoId','=','a.ActivoId')->get();
         $productos = Producto::get();
         $usuarios = User::get();
         $presentaciones = Presentacion::get();
         $activos = Activo::get();
-        return view('home', compact('usuarios', 'clientes', 'proveedores', 'productos', 'presentaciones', 'activos', 'inventariosActivos'));
+        return view('home', compact('usuarios', 'clientes', 'proveedores', 'productos', 
+        'presentaciones', 'activos', 'consumibles', 'equipos'));
         //return($usuarios);
     }
 }

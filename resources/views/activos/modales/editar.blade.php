@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-notify modal-info" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <p class="heading lead">Editar activo</p>
+                <p class="heading lead">Editar materia prima</p>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" class="white-text">&times;</span>
@@ -23,7 +23,7 @@
                             <input type="text" class="form-control" id="descripcionNueva">
                         </div>
                         <div class="mb-3">
-                            <h6>Tipo de activo</h6>
+                            <h6>Tipo de materia prima</h6>
                             <select class="browser-default custom-select" name="nuevo" id="nuevo">
                                 <option value="Consumible">Consumible</option>
                                 <option value="Equipo">Equipo</option>

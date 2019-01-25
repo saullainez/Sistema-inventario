@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
     <div class="modal-content text-center">
       <div class="modal-header d-flex justify-content-center">
-        <p class="heading">¿Seguro(a) que desea borrar este activo?</p>
+        <p class="heading">¿Seguro(a) que desea borrar esta materia prima?</p>
       </div>
       <div class="modal-body">
         <i class="fa fa-times fa-4x animated rotateIn"></i>

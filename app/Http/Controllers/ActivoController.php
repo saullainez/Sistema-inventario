@@ -70,7 +70,7 @@ class ActivoController extends Controller
             ]);*/
 
             $res = Activo::crearActivo($activo);
-            return response()->json([$res, "mensaje" =>"Activo creado correctamente"], 200)->header('Content-Type','application/json');
+            return response()->json([$res, "mensaje" =>"Materia prima creada correctamente"], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
             $error = ['error' => $e->getMessage()];
@@ -155,7 +155,7 @@ class ActivoController extends Controller
             $activo->TipoActivo = $request['TipoActivo'];
             $activo->save();
             return response()->json([
-                "mensaje" => "Activo actualizado correctamente"
+                "mensaje" => "Materia prima actualizada correctamente"
             ]);
         };
     }
@@ -165,7 +165,7 @@ class ActivoController extends Controller
             $activo = Activo::find($request->id);
             $activo->delete();
             return response()->json([
-                "mensaje" => "Activo eliminado correctamente"
+                "mensaje" => "Materia prima eliminada correctamente"
             ]);
         };
     }
