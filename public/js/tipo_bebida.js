@@ -24,7 +24,7 @@ function crearTipoBebida() {
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
-            $('.form-control').val(' ');
+            limpiar();
         },
         error: function (error) {
             console.error(error);
@@ -79,6 +79,10 @@ function reload() {
     $("#actTipoBebida").attr("disabled", "true");
     $("#elTipoBebida").attr("disabled", "true");
 
+}
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
     $('#tablaTipoBebida').DataTable({
