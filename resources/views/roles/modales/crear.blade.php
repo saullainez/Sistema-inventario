@@ -16,15 +16,15 @@
                         <input type="hidden" name="_tokenAgregar" value="{{ csrf_token() }}" id="tokenAgregar">
                         <div class="mb-3">
                             <label for="nombre" required>Nombre</label>
-                            <input type="text" class="form-control" id="nombre">
+                            <input type="text" class="form-control input-crear" id="nombre">
                         </div>
                         <div class="mb-3">
                             <label for="slug" required>Slug</label>
-                            <input type="text" class="form-control" id="slug">
+                            <input type="text" class="form-control input-crear" id="slug">
                         </div>
                         <div class="mb-3">
                             <label for="descripcion" required>Descripcion</label>
-                            <textarea class="form-control" id="descripcion"></textarea>
+                            <textarea class="form-control input-crear" id="descripcion"></textarea>
                         </div>
                         <div class="mb-3">
                             <h6>Permiso especial</h6>
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="crearRol()">Guardar</button>
+                <button disabled id="btn-crear" data-dismiss="modal" class="btn btn-primary" onclick="crearRol()">Guardar</button>
             </div>
         </div>
     </div>

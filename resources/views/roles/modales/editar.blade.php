@@ -15,15 +15,15 @@
                         <input type="hidden" name="_tokenEditar" value="{{ csrf_token() }}" id="tokenEditar">
                         <div class="mb-3">
                             <label for="nuevoNombre" required>Nombre</label>
-                            <input type="text" class="form-control" id="nuevoNombre">
+                            <input type="text" class="form-control input-editar" id="nuevoNombre">
                         </div>
                         <div class="mb-3">
                             <label for="nuevoSlug" required>Slug</label>
-                            <input type="text" class="form-control" id="nuevoSlug">
+                            <input type="text" class="form-control input-editar" id="nuevoSlug">
                         </div>
                         <div class="mb-3">
                             <label for="nuevaDescripcion" required>Descripcion</label>
-                            <textarea class="form-control" id="nuevaDescripcion"></textarea>
+                            <textarea class="form-control input-editar" id="nuevaDescripcion"></textarea>
                         </div>
                         <div class="mb-3">
                             <h6>Permiso especial</h6>

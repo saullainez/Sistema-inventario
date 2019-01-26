@@ -50,17 +50,32 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax()){
-            Role::create([
-                'name' => $request['name'],
-                'slug' => $request['slug'],
-                'description' => $request['description'],
-                'special' => $request['special']
-            ]);
-            return response()->json([
-                "mensaje" => "Rol creado correctamente"
-            ]);
-        };
+        try{
+            if($request->ajax()){
+                Role::create([
+                    'name' => $request['name'],
+                    'slug' => $request['slug'],
+                    'description' => $request['description'],
+                    'special' => $request['special']
+                ]);
+                return response()->json([
+                    "mensaje" => "Rol creado correctamente"
+                ]);
+            };
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            if(str_contains($error['error'], "for key 'roles_slug_unique'")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese slug, por favor elija otro"
+                ], 409);
+            }elseif(str_contains($error['error'], "for key 'roles_name_unique'")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese nombre, por favor elija otro"
+                ], 409);
+            }
+            return $error;
+        }
     }
 
     /**
@@ -99,17 +114,32 @@ class RoleController extends Controller
 
     public function actualizarRol(Request $request)
     {
-        if($request->ajax()){
-            $rol = Role::find($request->id);
-            $rol->name = $request['name'];
-            $rol->slug = $request['slug'];
-            $rol->description = $request['description'];
-            $rol->special = $request['special'];
-            $rol->save();
-            return response()->json([
-                "mensaje" => "Rol actualizado correctamente"
-            ]);
-        };
+        try{
+            if($request->ajax()){
+                $rol = Role::find($request->id);
+                $rol->name = $request['name'];
+                $rol->slug = $request['slug'];
+                $rol->description = $request['description'];
+                $rol->special = $request['special'];
+                $rol->save();
+                return response()->json([
+                    "mensaje" => "Rol actualizado correctamente"
+                ]);
+            };
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            if(str_contains($error['error'], "for key 'roles_slug_unique'")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese slug, por favor elija otro"
+                ], 409);
+            }elseif(str_contains($error['error'], "for key 'roles_name_unique'")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese nombre, por favor elija otro"
+                ], 409);
+            }
+            return $error;
+        }
     }
 
     /**

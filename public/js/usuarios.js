@@ -162,7 +162,6 @@ function limpiar() {
     $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 function exitoso (res){
-    console.log(res)
     $("#alert").removeClass("alert-danger");
     $("#alert").addClass("alert-success");
     $("#alert").show().fadeOut(3000);

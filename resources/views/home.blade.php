@@ -103,50 +103,52 @@
             </div>
         </div>
     @endcan
-    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-            <div class="container">
-                <div class="card-body row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="caja-info caja-verdegris">
-                            <span class="caja-info-icono">
-                                <i class="fas fa-warehouse"></i>
-                            </span>
-                            <div class="caja-info-contenido">
-                                <span class="caja-info-texto-chart">Inventario de materia prima</span>
-                                <span class="caja-info-numero-chart">{{ count($activos) }}</span>
-                                <span class="caja-info-chart">Consumibles: {{ count($consumibles) }}</span>
-                                <span class="caja-info-chart">Equipo: {{ count($equipos) }}</span>
-                                <div class="caja-divisor-chart"></div>
-                                <span class="caja-administrar-esp"><a href="/reporte-inventario" target="_blank" class="boton"><i class="fas fa-eye mt-0 mr-1"></i>Ver reporte</a></span>
+    @can('activo.index')
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="container">
+                    <div class="card-body row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="caja-info caja-verdegris">
+                                <span class="caja-info-icono">
+                                    <i class="fas fa-warehouse"></i>
+                                </span>
+                                <div class="caja-info-contenido">
+                                    <span class="caja-info-texto-chart">Inventario de materia prima</span>
+                                    <span class="caja-info-numero-chart">{{ count($activos) }}</span>
+                                    <span class="caja-info-chart">Consumibles: {{ count($consumibles) }}</span>
+                                    <span class="caja-info-chart">Equipo: {{ count($equipos) }}</span>
+                                    <div class="caja-divisor-chart"></div>
+                                    <span class="caja-administrar-esp"><a href="/reporte-inventario" target="_blank" class="boton"><i class="fas fa-eye mt-0 mr-1"></i>Ver reporte</a></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-7 col-lg-7">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="consumibles-tab" data-toggle="tab" href="#consumibles" role="tab" aria-controls="consumibles" aria-selected="true">Consumibles</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="equipos-tab" data-toggle="tab" href="#equipos" role="tab" aria-controls="equipos" aria-selected="false">Equipos</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="consumibles" role="tabpanel" aria-labelledby="consumibles-tab">
-                                <canvas id="chartConsumibles"></canvas>
-                            </div>
-                            <div class="tab-pane fade" id="equipos" role="tabpanel" aria-labelledby="equipos-tab">
-                                <canvas id="chartEquipos"></canvas>
+                        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="consumibles-tab" data-toggle="tab" href="#consumibles" role="tab" aria-controls="consumibles" aria-selected="true">Consumibles</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="equipos-tab" data-toggle="tab" href="#equipos" role="tab" aria-controls="equipos" aria-selected="false">Equipos</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="consumibles" role="tabpanel" aria-labelledby="consumibles-tab">
+                                    <canvas id="chartConsumibles"></canvas>
+                                </div>
+                                <div class="tab-pane fade" id="equipos" role="tabpanel" aria-labelledby="equipos-tab">
+                                    <canvas id="chartEquipos"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-5 col-lg-5">
-                        <canvas id="tipoMP"></canvas>
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-5">
+                            <canvas id="tipoMP"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endcan
     
 </div>
 @endsection

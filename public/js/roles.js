@@ -1,4 +1,8 @@
 function modalEditarRol(id, nombre, slug, desc, especial){
+    if(especial == "null"){
+        especial = " ";
+    }
+    
     $("#nuevoNombre").val(nombre);
     $("#nuevoSlug").val(slug);
     $("#nuevaDescripcion").val(desc);
@@ -28,13 +32,10 @@ function agregarPermiso(id){
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            limpiar();
+            exitoso(res);
         },
         error: function (error) {
-            console.error(error);
+            problema(error);
         }
     });
 }
@@ -49,7 +50,7 @@ function cargarPermisos(){
             for (var i = 0; i < res.length; i++) {
                 $("#listaPermisos").append(`
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="${res[i].id}" value="${res[i].id}" name="${res[i].slug}">
+                        <input type="checkbox" class="custom-control-input input-AP" id="${res[i].id}" value="${res[i].id}" name="${res[i].slug}">
                         <label class="custom-control-label" for="${res[i].id}">${res[i].name}</label>
                     </div>`);
             }
@@ -96,18 +97,14 @@ function llenarPermisosDeRol(id){
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             for (var i = 0; i < res.length; i++) {
                 permisos.push(res[i]);
                 /*permisos.push(res[i]);
                 alert(permisos[i]);*/
             };
             $(`input[type=checkbox]`).each(function(index){
-                //console.log("Nombre: " + this.name);
                 for (var i = 0; i < permisos.length; i++){
-                    //console.log("Permiso: " + permisos[i])
                     if(this.name == permisos[i]){
-                        //console.log("Permisos " + permisos[i]);
                         $(`input:checkbox[name="${permisos[i]}"]`).attr('checked', 'true');
                         //$(`input[type=checkbox name="${permisos[index]}"]`).attr('checked', 'true');
                         //$("input[type=checkbox]").attr('checked', 'true');
@@ -143,14 +140,10 @@ function crearRol() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
-            limpiar();
+            exitoso(res);
         },
         error: function (error) {
-            console.error(error);
+            problema(error);
         }
     });
 };
@@ -171,13 +164,10 @@ function actualizarRol(id) {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+            exitoso(res);
         },
         error: function (error) {
-            console.error(error);
+            problema(error);
         }
     });
 };
@@ -194,12 +184,10 @@ function eliminarRol(id){
         data: data,
         dataType: "json",
         success: function(res){
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+            exitoso(res);
         },
         error: function(error){
-            console.error(error);
+            problema(error);
         }
     });
 };
@@ -217,16 +205,53 @@ function reload() {
 }
 function limpiar(){
     $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
     $(`input:checkbox`).each(function(){
         if($(this).is(':checked')){
-            console.log($(this).value);
             $(this).attr('checked', false);
         }
     });
 }
+function exitoso (res){
+    $("#alert").removeClass("alert-danger");
+    $("#alert").addClass("alert-success");
+    $("#alert").show().fadeOut(3000);
+    $("#mensaje").html(res.mensaje);
+    reload();
+    limpiar();
+}
+function problema (error){
+    $("#alert").removeClass("alert-success");
+    $("#alert").addClass("alert-danger");
+    $("#alert").show().fadeOut(5000);
+    $("#mensaje").html(error.responseJSON.mensaje);
+    limpiar();
+}
 
 
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#nombre').val().length == 0 || $('#slug').val().length == 0 || $('#descripcion').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#nuevoNombre').val().length == 0 || $('#nuevoSlug').val().length == 0 || $('#nuevaDescripcion').val().length == 0){
+            $("#actualizarRol").attr("disabled", "true");
+        }else{
+            $("#actualizarRol").removeAttr("disabled");
+        }
+    });
+    $('#listaPermisos').on( 'click', '.input-AP', function () {
+        if($( "input:checked" ).length == 0){
+            $("#agregarPermiso").attr("disabled", "true");
+        }
+        else{
+            $("#agregarPermiso").removeAttr("disabled");
+        }
+    });
     $('#tablaRoles').DataTable({
         responsive: true,
         select: {
