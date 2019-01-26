@@ -16,11 +16,11 @@
                         <input type="hidden" name="_tokenEditar" value="{{ csrf_token() }}" id="tokenEditar">
                         <div class="mb-3">
                             <label for="nombreNuevo" required>Nombre</label>
-                            <input type="text" class="form-control" id="nombreNuevo">
+                            <input type="text" class="form-control input-editar" id="nombreNuevo">
                         </div>
                         <div class="mb-3">
                             <label for="emailNuevo" required>Correo electrónico</label>
-                            <input type="text" class="form-control" id="emailNuevo">
+                            <input type="text" class="form-control input-editar" id="emailNuevo">
                         </div>
                     </form>
                 </div>

@@ -54,17 +54,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax()){
-            User::create([
-                'name' => $request['name'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
-            ]);
-            return response()->json([
-                "mensaje" => "Usuario creado correctamente"
-            ]);
-        };
-        
+        try{
+            if($request->ajax()){
+                User::create([
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password']),
+                ]);
+                return response()->json([
+                    "mensaje" => "Usuario creado correctamente"
+                ]);
+            };
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            if(str_contains($error['error'], "Integrity constraint violation: 1062 Duplicate entry")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese correo electrónico, por favor elija otro"
+                ], 409);
+            }
+            return $error;
+        }
     }
 
     /**
@@ -111,15 +121,26 @@ class UserController extends Controller
 
     public function actualizarUsuario(Request $request)
     {
-        if($request->ajax()){
-            $usuario = User::find($request->id);
-            $usuario->name = $request['name'];
-            $usuario->email = $request['email'];
-            $usuario->save();
-            return response()->json([
-                "mensaje" => "Usuario actualizado correctamente"
-            ]);
-        };
+        try{
+            if($request->ajax()){
+                $usuario = User::find($request->id);
+                $usuario->name = $request['name'];
+                $usuario->email = $request['email'];
+                $usuario->save();
+                return response()->json([
+                    "mensaje" => "Usuario actualizado correctamente"
+                ]);
+            };
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            if(str_contains($error['error'], "Integrity constraint violation: 1062 Duplicate entry")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese correo electrónico, por favor elija otro"
+                ], 409);
+            }
+            return $error;
+        }
     }
 
     /**

@@ -15,22 +15,22 @@
                     <form>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
                         <div class="mb-3">
-                            <label for="nombre" required>Nombre</label>
-                            <input type="text" class="form-control" id="nombre">
+                            <label for="nombre" >Nombre</label>
+                            <input type="text" class="form-control input-crear" id="nombre">
                         </div>
                         <div class="mb-3">
-                            <label for="email" required>Correo electrónico</label>
-                            <input type="text" class="form-control" id="email">
+                            <label for="email" >Correo electrónico</label>
+                            <input type="text" class="form-control input-crear" id="email">
                         </div>
                         <div class="mb-3">
-                            <label for="pass" required>Contraseña</label>
-                            <input type="password" class="form-control" id="pass">
+                            <label for="pass" >Contraseña</label>
+                            <input type="password" class="form-control input-crear" id="pass">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="crearUsuario()">Guardar</button>
+                <button disabled data-dismiss="modal" class="btn btn-primary btn-crear" onclick="crearUsuario()">Guardar</button>
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" id="agregarRol">Guardar</button>
+                <button disabled data-dismiss="modal" class="btn btn-primary" id="agregarRol">Guardar</button>
             </div>
         </div>
     </div>

@@ -31,12 +31,10 @@ function agregarRol(id){
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
+            exitoso(res);
         },
         error: function (error) {
-            console.error(error);
+            problema(error);
         }
     });
 }
@@ -50,7 +48,7 @@ function cargarRoles(){
             for (var i = 0; i < res.length; i++) {
                 $("#listaRoles").append(`
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="${res[i].id}" value="${res[i].id}">
+                        <input type="checkbox" class="custom-control-input input-AR" id="${res[i].id}" value="${res[i].id}">
                         <label class="custom-control-label" for="${res[i].id}">${res[i].name}</label>
                     </div>`);
             }
@@ -96,14 +94,10 @@ function crearUsuario() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
-            limpiar();
+            exitoso(res);
         },
         error: function (error) {
-            console.error(error);
+            problema(error);
         }
     });
 };
@@ -121,13 +115,11 @@ function actualizarUsuario(id){
         method: "PUT",
         data: data,
         dataType: "json",
-        success: function(res){
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+        success: function (res) {
+            exitoso(res);
         },
-        error: function(error){
-            console.error(error);
+        error: function (error) {
+            problema(error);
         }
     });
 };
@@ -143,13 +135,11 @@ function eliminarUsuario(id){
         method: "DELETE",
         data: data,
         dataType: "json",
-        success: function(res){
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+        success: function (res) {
+            exitoso(res);
         },
-        error: function(error){
-            console.error(error);
+        error: function (error) {
+            problema(error);
         }
     });
 };
@@ -164,14 +154,55 @@ function reload() {
     $("#elUsuarioM").attr("disabled", "true");
     $("#VerRolUsuarioM").attr("disabled", "true");
     $("#AgregarRolUsuarioM").attr("disabled", "true");
+    $(".btn-crear").attr("disabled", "true");
 }
 
 function limpiar() {
     $('.form-control').val(' ');
-    $('#pass').val($('#pass').val().replace(' ', ''));
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
-
+function exitoso (res){
+    console.log(res)
+    $("#alert").removeClass("alert-danger");
+    $("#alert").addClass("alert-success");
+    $("#alert").show().fadeOut(3000);
+    $("#mensaje").html(res.mensaje);
+    reload();
+    limpiar();
+}
+function problema (error){
+    $("#alert").removeClass("alert-success");
+    $("#alert").addClass("alert-danger");
+    $("#alert").show().fadeOut(5000);
+    $("#mensaje").html(error.responseJSON.mensaje);
+    limpiar();
+}
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#pass').val().length == 0 || $('#email').val().length == 0 || $('#nombre').val().length == 0){
+            $(".btn-crear").attr("disabled", "true");
+        }else{
+            $(".btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#emailNuevo').val().length == 0 || $('#nombreNuevo').val().length == 0){
+            $("#actualizarUsuario").attr("disabled", "true");
+        }else{
+            $("#actualizarUsuario").removeAttr("disabled");
+        }
+    });
+    $('#listaRoles').on( 'click', '.input-AR', function () {
+        if($( "input:checked" ).length == 0){
+            $("#agregarRol").attr("disabled", "true");
+        }
+        else{
+            $("#agregarRol").removeAttr("disabled");
+        }
+    });
+
+    
+
     limpiar();
     $('#tablaUsuarios').DataTable({
         responsive: true,
