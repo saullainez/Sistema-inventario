@@ -90,6 +90,20 @@ function limpiar(){
     $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#nombre').val().length == 0 || $('#descripcion').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#nombreNuevo').val().length == 0 || $('#descripcionNueva').val().length == 0){
+            $("#actualizarActivo").attr("disabled", "true");
+        }else{
+            $("#actualizarActivo").removeAttr("disabled");
+        }
+    });
     $('#tablaActivo').DataTable({
         responsive: true,
         select: {
