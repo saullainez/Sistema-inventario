@@ -20,23 +20,23 @@
                                 <hr>
                                 <div class="mb-3">
                                     <label for="nombre" required>Nombre</label>
-                                    <input type="text" class="form-control" id="nombre">
+                                    <input type="text" class="form-control input-crear" id="nombre">
                                 </div>
                                 <div class="mb-3">
                                     <label for="direccion" required>Dirección</label>
-                                    <input type="text" class="form-control" id="direccion">
+                                    <input type="text" class="form-control input-crear" id="direccion">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefono" required>Teléfono</label>
-                                    <input type="text" class="form-control" id="telefono">
+                                    <input type="text" class="form-control input-crear" id="telefono">
                                 </div>
                                 <div class="mb-3">
                                     <label for="correo" required>Correo</label>
-                                    <input type="text" class="form-control" id="correo">
+                                    <input type="text" class="form-control input-crear" id="correo">
                                 </div>
                                 <div class="mb-3">
                                     <label for="fechapago" required>Fecha de pago</label>
-                                    <input type="text" class="form-control" id="fechapago">
+                                    <input type="text" class="form-control input-crear" id="fechapago">
                                 </div>
                                 <div class="mb-3">
                                     <h6>Tipo de empresa</h6>
@@ -52,15 +52,15 @@
                                 <hr>
                                 <div class="mb-3">
                                     <label for="nombreContacto" required>Nombre del contacto</label>
-                                    <input type="text" class="form-control" id="nombreContacto">
+                                    <input type="text" class="form-control input-crear" id="nombreContacto">
                                 </div>
                                 <div class="mb-3">
                                     <label for="telefonoContacto" required>Teléfono del contacto</label>
-                                    <input type="text" class="form-control" id="telefonoContacto">
+                                    <input type="text" class="form-control input-crear" id="telefonoContacto">
                                 </div>
                                 <div class="mb-3">
                                     <label for="correoContacto" required>Correo del contacto</label>
-                                    <input type="text" class="form-control" id="correoContacto">
+                                    <input type="text" class="form-control input-crear" id="correoContacto">
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="crearEmpresa()">Guardar</button>
+                <button disabled id="btn-crear" data-dismiss="modal" class="btn btn-primary" onclick="crearEmpresa()">Guardar</button>
             </div>
         </div>
     </div>

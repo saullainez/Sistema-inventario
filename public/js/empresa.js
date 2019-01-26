@@ -115,6 +115,24 @@ function limpiar(){
     $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#nombre').val().length == 0 || $('#direccion').val().length == 0 || $('#telefono').val().length == 0 ||
+        $('#correo').val().length == 0 || $('#fechapago').val().length == 0 || $('#nombreContacto').val().length == 0 ||
+        $('#telefonoContacto').val().length == 0 || $('#correoContacto').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#nuevoNombre').val().length == 0 || $('#nuevaDireccion').val().length == 0 || $('#nuevoTelefono').val().length == 0 ||
+        $('#nuevoCorreo').val().length == 0 || $('#nuevaFechaPago').val().length == 0 || $('#nuevoNombreContacto').val().length == 0 ||
+        $('#nuevoTelefonoContacto').val().length == 0 || $('#nuevoCorreoContacto').val().length == 0){
+            $("#actualizarEmpresa").attr("disabled", "true");
+        }else{
+            $("#actualizarEmpresa").removeAttr("disabled");
+        }
+    });
     $('#tablaEmpresa').DataTable({
         responsive: true,
         select: {
