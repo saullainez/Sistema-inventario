@@ -16,11 +16,11 @@
                         <input type="hidden" name="_tokenEditar" value="{{ csrf_token() }}" id="tokenEditar">
                         <div class="mb-3">
                             <label for="nuevoNombre" required>Nombre</label>
-                            <input type="text" class="form-control" id="nuevoNombre">
+                            <input type="text" class="form-control input-editar" id="nuevoNombre">
                         </div>
                         <div class="mb-3">
                             <label for="NuevaDescripcion" required>Descripcion</label>
-                            <input type="text" class="form-control" id="NuevaDescripcion">
+                            <input type="text" class="form-control input-editar" id="NuevaDescripcion">
                         </div>
                         <div class="mb-3">
                             <h6>Tipo de bebida</h6>

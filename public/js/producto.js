@@ -110,6 +110,20 @@ function limpiar(){
     $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#nombre').val().length == 0 || $('#descripcion').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#nuevoNombre').val().length == 0 || $('#NuevaDescripcion').val().length == 0){
+            $("#actualizarProducto").attr("disabled", "true");
+        }else{
+            $("#actualizarProducto").removeAttr("disabled");
+        }
+    });
     $('#tablaProducto').DataTable({
         responsive: true,
         select: {
