@@ -71,12 +71,11 @@ class PresentacionController extends Controller
             $presentacion->PresentacionId = $id;
             //$presentacion->save();
             $res = Presentacion::crearPresentacion($presentacion);
-            return response()->json([$res, "mensaje"=>"Producto final creado correctamente"], 200)->header('Content-Type','application/json');
-
+            return response()->json([$res[0], "mensaje"=>"Producto final creado correctamente"], 200)->header('Content-Type','application/json');
         }
         catch(\Exception $e){
-            $error = ['error'=>$e->getMessage()];
-            return response()->json($error)->header('Content-Type','application/json');
+            $error = ['error' => $e->getMessage()];
+            return $error;
         }
     }
 
@@ -173,17 +172,28 @@ class PresentacionController extends Controller
     }
     public function actualizarPresentacion(Request $request)
     {
-        if($request->ajax()){
-            $presentacion = Presentacion::find($request->pId);
-            $presentacion->ActivoId = $request->ActivoId;
-            $presentacion->ProductoId = $request->ProductoId;
-            $id = "{$request->ProductoId}{$request->ActivoId}";
-            $presentacion->PresentacionId = $id;
-            $presentacion->save();
-            return response()->json([
-                "mensaje" => "Producto final actualizado correctamente"
-            ]);
-        };
+        try{
+            if($request->ajax()){
+                $presentacion = Presentacion::find($request->pId);
+                $presentacion->ActivoId = $request->ActivoId;
+                $presentacion->ProductoId = $request->ProductoId;
+                $id = "{$request->ProductoId}{$request->ActivoId}";
+                $presentacion->PresentacionId = $id;
+                $presentacion->save();
+                return response()->json([
+                    "mensaje" => "Producto final actualizado correctamente"
+                ]);
+            };
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            if(str_contains($error['error'], "for key 'PRIMARY'")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese producto final, por favor elija otro"
+                ], 409);
+            }
+            return $error;
+        }
     }
     public function eliminarPresentacion(Request $request)
     {

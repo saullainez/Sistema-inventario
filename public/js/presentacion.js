@@ -64,10 +64,7 @@ function crearPresentacion() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+            verificar(res)
         },
         error: function (error) {
             console.error(error);
@@ -88,10 +85,7 @@ function actualizarPresentacion(id) {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+            verificarAct(res);
         },
         error: function (error) {
             console.error(error);
@@ -110,6 +104,8 @@ function eliminarPresentacion(id){
         data: data,
         dataType: "json",
         success: function(res){
+            $("#alert").removeClass("alert-danger");
+            $("#alert").addClass("alert-success");
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
@@ -123,6 +119,55 @@ function reload() {
     $('#tablaPresentacion').DataTable().ajax.reload();
     $("#actPresentacion").attr("disabled", "true");
     $("#elPresentacion").attr("disabled", "true");
+}
+function verificar (res){
+    console.log(res);
+    var e = {
+        mensaje: "Ya existe ese producto final, por favor elija otro"
+    };
+    if(res[0].error){
+        if(res[0].error.indexOf("for key 'PRIMARY'") != -1){
+            $("#alert").removeClass("alert-success");
+            $("#alert").addClass("alert-danger");
+            $("#alert").show().fadeOut(5000);
+            $("#mensaje").html(e.mensaje);
+        }
+    }
+    else{
+        $("#alert").removeClass("alert-danger");
+        $("#alert").addClass("alert-success");
+        $("#alert").show().fadeOut(3000);
+        $("#mensaje").html(res.mensaje);
+        reload();
+    }
+}
+function verificarAct (res){
+    console.log(res.error);
+    var e = {
+        mensaje: "Ya existe ese producto final, por favor elija otro"
+    };
+    if(res.error){
+        if(res.error.indexOf("1761 Foreign key constraint for table 'presentaciones'") != -1){
+            console.log(res.error.indexOf("for key 'PRIMARY'"))
+            $("#alert").removeClass("alert-success");
+            $("#alert").addClass("alert-danger");
+            $("#alert").show().fadeOut(5000);
+            $("#mensaje").html(e.mensaje);
+        }
+    }
+    else{
+        $("#alert").removeClass("alert-danger");
+        $("#alert").addClass("alert-success");
+        $("#alert").show().fadeOut(3000);
+        $("#mensaje").html(res.mensaje);
+        reload();
+    }
+}
+function problema (error){
+    $("#alert").removeClass("alert-success");
+    $("#alert").addClass("alert-danger");
+    $("#alert").show().fadeOut(5000);
+    $("#mensaje").html(error.mensaje);
 }
 $(document).ready(function () {
     $('#tablaPresentacion').DataTable({
