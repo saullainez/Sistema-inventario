@@ -28,7 +28,7 @@ function crearMovimientoConcepto(){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();   
-            $('.form-control').val(' ');
+            limpiar();
         },
         error: function(error){
             console.error(error);
@@ -55,6 +55,7 @@ function actualizarMovimiento(id){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();   
+            limpiar();
         },
         error: function(error){
             console.error(error);
@@ -86,6 +87,10 @@ function reload() {
     $('#tablaMovimientoConceptos').DataTable().ajax.reload();
     $("#actMovimientoConcepto").attr("disabled", "true");
     $("#elMovimientoConcepto").attr("disabled", "true");
+}
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 
 $(document).ready(function () {

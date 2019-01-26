@@ -111,7 +111,7 @@ function crearMovimientoActivo(){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
-            $('.form-control').val(' ');
+            limpiar();
         },
         error:function(error){
             console.error(error);
@@ -143,6 +143,7 @@ function actualizarMovimiento(id){
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
+            limpiar();
         },
         error:function(error){
             console.error(error);
@@ -178,8 +179,26 @@ function reload() {
     $("#actMovimientoActivo").attr("disabled", "true");
     $("#elMovimientoActivo").attr("disabled", "true");
 }
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
+}
 
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#descripcion').val().length == 0 || $('#fecha').val().length == 0 || $('#cantidad').val().length == 0 || $('#monto').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#NuevaDescripcion').val().length == 0 || $('#NuevaFecha').val().length == 0 || $('#NuevaCantidad').val().length == 0 || $('#NuevoMonto').val().length == 0){
+            $("#actualizarMovimientoActivo").attr("disabled", "true");
+        }else{
+            $("#actualizarMovimientoActivo").removeAttr("disabled");
+        }
+    });
     $('#tablaMovimientoActivos').DataTable({
         responsive: true,
         select: {

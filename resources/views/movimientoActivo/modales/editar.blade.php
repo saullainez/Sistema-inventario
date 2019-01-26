@@ -24,26 +24,25 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="NuevaDescripcion" required>Descripcion</label>
-                                    <input type="text" class="form-control" id="NuevaDescripcion">
+                                    <input type="text" class="form-control input-editar" id="NuevaDescripcion">
                                 </div>
                                 <div class="mb-3">
                                     <label for="NuevaFecha" required>Fecha</label>
-                                    <input type="date" class="form-control" id="NuevaFecha">
+                                    <input type="date" class="form-control input-editar" id="NuevaFecha">
                                 </div>
                                 <div class="mb-3">
                                     <label for="NuevaCantidad" required>Cantidad</label>
-                                    <input type="number" class="form-control" id="NuevaCantidad">
+                                    <input type="number" class="form-control input-editar" id="NuevaCantidad">
                                 </div>
                             </div>
                             <div class="col-12 col-md-12 col-sm-12 col-xs-12 col-lg-6 col-xl-6">
                             <div class="mb-3">
                                     <label for="NuevoMonto" required>Monto</label>
-                                    <input type="number" class="form-control" id="NuevoMonto">
+                                    <input type="number" class="form-control input-editar" id="NuevoMonto">
                                 </div>
                                 <div class="mb-3">
                                     <h6>Proveedor</h6>
                                     <select class="browser-default custom-select" name="NuevoProveedor" id="NuevoProveedor">
-
                                     </select>
                                 </div>
                                 <div class="mb-3">
