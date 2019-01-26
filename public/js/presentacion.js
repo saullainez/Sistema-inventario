@@ -121,7 +121,6 @@ function reload() {
     $("#elPresentacion").attr("disabled", "true");
 }
 function verificar (res){
-    console.log(res);
     var e = {
         mensaje: "Ya existe ese producto final, por favor elija otro"
     };
@@ -142,13 +141,11 @@ function verificar (res){
     }
 }
 function verificarAct (res){
-    console.log(res.error);
     var e = {
         mensaje: "Ya existe ese producto final, por favor elija otro"
     };
     if(res.error){
         if(res.error.indexOf("1761 Foreign key constraint for table 'presentaciones'") != -1){
-            console.log(res.error.indexOf("for key 'PRIMARY'"))
             $("#alert").removeClass("alert-success");
             $("#alert").addClass("alert-danger");
             $("#alert").show().fadeOut(5000);

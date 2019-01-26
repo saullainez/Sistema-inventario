@@ -24,7 +24,6 @@ function cargarPresentaciones(){
         method:"GET",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#presentacionId").html(" ");
             $("#NuevapresentacionId").html(" ");
             for(var i = 0; i< res.length; i++){
@@ -70,7 +69,6 @@ function cargarConceptos(){
         method:"GET",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#movimientoConceptoId").html(" ");
             $("#NuevoConcepto").html(" ");
             for(var i = 0; i< res.length; i++){
@@ -108,11 +106,10 @@ function crearMovimientoProducto(){
         dataType:"json",
         method:"POST",
         success:function(res){
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();   
-            $('.form-control').val(' ');
+            limpiar();
         },
         error:function(error){
             console.error(error);
@@ -140,7 +137,6 @@ function actualizarMovimiento(id){
         method:"PUT",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload(); 
@@ -180,8 +176,26 @@ function reload() {
     $("#actMovimientoProducto").attr("disabled", "true");
     $("#elMovimientoProducto").attr("disabled", "true");
 }
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
+}
 
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#descripcion').val().length == 0 || $('#fecha').val().length == 0 || $('#anioCosecha').val().length == 0 || $('#cantidad').val().length == 0 || $('#monto').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#NuevaDescripcion').val().length == 0 || $('#NuevaFecha').val().length == 0 || $('#NuevoAnio').val().length == 0 || $('#NuevaCantidad').val().length == 0 || $('#NuevoMonto').val().length == 0){
+            $("#actualizarMovimientoProducto").attr("disabled", "true");
+        }else{
+            $("#actualizarMovimientoProducto").removeAttr("disabled");
+        }
+    });
     $('#tablaMovimientoProductos').DataTable({
         responsive: true,
         select: {

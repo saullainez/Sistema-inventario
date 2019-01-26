@@ -24,7 +24,6 @@ function crearMovimientoConcepto(){
         method:"POST",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();   
@@ -51,7 +50,6 @@ function actualizarMovimiento(id){
         method:"PUT",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();   

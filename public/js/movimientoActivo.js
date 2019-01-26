@@ -23,7 +23,6 @@ function cargarProveedores(){
         method:"GET",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#proveedorId").html(" ");
             $("#NuevoProveedor").html(" ");
             for(var i = 0; i< res.length; i++){
@@ -47,7 +46,6 @@ function cargarActivos(){
         method:"GET",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#activoId").html(" ");
             $("#NuevoActivoId").html(" ");
             for(var i = 0; i< res.length; i++){
@@ -70,7 +68,6 @@ function cargarConceptos(){
         method:"GET",
         dataType:"json",
         success: function(res){
-            console.log(res);
             $("#movimientoConceptoId").html(" ");
             $("#NuevoConcepto").html(" ");
             for(var i = 0; i< res.length; i++){
@@ -107,7 +104,6 @@ function crearMovimientoActivo(){
         data:data,
         dataType:"json",
         success:function(res){
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
@@ -139,7 +135,6 @@ function actualizarMovimiento(id){
         data:data,
         dataType:"json",
         success:function(res){
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
@@ -164,7 +159,6 @@ function eliminarMovimiento(id){
         data: data,
         dataType: "json",
         success: function(res){
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();

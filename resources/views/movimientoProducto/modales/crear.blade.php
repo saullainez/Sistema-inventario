@@ -24,25 +24,25 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="descripcion" required>Descripcion</label>
-                                    <input type="text" class="form-control" id="descripcion">
+                                    <input type="text" class="form-control input-crear" id="descripcion">
                                 </div>
                                 <div class="mb-3">
                                     <label for="fecha" required>Fecha</label>
-                                    <input type="date" class="form-control" id="fecha">
+                                    <input type="date" class="form-control input-crear" id="fecha">
                                 </div>
                                 <div class="mb-3">
                                     <label for="anioCosecha" required>Año de cosecha</label>
-                                    <input type="number" class="form-control" id="anioCosecha">
+                                    <input type="number" class="form-control input-crear" id="anioCosecha">
                                 </div>
                             </div>
                             <div class="col-12 col-md-12 col-sm-12 col-xs-12 col-lg-6 col-xl-6">
                                 <div class="mb-3">
                                     <label for="cantidad" required>Cantidad</label>
-                                    <input type="number" class="form-control" id="cantidad">
+                                    <input type="number" class="form-control input-crear" id="cantidad">
                                 </div>
                                 <div class="mb-3">
                                     <label for="monto" required>Monto</label>
-                                    <input type="number" class="form-control" id="monto">
+                                    <input type="number" class="form-control input-crear" id="monto">
                                 </div>
                                 <div class="mb-3">
                                     <h6>Cliente</h6>
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="crearMovimientoProducto()">Guardar</button>
+                <button disabled id="btn-crear" data-dismiss="modal" class="btn btn-primary" onclick="crearMovimientoProducto()">Guardar</button>
             </div>
         </div>
     </div>
