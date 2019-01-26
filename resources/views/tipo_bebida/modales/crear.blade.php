@@ -16,13 +16,13 @@
                         <input type="hidden" name="_tokenAgregar" value="{{ csrf_token() }}" id="tokenAgregar">
                         <div class="mb-3">
                             <label for="nombre" required>Nombre</label>
-                            <input type="text" class="form-control" id="nombre">
+                            <input type="text" class="form-control input-crear" id="nombre">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="crearTipoBebida()">Guardar</button>
+                <button disabled data-dismiss="modal" class="btn btn-primary" id="btn-crear" onclick="crearTipoBebida()">Guardar</button>
             </div>
         </div>
     </div>

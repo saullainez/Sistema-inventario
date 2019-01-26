@@ -84,6 +84,20 @@ function limpiar(){
     $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#nombre').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#nombreNuevo').val().length == 0){
+            $("#actualizarTipoBebida").attr("disabled", "true");
+        }else{
+            $("#actualizarTipoBebida").removeAttr("disabled");
+        }
+    });
     $('#tablaTipoBebida').DataTable({
         responsive: true,
         select: {
