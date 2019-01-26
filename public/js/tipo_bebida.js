@@ -20,7 +20,6 @@ function crearTipoBebida() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();

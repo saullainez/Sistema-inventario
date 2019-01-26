@@ -45,11 +45,10 @@ function crearProducto() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
-            $('.form-control').val(' ');
+            limpiar();
         },
         error: function (error) {
             console.error(error);
@@ -71,7 +70,6 @@ function actualizarProducto(id) {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
@@ -106,6 +104,10 @@ function reload() {
     $('#tablaProducto').DataTable().ajax.reload();
     $("#actProducto").attr("disabled", "true");
     $("#elProducto").attr("disabled", "true");
+}
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
     $('#tablaProducto').DataTable({

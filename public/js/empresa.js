@@ -43,11 +43,10 @@ function crearEmpresa() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
-            $('.form-control').val(' ');
+            limpiar();
         },
         error: function (error) {
             console.error(error);
@@ -75,7 +74,6 @@ function actualizarEmpresa(id) {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
@@ -111,6 +109,10 @@ function reload() {
     $("#actEmpresa").attr("disabled", "true");
     $("#elEmpresa").attr("disabled", "true");
     $("#verContacto").attr("disabled", "true");
+}
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
     $('#tablaEmpresa').DataTable({

@@ -25,11 +25,10 @@ function crearActivo() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
-            $('.form-control').val(' ');
+            limpiar();
         },
         error: function (error) {
             console.error(error);
@@ -51,7 +50,6 @@ function actualizarActivo(id) {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             $("#alert").show().fadeOut(3000);
             $("#mensaje").html(res.mensaje);
             reload();
@@ -86,6 +84,10 @@ function reload() {
     $('#tablaActivo').DataTable().ajax.reload();
     $("#actActivo").attr("disabled", "true");
     $("#elActivo").attr("disabled", "true");
+}
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
 }
 $(document).ready(function () {
     $('#tablaActivo').DataTable({
