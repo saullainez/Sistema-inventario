@@ -24,14 +24,10 @@ function crearPermiso() {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
-            $('.form-control').val(' ');
+            exitoso(res);
         },
         error: function (error) {
-            console.error(error);
+            problema(error);
         }
     });
 };
@@ -51,13 +47,10 @@ function actualizarPermiso(id) {
         data: data,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+            exitoso(res);
         },
         error: function (error) {
-            console.error(error);
+            problema(error);
         }
     });
 };
@@ -74,12 +67,10 @@ function eliminarPermiso(id){
         data: data,
         dataType: "json",
         success: function(res){
-            $("#alert").show().fadeOut(3000);
-            $("#mensaje").html(res.mensaje);
-            reload();
+            exitoso(res);
         },
         error: function(error){
-            console.error(error);
+            problema(error);
         }
     });
 };
@@ -89,8 +80,40 @@ function reload() {
     $("#elPermiso").attr("disabled", "true");
 
 }
-
+function limpiar(){
+    $('.form-control').val(' ');
+    $('.form-control').val($('.form-control').val().replace(' ', ''));
+}
+function exitoso (res){
+    $("#alert").removeClass("alert-danger");
+    $("#alert").addClass("alert-success");
+    $("#alert").show().fadeOut(3000);
+    $("#mensaje").html(res.mensaje);
+    reload();
+    limpiar();
+}
+function problema (error){
+    $("#alert").removeClass("alert-success");
+    $("#alert").addClass("alert-danger");
+    $("#alert").show().fadeOut(5000);
+    $("#mensaje").html(error.responseJSON.mensaje);
+    limpiar();
+}
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#nombre').val().length == 0 || $('#slug').val().length == 0 || $('#descripcion').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#nuevoNombre').val().length == 0 || $('#nuevoSlug').val().length == 0 || $('#nuevaDescripcion').val().length == 0){
+            $("#actualizarPermiso").attr("disabled", "true");
+        }else{
+            $("#actualizarPermiso").removeAttr("disabled");
+        }
+    });
     $('#tablaPermisos').DataTable({
         responsive: true,
         select: {

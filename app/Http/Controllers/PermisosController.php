@@ -49,16 +49,27 @@ class PermisosController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax()){
-            Permission::create([
-                'name' => $request['name'],
-                'slug' => $request['slug'],
-                'description' => $request['description'],
-            ]);
-            return response()->json([
-                "mensaje" => "Permiso creado correctamente"
-            ]);
-        };
+        try{
+            if($request->ajax()){
+                Permission::create([
+                    'name' => $request['name'],
+                    'slug' => $request['slug'],
+                    'description' => $request['description'],
+                ]);
+                return response()->json([
+                    "mensaje" => "Permiso creado correctamente"
+                ]);
+            };
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            if(str_contains($error['error'], "for key 'permissions_slug_unique'")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese slug, por favor elija otro"
+                ], 409);
+            }
+            return $error;
+        }
     }
 
     /**
@@ -97,16 +108,27 @@ class PermisosController extends Controller
 
     public function actualizarPermiso(Request $request)
     {
-        if($request->ajax()){
-            $permiso = Permission::find($request->id);
-            $permiso->name = $request['name'];
-            $permiso->slug = $request['slug'];
-            $permiso->description = $request['description'];
-            $permiso->save();
-            return response()->json([
-                "mensaje" => "Permiso actualizado correctamente"
-            ]);
-        };
+        try{
+            if($request->ajax()){
+                $permiso = Permission::find($request->id);
+                $permiso->name = $request['name'];
+                $permiso->slug = $request['slug'];
+                $permiso->description = $request['description'];
+                $permiso->save();
+                return response()->json([
+                    "mensaje" => "Permiso actualizado correctamente"
+                ]);
+            };
+        }
+        catch(\Exception $e){
+            $error = ['error' => $e->getMessage()];
+            if(str_contains($error['error'], "for key 'permissions_slug_unique'")){
+                return response()->json([
+                    "mensaje" => "Ya existe ese slug, por favor elija otro"
+                ], 409);
+            }
+            return $error;
+        }
     }
 
     /**
