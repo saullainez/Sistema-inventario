@@ -16,7 +16,7 @@
                         <input type="hidden" name="_tokenAgregar" value="{{ csrf_token() }}" id="tokenAgregar">
                         <div class="mb-3">
                             <label for="nombre" required>Nombre</label>
-                            <input type="text" class="form-control" id="nombre">
+                            <input type="text" class="form-control input-crear" id="nombre">
                         </div>
                         <div class="mb-3">
                             <h6>Tipo de movimiento</h6>
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="modal-footer justify-content-center">
-                <button data-dismiss="modal" class="btn btn-primary" onclick="crearMovimientoConcepto()">Guardar</button>
+                <button disabled id="btn-crear" data-dismiss="modal" class="btn btn-primary" onclick="crearMovimientoConcepto()">Guardar</button>
             </div>
         </div>
     </div>

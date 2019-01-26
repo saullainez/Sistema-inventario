@@ -89,6 +89,20 @@ function reload() {
 }
 
 $(document).ready(function () {
+    $('.input-crear').on('keyup', function(){
+        if($('#nombre').val().length == 0){
+            $("#btn-crear").attr("disabled", "true");
+        }else{
+            $("#btn-crear").removeAttr("disabled");
+        }
+    });
+    $('.input-editar').on('keyup', function(){
+        if($('#nuevoNombre').val().length == 0){
+            $("#actualizarMovmientoConcepto").attr("disabled", "true");
+        }else{
+            $("#actualizarMovmientoConcepto").removeAttr("disabled");
+        }
+    });
     $('#tablaMovimientoConceptos').DataTable({
         responsive: true,
         select: {
