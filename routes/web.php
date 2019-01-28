@@ -136,4 +136,4 @@ route::get('/prueba', function(){
 
 Route::get('/reportes', function () {
     return view('reportes.index');
-});
+})->middleware(['auth', 'permission:reportes.index']);;

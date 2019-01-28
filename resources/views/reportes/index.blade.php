@@ -26,7 +26,7 @@
                 </div> 
             </div>
             <div class="row">
-                @can('movimiento-concepto.index')
+                @can('reporte-producto.inventariopresentacion')
                 <div class="col-12 col-sm-4 col-md-4 col-lg-4 ">
                     <div class="card">
                         <div class="card-body">
@@ -40,8 +40,8 @@
                 <div class="col-12 col-sm-4 col-md-4 col-lg-4 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title"><a>movimientos</a></h4>
-                            <a href="/movimiento-activo" class="btn btn-primary">movimientos</a>
+                            <h4 class="card-title"><a>Movimientos</a></h4>
+                            <a href="/movimiento-activo" class="btn btn-primary">Movimientos</a>
                         </div>
                     </div>
                 </div>
@@ -77,11 +77,11 @@
                 </div> 
             </div>
             <div class="row">
-                @can('movimiento-concepto.index')
+                @can('reporte-inventario.totalinventario')
                 <div class="col-12 col-sm-4 col-md-4 col-lg-4 ">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title"><a>Invenario</a></h4>
+                            <h4 class="card-title"><a>Inventario</a></h4>
                             <a href="/reporte-inventario" target="_blank" class="btn btn-primary">Inventario</a>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    $("#movimientos").addClass("active");
-    $("#movimientosMenu").addClass("active");
+    $("#reportes").addClass("active");
+    $("#reportesMenu").addClass("active");
 </script>
 @endsection

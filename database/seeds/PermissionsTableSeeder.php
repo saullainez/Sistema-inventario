@@ -121,7 +121,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create([
             'name'          => 'Navegar Empresas',
             'slug'          => 'empresa.index',
-            'description'   => 'Lista y navega todos los Empresas del sistema',
+            'description'   => 'Lista y navega todas los Empresas del sistema',
         ]);
         Permission::create([
             'name'          => 'Crear Empresas',
@@ -163,7 +163,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create([
             'name'          => 'Navegar Presentaciones',
             'slug'          => 'presentacion.index',
-            'description'   => 'Lista y navega todos los Presentaciones del sistema',
+            'description'   => 'Lista y navega todas las Presentaciones del sistema',
         ]);
         Permission::create([
             'name'          => 'Crear Presentaciones',
@@ -243,5 +243,41 @@ class PermissionsTableSeeder extends Seeder
             'slug'          => 'movimiento-producto.destroy',
             'description'   => 'Elimina cualquier movimiento de producto del sistema',
         ]);
+        Permission::create([
+            'name'          => 'Mirar vista de reportes',
+            'slug'          => 'reportes.index',
+            'description'   => 'Muestra la vista de reportes',
+        ]);
+        Permission::create([
+            'name'          => 'Mirar inventario de materia prima',
+            'slug'          => 'reporte-inventario.totalinventario',
+            'description'   => 'Muestra un reporte con el inventario de la materia prima',
+        ]);
+        Permission::create([
+            'name'          => 'Mirar reporte de compra y venta',
+            'slug'          => 'reporte-inventario.compraventainventario',
+            'description'   => 'Muestra un reporte de compras y ventas',
+        ]);
+        Permission::create([
+            'name'          => 'Mirar reporte de mejor proveedor',
+            'slug'          => 'reporte-inventario.mejorproveedor',
+            'description'   => 'Muestra un reporte de mejor proveedor',
+        ]);
+        Permission::create([
+            'name'          => 'Mirar reporte de productos',
+            'slug'          => 'reporte-producto.inventariopresentacion',
+            'description'   => 'Muestra un reporte con el inventario de productos',
+        ]);
+        Permission::create([
+            'name'          => 'Mirar reporte de movimientos de productos',
+            'slug'          => 'reporte-producto.movimientosproducto',
+            'description'   => 'Muestra un reporte con los movimientos de productos',
+        ]);
+        Permission::create([
+            'name'          => 'Mirar reporte de mejor cliente',
+            'slug'          => 'reporte-producto.mejorcliente',
+            'description'   => 'Muestra un reporte de mejor cliente',
+        ]);
+        
     }
 }

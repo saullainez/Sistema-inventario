@@ -105,6 +105,10 @@
                                 <a id = "movimientosMenu" href="/movimientos" class="nav-link">
                                     <i class="fas fa-exchange-alt mr-3"></i>Movimientos</a>
                                 @endcan
+                                @can('reportes.index')
+                                <a id = "reportesMenu" href="/reportes" class="nav-link">
+                                    <i class="fas fa-clipboard-list mr-3"></i>Reportes</a>
+                                @endcan
                             </div>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -195,6 +199,10 @@
                 @can('movimientos.index')
                     <a style="padding: 0.75rem 0.50rem;" id = "movimientos" href="/movimientos" class="list-group-item list-group-item-action waves-effect">
                         <i class="fas fa-exchange-alt mr-2"></i>Movimientos</a>
+                @endcan
+                @can('reportes.index')
+                    <a style="padding: 0.75rem 0.50rem;" id = "reportes" href="/reportes" class="list-group-item list-group-item-action waves-effect">
+                        <i class="fas fa-clipboard-list mr-3"></i>Reportes</a>
                 @endcan
                 
 

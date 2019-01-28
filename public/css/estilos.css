@@ -222,7 +222,12 @@ table.dataTable {
 .boton:hover{
     color:black;
 }
-
+.sidebar-fixed .logo-wrapper {
+    padding: 1rem !important;
+}
+.sidebar-fixed .logo-wrapper img {
+    max-height: 39px !important;
+}
 @media only screen and (max-width: 991px) {
     .caja-info-numero-chart {
         text-align:left;

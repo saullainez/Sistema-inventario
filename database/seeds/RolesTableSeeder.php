@@ -13,9 +13,10 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         Role::create([
-            'name'      => 'Admin',
-            'slug'      => 'admin',
-            'special'   => 'all-access',
+            'name'          => 'Admin',
+            'slug'          => 'admin',
+            'description'   => 'Rol de administrador del sistema',
+            'special'       => 'all-access',
         ]);
     }
 }

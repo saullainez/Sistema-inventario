@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class repInvController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:reporte-inventario.totalinventario')->only('totalInventario');
+        $this->middleware('permission:reporte-inventario.compraventainventario')->only('compraVentaInv');
+        $this->middleware('permission:reporte-inventario.mejorproveedor')->only('mejorProveedor');
+        
+    }
     //
     /**
      * @return \Illuminate\Http\Resonse

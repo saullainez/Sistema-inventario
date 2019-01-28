@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class repPresController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:reporte-producto.inventariopresentacion')->only('inventarioPresentacion');
+        $this->middleware('permission:reporte-producto.movimientosproducto')->only('movimientosProducto');
+        $this->middleware('permission:reporte-producto.mejorcliente')->only('mejorCliente');
+    }
     //
 
     public function inventarioPresentacion(){

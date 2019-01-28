@@ -57,13 +57,6 @@
                     </div>
                 </div>
                 @endcan
-                <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title"><a>Reportes</a></h4>
-                            <a href="/reportes" class="btn btn-primary">Reportes</a>
-                        </div>
-                    </div>
             </div>
         </div>
     </div>
